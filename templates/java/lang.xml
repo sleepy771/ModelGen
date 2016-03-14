@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<lang>
+    <scopes>
+        <scope id="file"/>
+        <scope id="class"/>
+        <scope id="class-code"/>
+        <scope id="method"/>
+        <scope id="field"/>
+        <scope id="arguments"/>
+        <scope id="argument"/>
+    </scopes>
+    <templates>
+        <template id="class" scope="file">
+            <variables>
+                <variable id="name" type="String"/>
+                <variable id="modifiers" type="ModifiersDefinition"/>
+                <variable id="supperClass" type="Meta"/>
+                <variable id="interfaces" type="Meta[]"/>
+                <variable id="code" type="ClassCodeDefinition"/>
+            </variables>
+            <velocity>
+                #set($extends="")\\
+                #if ($superclass)\\
+                    #set($extends=" extends ${superclass}")\\
+                #end\\
+                #set($implements="")\\
+                #if ($interfaces)\\
+                    #foreach ($meta in $interfaces)\\
+                        #if ($implements.isEmpty())\\
+                            #set($implements=" implements ${meta}")\\
+                        #else\\
+                            #set($implements=$implements+", "+$meta)\\
+                        #end\\
+                    #end\\
+                #end\\
+                ${modifiers}class ${name}${extends}${implements} {${LN}${TAB}${code}${LN}}${LN}
+            </velocity>
+        </template>
+        <template id="class-code" scope="class">
+            <variables>
+                <variable id="fields" type="FieldDefinition[]"/>
+                <variable id="methods" type="MethodDefinition[]"/>
+            </variables>
+            <velocity>
+                #if ($fields)\\
+                    #foreach($field in $fields)\\
+                        $field\\
+                    #end\\
+                #end\\
+                #if ($methods)\\
+                    ${LN}\\
+                    #foreach ($method in $methods)\\
+                        ${method}${LN}\\
+                    #end\\
+                #end
+            </velocity>
+        </template>
+        <template id="method" scope="class-code">
+            <variables>
+                <variable id="modifiers" type="ModifiersDefinition"/>
+                <variable id="type" type="Meta"/>
+                <variable id="name" type="String"/>
+                <variable id="arguments" type="ArgumentsDefinition"/>
+                <variable id="code" type="FlowCode"/>
+            </variables>
+            <velocity>
+                ${modifiers}$type $name($arguments){${LN}${TAB}$code${LN}}${LN}${LN}
+            </velocity>
+        </template>
+        <template  id="field" scope="class-code">
+            <variables>
+                <variable id="name" type="String"/>
+                <variable id="modifiers" type="ModifiersDefinition"/>
+                <variable id="type" type="Meta"/>
+                <variable id="value" type="String"/> <!-- TODO this would change in future -->
+            </variables>
+            <velocity>
+                #if ($value)\\
+                    #set($assign=" = $value")\\
+                #end\\
+                ${modifiers}$type ${name}${assign};
+            </velocity>
+        </template>
+        <template id="modifiers" scope="class,method,field,argument">
+            <variables>
+                <variable id="modifiers" type="Modifier[]"/>
+            </variables>
+            <velocity>
+                #set($mods="")\\
+                #if($modifiers)\\
+                    #foreach($mod in $modifiers)\\
+                        #set($mods=$mods + $mod + " ")\\
+                    #end\\
+                #end\\
+                $mods
+            </velocity>
+        </template>
+        <template id="argument" scope="arguments">
+            <variables>
+                <variable id="modifiers" type="ModifiersDefinition"/>
+                <variable id="type" type="Meta"/>
+                <variable id="name" type="String"/>
+            </variables>
+            <velocity>
+                ${modifiers}$type $name
+            </velocity>
+        </template>
+        <template id="arguments" scope="method">
+            <variables>
+                <variable id="arguments" type="Argument[]"/>
+            </variables>
+            <velocity>
+                #set($args="")\\
+                #if($arguments)\\
+                    #foreach($arg in $arguments)\\
+                        #if($args.isEmpty())\\
+                            #set($args=$arg)\\
+                        #else\\
+                            #set($args=$args + ", " + $arg)\\
+                        #end\\
+                    #end\\
+                #end\\
+                $arguments
+            </velocity>
+        </template>
+        <template id="constructor" scope="class-code" extends="method">
+            <variables>
+                <variable id="name" type="Meta"/>
+            </variables>
+        </template>
+        <template id="constant" scope="class-code" extends="field">
+            <variables>
+                <variable id="modifiers" type="ModifierDefinition">
+                    <value>public</value>
+                    <value>static</value>
+                    <value>final</value>
+                </variable>
+            </variables>
+        </template>
+        <template id="initializer" scope="class-code">
+            <variables>
+                <variable id="code" type="FlowCode"/>
+                <variable id="modifiers" type="ModifiersDefinition"/>
+            </variables>
+            <velocity>
+                ${modifiers}{${LN}${TAB}${code}${LN}}
+            </velocity>
+        </template>
+        <template id="FlowCode" scope="method,initializer">
+
+        </template>
+    </templates>
+</lang>

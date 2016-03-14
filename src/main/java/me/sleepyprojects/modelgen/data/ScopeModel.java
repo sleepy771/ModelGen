@@ -17,43 +17,28 @@
  */
 package me.sleepyprojects.modelgen.data;
 
-import java.util.Set;
+import com.sun.istack.internal.NotNull;
 
-public class TemplateModel {
-    private String id;
-    private String template;
-    private Set<VariableModel> variables;
-    private Set<Scope> scopes;
+public class ScopeModel implements Scope {
 
+    private final String id;
+
+    ScopeModel(final @NotNull String id) {
+        this.id = id;
+    }
+
+    @Override
     public String getId() {
         return id;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    @Override
+    public int hashCode() {
+        return 17 * 31 + id.hashCode();
     }
 
-    public String getTemplate() {
-        return template;
-    }
-
-    public void setTemplate(String template) {
-        this.template = template;
-    }
-
-    public Set<VariableModel> getVariables() {
-        return variables;
-    }
-
-    public void setVariables(Set<VariableModel> variables) {
-        this.variables = variables;
-    }
-
-    public Set<Scope> getScopes() {
-        return scopes;
-    }
-
-    public void setScopes(Set<Scope> scopes) {
-        this.scopes = scopes;
+    @Override
+    public boolean equals(Object obj) {
+        return obj instanceof Scope && this.id.equals(((Scope) obj).getId());
     }
 }

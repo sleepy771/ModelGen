@@ -17,43 +17,6 @@
  */
 package me.sleepyprojects.modelgen.data;
 
-import java.util.Set;
-
-public class TemplateModel {
-    private String id;
-    private String template;
-    private Set<VariableModel> variables;
-    private Set<Scope> scopes;
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getTemplate() {
-        return template;
-    }
-
-    public void setTemplate(String template) {
-        this.template = template;
-    }
-
-    public Set<VariableModel> getVariables() {
-        return variables;
-    }
-
-    public void setVariables(Set<VariableModel> variables) {
-        this.variables = variables;
-    }
-
-    public Set<Scope> getScopes() {
-        return scopes;
-    }
-
-    public void setScopes(Set<Scope> scopes) {
-        this.scopes = scopes;
-    }
+public interface Scope {
+    String getId();
 }
