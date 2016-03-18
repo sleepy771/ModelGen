@@ -32,7 +32,7 @@ public class ModifiersDefinition extends BaseDefinition {
 
     @Override
     protected void assign(Language language, Map<String, Part> parts, Map<String, Block> blocks) {
-        parts.put("mods", new PartsIterable<>(mods));
+        parts.put("modifiers", new PartsIterable<>(mods));
     }
 
     public static class Builder implements Block.Builder<ModifiersDefinition> {

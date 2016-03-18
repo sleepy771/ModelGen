@@ -37,7 +37,7 @@ public class ArgumentsDefinition extends BaseDefinition {
     protected void assign(Language language, Map<String, Part> parts, Map<String, Block> blocks) {
         final Map<String, Block> argumentsMap = new HashMap<>();
         for (int i=0, size = arguments.size(); i < size; i++) {
-            argumentsMap.put("L:args#" + i, arguments.get(i).create(language));
+            argumentsMap.put("L:arguments#" + i, arguments.get(i).create(language));
         }
         blocks.putAll(argumentsMap);
     }

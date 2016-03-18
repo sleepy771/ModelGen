@@ -59,15 +59,15 @@ public class TestJavaClass {
         argument.addModifier(Modifier.Factory.getInstance().get("final"));
         argument.setType(longTime);
 
-//        Argument.Builder argument2 = new Argument.Builder("something");
-//        argument2.addModifier(Modifier.Factory.getInstance().get("final"));
-//        argument2.setType(string);
+        Argument.Builder argument2 = new Argument.Builder("something");
+        argument2.addModifier(Modifier.Factory.getInstance().get("final"));
+        argument2.setType(string);
 
         MethodDefinition.Builder methodBuilder = new MethodDefinition.Builder("getName");
         methodBuilder.setReturnType(string);
         methodBuilder.addModifier(Modifier.Factory.getInstance().get("public"));
         methodBuilder.addArgument(argument.build());
-//        methodBuilder.addArgument(argument2.build());
+        methodBuilder.addArgument(argument2.build());
 
 
         ClassDefinition.Builder builder = new ClassDefinition.Builder();

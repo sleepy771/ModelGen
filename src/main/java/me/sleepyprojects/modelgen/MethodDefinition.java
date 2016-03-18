@@ -27,11 +27,11 @@ import java.util.TreeSet;
 public class MethodDefinition extends BaseDefinition {
     public static final BlockType TYPE = BlockType.METHOD;
     private final String name;
-    private final Set<Modifier> modifiers;
+    private final ModifiersDefinition modifiers;
     private final ArgumentsDefinition args;
     private final Meta returnType;
 
-    private MethodDefinition(String name, Set<Modifier> modifiers, ArgumentsDefinition args, Meta returnType) {
+    private MethodDefinition(String name, ModifiersDefinition modifiers, ArgumentsDefinition args, Meta returnType) {
 
         this.name = name;
         this.modifiers = modifiers;
@@ -45,19 +45,19 @@ public class MethodDefinition extends BaseDefinition {
         parts.put("type", returnType);
         blocks.put("arguments", this.args.create(language));
         // TODO create Modifiers assigner
-        parts.put("mods", new PartsIterable<>(modifiers));
+        blocks.put("modifiers", modifiers.create(language));
     }
 
     public static class Builder implements Block.Builder<MethodDefinition> {
 
         private final String name;
-        private final Set<Modifier> modifiers;
+        private final ModifiersDefinition.Builder modifiers;
         private final ArgumentsDefinition.Builder arguments;
         private Meta returnType;
 
         public Builder(String name) {
             this.name = name;
-            this.modifiers = new TreeSet<>(Modifier.Comparator.INSTANCE);
+            this.modifiers = new ModifiersDefinition.Builder(MethodDefinition.TYPE);
             this.arguments = new ArgumentsDefinition.Builder();
         }
 
@@ -78,7 +78,7 @@ public class MethodDefinition extends BaseDefinition {
 
         @Override
         public MethodDefinition build() {
-            return new MethodDefinition(name, modifiers, arguments.build(), returnType);
+            return new MethodDefinition(name, modifiers.build(), arguments.build(), returnType);
         }
     }
 }
