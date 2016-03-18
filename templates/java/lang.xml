@@ -4,7 +4,10 @@
         <scope id="file"/>
         <scope id="class"/>
         <scope id="class-code"/>
+        <scope id="assign-code"/>
         <scope id="method"/>
+        <scope id="method-code"/>
+        <scope id="flow-code"/>
         <scope id="field"/>
         <scope id="arguments"/>
         <scope id="argument"/>
@@ -146,7 +149,41 @@
                 ${modifiers}{${LN}${TAB}${code}${LN}}
             </velocity>
         </template>
-        <template id="FlowCode" scope="method,initializer">
+        <template id="field-call" scope="flow-code">
+            <variables>
+                <variable id="instance" type="String"/>
+                <variable id="name" type="String"/>
+            </variables>
+            <velocity>
+                #if ($instance.isEmpty())\\
+                #set($instance="this")\\
+                #end\\
+                ${instance}.${name}
+            </velocity>
+        </template>
+        <template id="method-call" scope="flow-code">
+            <variables>
+                <variable id="instance" type="String"/>
+                <variable id="name" type="String"/>
+            </variables>
+            <velocity>
+                #if ($instance.isEmpty())\\
+                #set($instance="this")\\
+                #end\\
+                ${instance}.${name}()
+            </velocity>
+        </template>
+        <template id="assign" scope="flow-code, assign-code">
+            <velocity>
+                ${assignee} = ${assigner};
+            </velocity>
+        </template>
+        <template id="operation" scope="flow-code">
+            <velocity>
+                ${operand1} ${operator} ${operand2}
+            </velocity>
+        </template>
+        <template id="flow-code" scope="method,initializer">
 
         </template>
     </templates>
