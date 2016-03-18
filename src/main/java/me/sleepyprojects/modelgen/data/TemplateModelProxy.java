@@ -17,56 +17,52 @@
  */
 package me.sleepyprojects.modelgen.data;
 
+import com.sun.istack.internal.NotNull;
+import org.apache.velocity.Template;
+
 import java.util.Set;
 
-import com.sun.istack.internal.NotNull;
+public class TemplateModelProxy implements ITemplateModel {
 
-class TemplateModel implements ITemplateModel {
-  private String id;
-  private String template;
-  private Set<VariableModel> variables;
-  private Set<String> scopes;
+    private final ITemplateModel model;
+    private Template template;
 
-  public String getId() {
-    return id;
-  }
+    TemplateModelProxy(final @NotNull ITemplateModel model) {
+        this.model = model;
+    }
 
-  public void setId(final @NotNull String id) {
-    this.id = id;
-  }
+    public String getId() {
+        return model.getId();
+    }
 
-  public String getTemplate() {
-    return template;
-  }
+    public String getTemplate() {
+        return model.getTemplate();
+    }
 
-  public void setTemplate(final @NotNull String template) {
-    this.template = template;
-  }
+    public Set<String> getScopes() {
+        return model.getScopes();
+    }
 
-  public Set<VariableModel> getVariables() {
-    return variables;
-  }
+    public Set<VariableModel> getVariables() {
+        return model.getVariables();
+    }
 
-  public void setVariables(final @NotNull Set<VariableModel> variables) {
-    this.variables = variables;
-  }
+    public Template getVelocityTemplate() {
+        return template;
+    }
 
-  public Set<String> getScopes() {
-    return scopes;
-  }
+    void setVelocityTemplate(final @NotNull Template template) {
+        this.template = template;
+    }
 
-  public void setScopes(final @NotNull Set<String> scopes) {
-    this.scopes = scopes;
-  }
+    public boolean hasVelocityTemplate() {
+        return this.template != null;
+    }
 
-  @Override
-  public int hashCode() {
-    return 17 * 31 + (this.id != null ? this.id.hashCode() : 0);
-  }
-
-  @Override
-  public boolean equals(Object obj) {
-    return this == obj || (obj instanceof TemplateModel) &&
-        Utils.isEqual(((TemplateModel) obj).id, this.id);
-  }
+    public static TemplateModelProxy create(ITemplateModel model) {
+        if (model instanceof TemplateModelProxy) {
+            return (TemplateModelProxy) model;
+        }
+        return new TemplateModelProxy(model);
+    }
 }

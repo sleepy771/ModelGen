@@ -19,90 +19,98 @@ import org.xml.sax.SAXException;
 
 public class XMLLangParser {
 
-  private final File file;
-  private Document document;
-  private Set<TemplateModel> models;
+    private final File file;
+    private Document document;
+    private Set<TemplateModel> models;
 
-  public XMLLangParser(final File file) {
-    this.file = file;
-  }
-
-  public void init() throws ParserConfigurationException, IOException,
-      SAXException {
-    DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-    DocumentBuilder builder = factory.newDocumentBuilder();
-    document = builder.parse(file);
-
-    document.getDocumentElement().normalize();
-  }
-
-  private List<Element> getElements(Element element, String name) {
-    NodeList list = element.getElementsByTagName(name);
-    List<Element> elements = new ArrayList<>();
-    for (int i = 0; i < list.getLength(); i++) {
-      if (list.item(i).getNodeType() == Node.ELEMENT_NODE) {
-        elements.add((Element) list.item(i));
-      }
+    public XMLLangParser(final File file) {
+        this.file = file;
     }
-    return elements;
-  }
 
-  private Element getElement(Element element, String name) {
-    NodeList list = element.getElementsByTagName(name);
-    if (list.item(0).getNodeType() == Node.ELEMENT_NODE) {
-      return (Element) list.item(0);
-    }
-    return null;
-  }
+    public void init() throws ParserConfigurationException, IOException,
+            SAXException {
+        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+        DocumentBuilder builder = factory.newDocumentBuilder();
+        document = builder.parse(file);
 
-  private Set<VariableModel> loadVariables(final Element element) {
-    final Element variables = getElement(element, "variables");
-    if (variables == null) {
-      throw new RuntimeException("Variables node does not exist");
+        document.getDocumentElement().normalize();
     }
-    final Set<VariableModel> models = new HashSet<>();
-    for (final Element variableElement : getElements(variables, "variable")) {
-      final String id = variableElement.getAttribute("id");
-      final String type = variableElement.getAttribute("type");
-      final VariableModel model = new VariableModel();
-      model.setBaseType(ClassBinder.getInstance().get(type));
-      model.setId(id);
-      model.setIterable(type.endsWith("[]"));
-      models.add(model);
-    }
-    return models;
-  }
 
-  public Set<TemplateModel> getModels() {
-    if (models == null) {
-      models = loadTemplates(document.getDocumentElement());
+    private List<Element> getElements(Element element, String name) {
+        NodeList list = element.getElementsByTagName(name);
+        List<Element> elements = new ArrayList<>();
+        for (int i = 0; i < list.getLength(); i++) {
+            if (list.item(i).getNodeType() == Node.ELEMENT_NODE) {
+                elements.add((Element) list.item(i));
+            }
+        }
+        return elements;
     }
-    return models;
-  }
 
-  private Set<TemplateModel> loadTemplates(final Element element) {
-    final Element templates = getElement(element, "templates");
-    if (templates == null) {
-      throw new RuntimeException("Templates does not exist");
+    private Element getElement(Element element, String name) {
+        NodeList list = element.getElementsByTagName(name);
+        if (list.getLength() != 1) {
+            throw new RuntimeException(String.format("Invalid node list size %d of %s in element %s", list.getLength(), name, element.getAttribute("id")));
+        }
+        if (list.item(0).getNodeType() == Node.ELEMENT_NODE) {
+            return (Element) list.item(0);
+        }
+        return null;
     }
-    final Set<TemplateModel> templateModels = new HashSet<>();
-    for (final Element templateElement : getElements(templates, "template")) {
-      final String id = templateElement.getAttribute("id");
-      final String scopeAttr = templateElement.getAttribute("scope");
-      final String[] scopes = scopeAttr.split(",");
-      final Set<VariableModel> variables = loadVariables(templateElement);
-      final Element velocity = getElement(templateElement, "velocity");
-      if (velocity == null) {
-        throw new NullPointerException("Velocity not found");
-      }
-      final String velocityContext = velocity.getTextContent();
-      final TemplateModel model = new TemplateModel();
-      templateModels.add(model);
-      model.setId(id);
-      model.setTemplate(velocityContext);
-      model.setVariables(new HashSet<>(variables));
-      model.setScopes(new HashSet<>(Arrays.asList(scopes)));
+
+    private Set<VariableModel> loadVariables(final Element element) {
+        final Element variables = getElement(element, "variables");
+        if (variables == null) {
+            throw new RuntimeException("Variables node does not exist");
+        }
+        final Set<VariableModel> models = new HashSet<>();
+        for (final Element variableElement : getElements(variables, "variable")) {
+            final String id = variableElement.getAttribute("id");
+            final String type = variableElement.getAttribute("type");
+            final VariableModel model = new VariableModel();
+            model.setBaseType(ClassBinder.getInstance().get(type));
+            model.setId(id);
+            model.setIterable(type.endsWith("[]"));
+            models.add(model);
+        }
+        return models;
     }
-    return templateModels;
-  }
+
+    public Set<TemplateModel> getModels() {
+        if (models == null) {
+            try {
+                init();
+            } catch (IOException | ParserConfigurationException | SAXException e) {
+                throw new RuntimeException("NOPE");
+            }
+            models = loadTemplates(document.getDocumentElement());
+        }
+        return models;
+    }
+
+    private Set<TemplateModel> loadTemplates(final Element element) {
+        final Element templates = getElement(element, "templates");
+        if (templates == null) {
+            throw new RuntimeException("Templates does not exist");
+        }
+        final Set<TemplateModel> templateModels = new HashSet<>();
+        for (final Element templateElement : getElements(templates, "template")) {
+            final String id = templateElement.getAttribute("id");
+            final String scopeAttr = templateElement.getAttribute("scope");
+            final String[] scopes = scopeAttr.split(",");
+            final Set<VariableModel> variables = loadVariables(templateElement);
+            final Element velocity = getElement(templateElement, "velocity");
+            if (velocity == null) {
+                throw new NullPointerException("Velocity not found");
+            }
+            final String velocityContext = velocity.getTextContent();
+            final TemplateModel model = new TemplateModel();
+            templateModels.add(model);
+            model.setId(id);
+            model.setTemplate(velocityContext);
+            model.setVariables(new HashSet<>(variables));
+            model.setScopes(new HashSet<>(Arrays.asList(scopes)));
+        }
+        return templateModels;
+    }
 }

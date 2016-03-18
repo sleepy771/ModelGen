@@ -26,12 +26,12 @@ import java.util.*;
 public class ClassDefinition extends BaseDefinition {
     public static final BlockType TYPE = BlockType.TYPE;
 
-    private List<Meta> superTypes;
-    private final Set<Modifier> modifiers;
-    private Meta thisClass;
+    private final List<Meta> superTypes;
+    private final ModifiersDefinition modifiers;
+    private final Meta thisClass;
     private ClassCodeDefinition code;
 
-    ClassDefinition(Meta thisClass, List<Meta> superTypes, Set<Modifier> modifiers, ClassCodeDefinition definition) {
+    ClassDefinition(Meta thisClass, List<Meta> superTypes, ModifiersDefinition modifiers, ClassCodeDefinition definition) {
         this.thisClass = thisClass;
         this.superTypes = superTypes;
         this.modifiers = modifiers;
@@ -41,11 +41,11 @@ public class ClassDefinition extends BaseDefinition {
     @Override
     protected void assign(Language language, Map<String, Part> parts, Map<String, Block> blocks) {
         SuperTypeAssigner superType = language.getAssigner(SuperTypeAssigner.class);
-        parts.put("modifiers", new PartsIterable<>(modifiers)); // TODO: 14.3.2016 create assigner for modifiers
         superType.setCurrentMeta(thisClass);
         superType.assign(blocks, parts, superTypes);
         parts.put("name", new FlatPart(this.thisClass.getName()));
         blocks.put("code", code.create(language));
+        blocks.put("modifiers", modifiers.create(language)); // TODO: 14.3.2016 create assigner for modifiers
     }
 
     public static class Builder implements Block.Builder<ClassDefinition> {
@@ -54,12 +54,12 @@ public class ClassDefinition extends BaseDefinition {
         private String pkg;
         private List<Meta> superClasses;
         private Meta.Type type;
-        private Set<Modifier> modifiers;
+        private ModifiersDefinition.Builder modifiers;
         private ClassCodeDefinition.Builder codeBuilder;
 
         public Builder() {
             this.superClasses = new ArrayList<>();
-            this.modifiers = new TreeSet<>(Modifier.Comparator.INSTANCE);
+            this.modifiers = new ModifiersDefinition.Builder(ClassDefinition.TYPE);
             this.codeBuilder = new ClassCodeDefinition.Builder();
         }
 
@@ -76,10 +76,6 @@ public class ClassDefinition extends BaseDefinition {
         }
 
         public void addModifier(Modifier modifier) {
-            if (!modifier.getSupportedTypes().contains(ClassDefinition.TYPE)) {
-                throw new RuntimeException("Unsupported block type");
-                // TODO better exception
-            }
             modifiers.add(modifier);
         }
 
@@ -116,7 +112,7 @@ public class ClassDefinition extends BaseDefinition {
         @Override
         public ClassDefinition build() {
             Meta classMeta = new BaseMeta(this.className, this.pkg, this.type);
-            return new ClassDefinition(classMeta, superClasses, modifiers, codeBuilder.build());
+            return new ClassDefinition(classMeta, superClasses, modifiers.build(), codeBuilder.build());
         }
     }
 }

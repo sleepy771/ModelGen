@@ -18,9 +18,12 @@
 package me.sleepyprojects.modelgen;
 
 import com.sun.org.apache.xpath.internal.operations.Mod;
+import me.sleepyprojects.modelgen.data.DefaultClassBinder;
+import me.sleepyprojects.modelgen.data.TemplateManagerImpl;
 import me.sleepyprojects.modelgen.language.BaseMeta;
 import me.sleepyprojects.modelgen.language.SuperTypeAssigner;
 
+import java.io.File;
 import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -28,11 +31,14 @@ import java.util.Map;
 
 public class TestJavaClass {
 
-    private static TemplateManager manager;
     private static Map<String, String> javaDefaults;
     private static Language language;
 
     public static void main(String[] args) {
+
+        new DefaultClassBinder();
+        TemplateManagerImpl.create(new File("templates/java/lang.xml"));
+
         long time = System.currentTimeMillis();
         Modifier.Factory.getInstance().create("public", EnumSet.allOf(BlockType.class), 0);
         Modifier.Factory.getInstance().create("protected", EnumSet.allOf(BlockType.class), 0);
@@ -53,15 +59,15 @@ public class TestJavaClass {
         argument.addModifier(Modifier.Factory.getInstance().get("final"));
         argument.setType(longTime);
 
-        Argument.Builder argument2 = new Argument.Builder("something");
-        argument2.addModifier(Modifier.Factory.getInstance().get("final"));
-        argument2.setType(string);
+//        Argument.Builder argument2 = new Argument.Builder("something");
+//        argument2.addModifier(Modifier.Factory.getInstance().get("final"));
+//        argument2.setType(string);
 
         MethodDefinition.Builder methodBuilder = new MethodDefinition.Builder("getName");
         methodBuilder.setReturnType(string);
         methodBuilder.addModifier(Modifier.Factory.getInstance().get("public"));
         methodBuilder.addArgument(argument.build());
-        methodBuilder.addArgument(argument2.build());
+//        methodBuilder.addArgument(argument2.build());
 
 
         ClassDefinition.Builder builder = new ClassDefinition.Builder();
@@ -98,10 +104,7 @@ public class TestJavaClass {
 
                 @Override
                 public TemplateManager getManager() {
-                    if (TestJavaClass.manager == null) {
-                        TestJavaClass.manager = new FooManager();
-                    }
-                    return TestJavaClass.manager;
+                    return TemplateManagerImpl.getInstance();
                 }
 
                 @Override

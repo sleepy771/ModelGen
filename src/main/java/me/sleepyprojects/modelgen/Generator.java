@@ -80,8 +80,10 @@ public class Generator {
         final List<String> subParts;
         if (peek.getBlockCount() == partNames.size()) {
             subParts = partNames;
+        } else if (partNames.size() < peek.getBlockCount()) {
+            return false;
         } else {
-            subParts = partNames.subList(0, peek.getBlockCount() - 1);
+            subParts = partNames.subList(0, peek.getBlockCount());
         }
         return subParts.containsAll(peek.getBlockNames());
     }

@@ -24,17 +24,17 @@
             <velocity>
                 #set($extends="")\\
                 #if ($superclass)\\
-                    #set($extends=" extends ${superclass}")\\
+                #set($extends=" extends ${superclass}")\\
                 #end\\
                 #set($implements="")\\
                 #if ($interfaces)\\
-                    #foreach ($meta in $interfaces)\\
-                        #if ($implements.isEmpty())\\
-                            #set($implements=" implements ${meta}")\\
-                        #else\\
-                            #set($implements=$implements+", "+$meta)\\
-                        #end\\
-                    #end\\
+                #foreach ($meta in $interfaces)\\
+                #if ($implements.isEmpty())\\
+                #set($implements=" implements ${meta}")\\
+                #else\\
+                #set($implements=$implements+", "+$meta)\\
+                #end\\
+                #end\\
                 #end\\
                 ${modifiers}class ${name}${extends}${implements} {${LN}${TAB}${code}${LN}}${LN}
             </velocity>
@@ -46,15 +46,15 @@
             </variables>
             <velocity>
                 #if ($fields)\\
-                    #foreach($field in $fields)\\
-                        $field\\
-                    #end\\
+                #foreach($field in $fields)\\
+                $field\\
+                #end\\
                 #end\\
                 #if ($methods)\\
-                    ${LN}\\
-                    #foreach ($method in $methods)\\
-                        ${method}${LN}\\
-                    #end\\
+                ${LN}\\
+                #foreach ($method in $methods)\\
+                ${method}${LN}\\
+                #end\\
                 #end
             </velocity>
         </template>
@@ -79,7 +79,7 @@
             </variables>
             <velocity>
                 #if ($value)\\
-                    #set($assign=" = $value")\\
+                #set($assign="${S}=${S}$value")\\
                 #end\\
                 ${modifiers}$type ${name}${assign};
             </velocity>
@@ -91,9 +91,9 @@
             <velocity>
                 #set($mods="")\\
                 #if($modifiers)\\
-                    #foreach($mod in $modifiers)\\
-                        #set($mods=$mods + $mod + " ")\\
-                    #end\\
+                #foreach($mod in $modifiers)\\
+                #set($mods=$mods + $mod + $S)\\
+                #end\\
                 #end\\
                 $mods
             </velocity>
@@ -115,31 +115,31 @@
             <velocity>
                 #set($args="")\\
                 #if($arguments)\\
-                    #foreach($arg in $arguments)\\
-                        #if($args.isEmpty())\\
-                            #set($args=$arg)\\
-                        #else\\
-                            #set($args=$args + ", " + $arg)\\
-                        #end\\
-                    #end\\
+                #foreach($arg in $arguments)\\
+                #if($args.isEmpty())\\
+                #set($args=$arg)\\
+                #else\\
+                #set($args=$args + ",$S" + $arg)\\
+                #end\\
+                #end\\
                 #end\\
                 $arguments
             </velocity>
         </template>
-        <template id="constructor" scope="class-code" extends="method">
-            <variables>
-                <variable id="name" type="Meta"/>
-            </variables>
-        </template>
-        <template id="constant" scope="class-code" extends="field">
-            <variables>
-                <variable id="modifiers" type="ModifierDefinition">
-                    <value>public</value>
-                    <value>static</value>
-                    <value>final</value>
-                </variable>
-            </variables>
-        </template>
+        <!--<template id="constructor" scope="class-code" extends="method">-->
+            <!--<variables>-->
+                <!--<variable id="name" type="Meta"/>-->
+            <!--</variables>-->
+        <!--</template>-->
+        <!--<template id="constant" scope="class-code" extends="field">-->
+            <!--<variables>-->
+                <!--<variable id="modifiers" type="ModifierDefinition">-->
+                    <!--<value>public</value>-->
+                    <!--<value>static</value>-->
+                    <!--<value>final</value>-->
+                <!--</variable>-->
+            <!--</variables>-->
+        <!--</template>-->
         <template id="initializer" scope="class-code">
             <variables>
                 <variable id="code" type="FlowCode"/>
@@ -173,18 +173,18 @@
                 ${instance}.${name}()
             </velocity>
         </template>
-        <template id="assign" scope="flow-code, assign-code">
-            <velocity>
-                ${assignee} = ${assigner};
-            </velocity>
-        </template>
-        <template id="operation" scope="flow-code">
-            <velocity>
-                ${operand1} ${operator} ${operand2}
-            </velocity>
-        </template>
-        <template id="flow-code" scope="method,initializer">
+        <!--<template id="assign" scope="flow-code, assign-code">-->
+            <!--<velocity>-->
+                <!--${assignee}${S}=${S}${assigner};-->
+            <!--</velocity>-->
+        <!--</template>-->
+        <!--<template id="operation" scope="flow-code">-->
+            <!--<velocity>-->
+                <!--${operand1}${S}${operator}${S}${operand2}-->
+            <!--</velocity>-->
+        <!--</template>-->
+        <!--<template id="flow-code" scope="method,initializer">-->
 
-        </template>
+        <!--</template>-->
     </templates>
 </lang>
