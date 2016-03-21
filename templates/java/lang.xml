@@ -1,22 +1,41 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <lang>
     <modifiers>
-        <modifier id="public" type="visibility" order="1">public</modifier>
-        <modifier id="protected" type="visibility" order="1">protected</modifier>
-        <modifier id="package-protected" type="visibility" order="1" is-default="true"/>
-        <modifier id="private" type="visibility" order="1">private</modifier>
-        <modifier id="static" type="scope" order="2">static</modifier>
-        <modifier id="abstract" type="inheritance" order="3">abstract</modifier>
-        <modifier id="synchronized" type="concurrency" order="4">synchronized</modifier>
-        <modifier id="volatile" type="mem-access" order="5">volatile</modifier>
-        <modifier id="transient" type="persistence" order="5">transient</modifier>
-        <modifier id="final" type="finality" order="6">final</modifier>
-        <modifier id="native" type="external" order="7">native</modifier>
+        <groups>
+            <group id="visibility" order="1" scopes="type,method,field">
+                <modifier id="public">public</modifier>
+                <modifier id="protected">protected</modifier>
+                <modifier id="package-protected" is-default="true"/>
+                <modifier id="private">private</modifier>
+            </group>
+            <group id="scope" order="2" scopes="type,method,field,block">
+                <modifier id="static">static</modifier>
+            </group>
+            <group id="inheritance" order="3" scopes="type,method">
+                <modifier id="abstract">abstract</modifier>
+            </group>
+            <group id="concurrency" order="4" scopes="method,field,block">
+                <modifier id="synchronized">synchronized</modifier>
+            </group>
+            <group id="mem-access" order="5" scopes="field,variable">
+                <modifier id="volatile">volatile</modifier>
+            </group>
+            <group id="persistence" order="5" scopes="field">
+                <modifier id="transient">transient</modifier>
+            </group>
+            <group id="mutability" order="6" scopes="type,method,field,variable">
+                <modifier id="final">final</modifier>
+            </group>
+            <group id="external" order="7" scopes="method">
+                <modifier id="native">native</modifier>
+            </group>
+        </groups>
     </modifiers>
     <scopes>
         <scope id="file"/>
         <scope id="class"/>
         <scope id="class-code"/>
+        <scope id="init-block"/>
         <scope id="assign-code"/>
         <scope id="method"/>
         <scope id="method-code"/>
@@ -116,7 +135,7 @@
                 <variable id="name" type="String"/>
             </variables>
             <velocity>
-                ${modifiers}$S$type $name
+                ${modifiers}$type $name
             </velocity>
         </template>
         <template id="arguments" scope="method">

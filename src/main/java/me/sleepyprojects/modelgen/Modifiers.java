@@ -17,30 +17,13 @@
  */
 package me.sleepyprojects.modelgen;
 
-import me.sleepyprojects.modelgen.data.ModGroup;
-
-import java.util.EnumSet;
-
-public interface Modifier extends Part {
-    EnumSet<BlockType> getSupportedTypes();
-
-    boolean isInScope(BlockType blockType);
-
-    String getValue();
-
-    ModGroup getGroup();
-
-    int getOrder();
-
-    void setParent(ModGroup modGroup);
-
-    class Comparator implements java.util.Comparator<Modifier> {
-
-        public static final Comparator INSTANCE = new Comparator();
-
-        @Override
-        public int compare(Modifier o1, Modifier o2) {
-            return o1.getOrder() - o2.getOrder();
-        }
-    }
+public enum Modifiers {
+    PUBLIC,
+    PROTECTED,
+    PACKAGE_PROTECTED,
+    PRIVATE,
+    STATIC, // @staticmethod OR SCREAMING_SNAKE_CASE class variable
+    ABSTRACT, // abc.ABCMeta
+    FINAL, // TODO let user decide
+    NATIVE; // TODO create in python
 }

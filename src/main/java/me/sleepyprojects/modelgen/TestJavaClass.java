@@ -21,6 +21,7 @@ import com.sun.org.apache.xpath.internal.operations.Mod;
 import me.sleepyprojects.modelgen.data.DefaultClassBinder;
 import me.sleepyprojects.modelgen.data.ITemplateModel;
 import me.sleepyprojects.modelgen.data.TemplateManagerImpl;
+import me.sleepyprojects.modelgen.data.XMLLangParser;
 import me.sleepyprojects.modelgen.language.BaseMeta;
 import me.sleepyprojects.modelgen.language.SuperTypeAssigner;
 
@@ -60,6 +61,7 @@ public class TestJavaClass {
         Meta aBax = new BaseMeta("Bax", "pkg", Meta.Type.CLASS);
         Meta string = new BaseMeta("String", "java.lang", Meta.Type.CLASS);
         Meta longTime = new BaseMeta("long", "-", Meta.Type.TYPE);
+        Meta intIndex = new BaseMeta("int", "-", Meta.Type.TYPE);
 
         Argument.Builder argument = new Argument.Builder("time");
         argument.addModifier(Modifier.Factory.getInstance().get("final"));
@@ -69,12 +71,22 @@ public class TestJavaClass {
         argument2.addModifier(Modifier.Factory.getInstance().get("final"));
         argument2.setType(string);
 
-        MethodDefinition.Builder methodBuilder = new MethodDefinition.Builder("getName");
+        MethodDefinition.Builder methodBuilder = new MethodDefinition.Builder("doStuff");
         methodBuilder.setReturnType(string);
-        methodBuilder.addModifier(Modifier.Factory.getInstance().get("public"));
+        methodBuilder.addModifier(Modifier.Factory.getInstance().get("private"));
         methodBuilder.addArgument(argument.build());
         methodBuilder.addArgument(argument2.build());
 
+        MethodDefinition.Builder methodBuilder2 = new MethodDefinition.Builder("getName");
+        methodBuilder2.setReturnType(string);
+        methodBuilder2.addModifier(Modifier.Factory.getInstance().get("public"));
+        methodBuilder2.addModifier(Modifier.Factory.getInstance().get("final"));
+
+        MethodDefinition.Builder methodBuilder3 = new MethodDefinition.Builder("getSomething");
+        methodBuilder3.setReturnType(string);
+        Argument.Builder aBuild = new Argument.Builder("index");
+        aBuild.setType(intIndex);
+        methodBuilder3.addArgument(aBuild.build());
 
         ClassDefinition.Builder builder = new ClassDefinition.Builder();
         builder.setName("Foo");
@@ -84,8 +96,10 @@ public class TestJavaClass {
         builder.addSuperClass(iBaz);
         builder.addSuperClass(aBax);
 //        builder.addModifier(Modifier.Factory.getInstance().get("final"));
-//        builder.addModifier(Modifier.Factory.getInstance().get("public"));
+        builder.addModifier(Modifier.Factory.getInstance().get("public"));
         builder.addMethod(methodBuilder.build());
+        builder.addMethod(methodBuilder2.build());
+        builder.addMethod(methodBuilder3.build());
 
 
         Generator generator = new Generator(getLanguage());
@@ -106,6 +120,11 @@ public class TestJavaClass {
                         TestJavaClass.initDefaults();
                     }
                     return TestJavaClass.javaDefaults;
+                }
+
+                @Override
+                public XMLLangParser getParser() {
+                    return XMLLangParser.getInstance();
                 }
 
                 @Override

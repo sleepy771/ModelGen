@@ -17,30 +17,25 @@
  */
 package me.sleepyprojects.modelgen;
 
-import me.sleepyprojects.modelgen.data.ModGroup;
+import me.sleepyprojects.modelgen.language.HasName;
 
-import java.util.EnumSet;
+import java.util.List;
 
-public interface Modifier extends Part {
-    EnumSet<BlockType> getSupportedTypes();
+public interface Method extends HasName {
 
-    boolean isInScope(BlockType blockType);
+    void setName(String name);
 
-    String getValue();
+    void addArgument(Argument argument);
 
-    ModGroup getGroup();
+    void addArguments(Iterable<Argument> arguments);
 
-    int getOrder();
+    void setReturnType(Meta returnType);
 
-    void setParent(ModGroup modGroup);
+    void setBody(FlowCode code);
 
-    class Comparator implements java.util.Comparator<Modifier> {
+    FlowCode getBody();
 
-        public static final Comparator INSTANCE = new Comparator();
+    List<Argument> getArguments();
 
-        @Override
-        public int compare(Modifier o1, Modifier o2) {
-            return o1.getOrder() - o2.getOrder();
-        }
-    }
+    Meta getReturnType();
 }

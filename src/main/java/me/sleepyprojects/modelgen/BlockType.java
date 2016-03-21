@@ -18,5 +18,10 @@
 package me.sleepyprojects.modelgen;
 
 public enum BlockType {
-    TYPE, METHOD, FIELD, BLOCK, ARGUMENT;
+    TYPE, METHOD, FIELD, BLOCK, VARIABLE;
+
+    public static BlockType get(final String value) {
+        final String name = value.toUpperCase().replace("-", "_");
+        return BlockType.valueOf(name);
+    }
 }

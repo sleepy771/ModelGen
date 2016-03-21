@@ -15,32 +15,26 @@
  * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
  * DEALINGS IN THE SOFTWARE.
  */
-package me.sleepyprojects.modelgen;
+package me.sleepyprojects.modelgen.language.python;
 
-import me.sleepyprojects.modelgen.data.ModGroup;
+import me.sleepyprojects.modelgen.Block;
+import me.sleepyprojects.modelgen.language.HasName;
+import me.sleepyprojects.modelgen.language.modifiers.Modifier;
 
-import java.util.EnumSet;
+public class PythonInvisibleModifier implements Modifier {
 
-public interface Modifier extends Part {
-    EnumSet<BlockType> getSupportedTypes();
+    public static final PythonInvisibleModifier INSTANCE = new PythonInvisibleModifier();
 
-    boolean isInScope(BlockType blockType);
+    private PythonInvisibleModifier(){}
 
-    String getValue();
-
-    ModGroup getGroup();
-
-    int getOrder();
-
-    void setParent(ModGroup modGroup);
-
-    class Comparator implements java.util.Comparator<Modifier> {
-
-        public static final Comparator INSTANCE = new Comparator();
-
-        @Override
-        public int compare(Modifier o1, Modifier o2) {
-            return o1.getOrder() - o2.getOrder();
+    @Override
+    public boolean apply(Block.Definition builder) {
+        if (builder instanceof HasName) {
+            HasName named = (HasName) builder;
+            if (!named.getName().startsWith("_")) {
+                named.setName("_" + named.getName());
+            }
         }
+        return false;
     }
 }

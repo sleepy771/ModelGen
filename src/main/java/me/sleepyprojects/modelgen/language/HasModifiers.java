@@ -15,32 +15,14 @@
  * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
  * DEALINGS IN THE SOFTWARE.
  */
-package me.sleepyprojects.modelgen;
+package me.sleepyprojects.modelgen.language;
 
-import me.sleepyprojects.modelgen.data.ModGroup;
+import me.sleepyprojects.modelgen.language.modifiers.Modifier;
 
-import java.util.EnumSet;
+import java.util.Set;
 
-public interface Modifier extends Part {
-    EnumSet<BlockType> getSupportedTypes();
+public interface HasModifiers {
+    Set<Modifier> getModifiers();
 
-    boolean isInScope(BlockType blockType);
-
-    String getValue();
-
-    ModGroup getGroup();
-
-    int getOrder();
-
-    void setParent(ModGroup modGroup);
-
-    class Comparator implements java.util.Comparator<Modifier> {
-
-        public static final Comparator INSTANCE = new Comparator();
-
-        @Override
-        public int compare(Modifier o1, Modifier o2) {
-            return o1.getOrder() - o2.getOrder();
-        }
-    }
+    boolean addModifier(Modifier modifier);
 }

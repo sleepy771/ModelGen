@@ -15,32 +15,32 @@
  * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
  * DEALINGS IN THE SOFTWARE.
  */
-package me.sleepyprojects.modelgen;
+package me.sleepyprojects.modelgen.language.python;
 
-import me.sleepyprojects.modelgen.data.ModGroup;
+import me.sleepyprojects.modelgen.Meta;
+import me.sleepyprojects.modelgen.MethodDefinition;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
-import java.util.EnumSet;
+public class PythonImporter {
 
-public interface Modifier extends Part {
-    EnumSet<BlockType> getSupportedTypes();
+    private static PythonImporter INSTANCE;
 
-    boolean isInScope(BlockType blockType);
+    PythonImporter() {
+        throw new NotImplementedException();
+    }
 
-    String getValue();
+    public Meta getMeta(String pkg, String name) {
+        return null;
+    }
 
-    ModGroup getGroup();
+    public MethodDefinition getMethod(String pkg, String method) {
+        return null;
+    }
 
-    int getOrder();
-
-    void setParent(ModGroup modGroup);
-
-    class Comparator implements java.util.Comparator<Modifier> {
-
-        public static final Comparator INSTANCE = new Comparator();
-
-        @Override
-        public int compare(Modifier o1, Modifier o2) {
-            return o1.getOrder() - o2.getOrder();
+    public static PythonImporter getInstance() {
+        if (INSTANCE == null) {
+            INSTANCE = new PythonImporter();
         }
+        return INSTANCE;
     }
 }

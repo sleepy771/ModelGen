@@ -17,10 +17,14 @@
  */
 package me.sleepyprojects.modelgen;
 
+import me.sleepyprojects.modelgen.data.XMLLangParser;
+
 import java.util.Map;
 
 public interface Language {
     Map<String, String> getPredefined();
+
+    XMLLangParser getParser();
 
     TemplateManager getManager();
 

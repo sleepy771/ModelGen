@@ -7,10 +7,13 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import me.sleepyprojects.modelgen.BlockType;
+import me.sleepyprojects.modelgen.Modifier;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -22,9 +25,14 @@ public class XMLLangParser {
     private final File file;
     private Document document;
     private Set<TemplateModel> models;
+    private static XMLLangParser instance;
 
     public XMLLangParser(final File file) {
         this.file = file;
+    }
+
+    public static XMLLangParser getInstance() {
+        return instance;
     }
 
     public void init() throws ParserConfigurationException, IOException,
@@ -103,12 +111,9 @@ public class XMLLangParser {
             if (velocity == null) {
                 throw new NullPointerException("Velocity not found");
             }
-            final String[] velocityContextLines = velocity.getTextContent().split("\n");
+            final String[] velocityContextLines = velocity.getTextContent().trim().split("\n");
             final StringBuilder velocityContext = new StringBuilder();
             for (int i = 0; i < velocityContextLines.length; i++) {
-                if (velocityContext.length() == 0 && velocityContextLines[i].isEmpty()) {
-                    continue;
-                }
                 velocityContext.append(velocityContextLines[i].trim());
                 if (velocityContextLines.length - 1 == i) {
                     continue;

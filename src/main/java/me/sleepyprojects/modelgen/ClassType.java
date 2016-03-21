@@ -17,30 +17,16 @@
  */
 package me.sleepyprojects.modelgen;
 
-import me.sleepyprojects.modelgen.data.ModGroup;
+import me.sleepyprojects.modelgen.language.HasName;
 
-import java.util.EnumSet;
+public interface ClassType extends HasName {
 
-public interface Modifier extends Part {
-    EnumSet<BlockType> getSupportedTypes();
+    void addMethod(Method method);
 
-    boolean isInScope(BlockType blockType);
+    void addField(Field field);
 
-    String getValue();
+    void addConstructor(Method constructor);
 
-    ModGroup getGroup();
+    void addConstant(Field constant);
 
-    int getOrder();
-
-    void setParent(ModGroup modGroup);
-
-    class Comparator implements java.util.Comparator<Modifier> {
-
-        public static final Comparator INSTANCE = new Comparator();
-
-        @Override
-        public int compare(Modifier o1, Modifier o2) {
-            return o1.getOrder() - o2.getOrder();
-        }
-    }
 }

@@ -48,6 +48,11 @@ public class MethodDefinition extends BaseDefinition {
         blocks.put("modifiers", modifiers.create(language));
     }
 
+    @Override
+    public BlockType getType() {
+        return BlockType.METHOD;
+    }
+
     public static class Builder implements Block.Builder<MethodDefinition> {
 
         private final String name;

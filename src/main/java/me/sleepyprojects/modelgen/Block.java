@@ -23,6 +23,8 @@ public interface Block extends Buildable {
 
     interface Definition {
         Block create(Language language);
+
+        BlockType getType();
     }
 
     interface Builder<T extends Definition> {

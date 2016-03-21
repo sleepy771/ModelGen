@@ -20,12 +20,10 @@ package me.sleepyprojects.modelgen;
 import com.sun.istack.internal.NotNull;
 
 import java.util.Map;
-import java.util.Set;
-import java.util.TreeSet;
 
 @TemplateId("argument")
 public class Argument extends BaseDefinition {
-    public static final BlockType TYPE = BlockType.ARGUMENT;
+    public static final BlockType TYPE = BlockType.VARIABLE;
     private final String name;
     private final Meta type;
     private final ModifiersDefinition modifiers;
@@ -56,7 +54,7 @@ public class Argument extends BaseDefinition {
 
         public Builder(String name) {
             this.name = name;
-            this.modifiers = new ModifiersDefinition.Builder(BlockType.ARGUMENT);
+            this.modifiers = new ModifiersDefinition.Builder(BlockType.VARIABLE);
         }
 
         public void setType(final @NotNull Meta argType) {

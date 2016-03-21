@@ -15,32 +15,50 @@
  * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
  * DEALINGS IN THE SOFTWARE.
  */
-package me.sleepyprojects.modelgen;
+package me.sleepyprojects.modelgen.language.python;
 
-import me.sleepyprojects.modelgen.data.ModGroup;
+import me.sleepyprojects.modelgen.Meta;
 
-import java.util.EnumSet;
+public class MutableMeta implements Meta {
 
-public interface Modifier extends Part {
-    EnumSet<BlockType> getSupportedTypes();
 
-    boolean isInScope(BlockType blockType);
+    private String name;
+    private String pkg;
+    private Type type;
 
-    String getValue();
+    private MutableMeta(String name, String pkg, Type type) {
+        this.name = name;
+        this.pkg = pkg;
+        this.type = type;
+    }
 
-    ModGroup getGroup();
+    @Override
+    public String getName() {
+        return name;
+    }
 
-    int getOrder();
+    public void setName(String name) {
+        this.name = name;
+    }
 
-    void setParent(ModGroup modGroup);
+    @Override
+    public String getPackage() {
+        return pkg;
+    }
 
-    class Comparator implements java.util.Comparator<Modifier> {
+    @Override
+    public Type getType() {
+        return type;
+    }
 
-        public static final Comparator INSTANCE = new Comparator();
-
-        @Override
-        public int compare(Modifier o1, Modifier o2) {
-            return o1.getOrder() - o2.getOrder();
+    public static MutableMeta create(Meta meta) {
+        if (meta instanceof MutableMeta) {
+            return (MutableMeta) meta;
         }
+        return new MutableMeta(meta.getName(), meta.getPackage(), meta.getType());
+    }
+
+    public static MutableMeta create(String name, String pkg, Type type) {
+        return new MutableMeta(name, pkg, type);
     }
 }

@@ -15,32 +15,20 @@
  * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
  * DEALINGS IN THE SOFTWARE.
  */
-package me.sleepyprojects.modelgen;
+package me.sleepyprojects.modelgen.language.python;
 
-import me.sleepyprojects.modelgen.data.ModGroup;
+import me.sleepyprojects.modelgen.Block;
+import me.sleepyprojects.modelgen.BlockType;
+import me.sleepyprojects.modelgen.language.modifiers.Modifier;
 
-import java.util.EnumSet;
-
-public interface Modifier extends Part {
-    EnumSet<BlockType> getSupportedTypes();
-
-    boolean isInScope(BlockType blockType);
-
-    String getValue();
-
-    ModGroup getGroup();
-
-    int getOrder();
-
-    void setParent(ModGroup modGroup);
-
-    class Comparator implements java.util.Comparator<Modifier> {
-
-        public static final Comparator INSTANCE = new Comparator();
-
-        @Override
-        public int compare(Modifier o1, Modifier o2) {
-            return o1.getOrder() - o2.getOrder();
+public class AbstractModifier implements Modifier {
+    @Override
+    public boolean apply(Block.Definition builder) {
+        if (builder.getType() == BlockType.TYPE && builder instanceof HasMeta) {
+            return ((HasMeta) builder).addMeta(PythonImporter.getInstance().getMeta("abc", "ABCMeta"));
+        } else if (builder.getType() == BlockType.METHOD && builder instanceof HasDecorators) {
+            return ((HasDecorators) builder).addDecorator(PythonImporter.getInstance().getMethod("abc", "abstractmethod"));
         }
+        return false;
     }
 }
