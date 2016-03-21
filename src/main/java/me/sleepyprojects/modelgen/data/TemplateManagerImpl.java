@@ -73,6 +73,7 @@ public class TemplateManagerImpl implements TemplateManager {
         if (!proxy.hasVelocityTemplate()) {
             try {
                 initTemplate(proxy);
+                modelMap.put(proxy.getId(), proxy);
             } catch (ParseException pe) {
                 throw new RuntimeException(pe);
             }
@@ -82,9 +83,8 @@ public class TemplateManagerImpl implements TemplateManager {
 
     private void initTemplate(final @NotNull TemplateModelProxy proxy) throws ParseException {
         final String templateStr = proxy.getTemplate();
-        final String preparedTpl = templateStr.replaceAll("\\s+", " ").replaceAll("\\\\\\\\", "\n");
         final RuntimeServices runtimeServices = RuntimeSingleton.getRuntimeServices();
-        final StringReader templateReader = new StringReader(preparedTpl);
+        final StringReader templateReader = new StringReader(templateStr);
         final SimpleNode node = runtimeServices.parse(templateReader, proxy.getId());
         final Template template = new Template();
         template.setRuntimeServices(runtimeServices);

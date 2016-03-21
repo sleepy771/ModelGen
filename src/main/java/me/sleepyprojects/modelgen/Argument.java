@@ -28,10 +28,10 @@ public class Argument extends BaseDefinition {
     public static final BlockType TYPE = BlockType.ARGUMENT;
     private final String name;
     private final Meta type;
-    private final Iterable<Modifier> modifiers;
+    private final ModifiersDefinition modifiers;
 
 
-    private Argument(String name, Meta type, Iterable<Modifier> modifiers) {
+    private Argument(String name, Meta type, ModifiersDefinition modifiers) {
         this.name = name;
         this.type = type;
         this.modifiers = modifiers;
@@ -41,18 +41,22 @@ public class Argument extends BaseDefinition {
     protected void assign(Language language, Map<String, Part> parts, Map<String, Block> blocks) {
         parts.put("name", new FlatPart(name));
         parts.put("type", type);
-        parts.put("mods", new PartsIterable<>(modifiers));
+        blocks.put("mods", modifiers.create(language));
+    }
+
+    public String getName() {
+        return name;
     }
 
     public static class Builder implements Block.Builder<Argument> {
 
         private final String name;
         private Meta argType;
-        private final Set<Modifier> modifiers;
+        private final ModifiersDefinition.Builder modifiers;
 
         public Builder(String name) {
             this.name = name;
-            this.modifiers = new TreeSet<>(Modifier.Comparator.INSTANCE);
+            this.modifiers = new ModifiersDefinition.Builder(BlockType.ARGUMENT);
         }
 
         public void setType(final @NotNull Meta argType) {
@@ -68,7 +72,7 @@ public class Argument extends BaseDefinition {
 
         @Override
         public Argument build() {
-            return new Argument(name, argType, modifiers);
+            return new Argument(name, argType, modifiers.build());
         }
     }
 }

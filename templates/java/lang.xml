@@ -1,5 +1,18 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <lang>
+    <modifiers>
+        <modifier id="public" type="visibility" order="1">public</modifier>
+        <modifier id="protected" type="visibility" order="1">protected</modifier>
+        <modifier id="package-protected" type="visibility" order="1" is-default="true"/>
+        <modifier id="private" type="visibility" order="1">private</modifier>
+        <modifier id="static" type="scope" order="2">static</modifier>
+        <modifier id="abstract" type="inheritance" order="3">abstract</modifier>
+        <modifier id="synchronized" type="concurrency" order="4">synchronized</modifier>
+        <modifier id="volatile" type="mem-access" order="5">volatile</modifier>
+        <modifier id="transient" type="persistence" order="5">transient</modifier>
+        <modifier id="final" type="finality" order="6">final</modifier>
+        <modifier id="native" type="external" order="7">native</modifier>
+    </modifiers>
     <scopes>
         <scope id="file"/>
         <scope id="class"/>
@@ -22,20 +35,20 @@
                 <variable id="code" type="ClassCodeDefinition"/>
             </variables>
             <velocity>
-                #set($extends="")\\
-                #if ($superclass)\\
-                #set($extends=" extends ${superclass}")\\
-                #end\\
-                #set($implements="")\\
-                #if ($interfaces)\\
-                #foreach ($meta in $interfaces)\\
-                #if ($implements.isEmpty())\\
-                #set($implements=" implements ${meta}")\\
-                #else\\
-                #set($implements=$implements+", "+$meta)\\
-                #end\\
-                #end\\
-                #end\\
+                #set($extends="")
+                #if ($superclass)
+                #set($extends=" extends ${superclass}")
+                #end
+                #set($implements="")
+                #if ($interfaces)
+                #foreach ($meta in $interfaces)
+                #if ($implements.isEmpty())
+                #set($implements=" implements ${meta}")
+                #else
+                #set($implements=$implements+", "+$meta)
+                #end
+                #end
+                #end
                 ${modifiers}class ${name}${extends}${implements} {${LN}${TAB}${code}${LN}}${LN}
             </velocity>
         </template>
@@ -45,16 +58,16 @@
                 <variable id="methods" type="MethodDefinition[]"/>
             </variables>
             <velocity>
-                #if ($fields)\\
-                #foreach($field in $fields)\\
-                $field\\
-                #end\\
-                #end\\
-                #if ($methods)\\
-                ${LN}\\
-                #foreach ($method in $methods)\\
-                ${method}${LN}\\
-                #end\\
+                #if ($fields)
+                #foreach($field in $fields)
+                $field
+                #end
+                #end
+                #if ($methods)
+                ${LN}
+                #foreach ($method in $methods)
+                ${method}${LN}
+                #end
                 #end
             </velocity>
         </template>
@@ -78,9 +91,9 @@
                 <variable id="value" type="String"/> <!-- TODO this would change in future -->
             </variables>
             <velocity>
-                #if ($value)\\
-                #set($assign="${S}=${S}$value")\\
-                #end\\
+                #if ($value)
+                #set($assign="${S}=${S}$value")
+                #end
                 ${modifiers}$type ${name}${assign};
             </velocity>
         </template>
@@ -89,12 +102,10 @@
                 <variable id="modifiers" type="Modifier[]"/>
             </variables>
             <velocity>
-                #set($mods="")\\
-                #if($modifiers)\\
-                #foreach($mod in $modifiers)\\
-                #set($mods=$mods + $mod + $S)\\
-                #end\\
-                #end\\
+                #set($mods="")
+                #foreach($mod in $modifiers)
+                #set($mods=$mods + $mod + " ")
+                #end
                 $mods
             </velocity>
         </template>
@@ -113,16 +124,16 @@
                 <variable id="arguments" type="Argument[]"/>
             </variables>
             <velocity>
-                #set($args="")\\
-                #if($arguments)\\
-                #foreach($arg in $arguments)\\
-                #if($args.isEmpty())\\
-                #set($args=$arg)\\
-                #else\\
-                #set($args=$args + ",$S" + $arg)\\
-                #end\\
-                #end\\
-                #end\\
+                #set($args="")
+                #if($arguments)
+                #foreach($arg in $arguments)
+                #if($args.isEmpty())
+                #set($args=$arg)
+                #else
+                #set($args=$args + ",$S" + $arg)
+                #end
+                #end
+                #end
                 $arguments
             </velocity>
         </template>
@@ -155,9 +166,9 @@
                 <variable id="name" type="String"/>
             </variables>
             <velocity>
-                #if ($instance.isEmpty())\\
-                #set($instance="this")\\
-                #end\\
+                #if ($instance.isEmpty())
+                #set($instance="this")
+                #end
                 ${instance}.${name}
             </velocity>
         </template>
@@ -165,12 +176,13 @@
             <variables>
                 <variable id="instance" type="String"/>
                 <variable id="name" type="String"/>
+                <variable id="arguments" type="ArgumentsDefinition"/>
             </variables>
             <velocity>
-                #if ($instance.isEmpty())\\
-                #set($instance="this")\\
-                #end\\
-                ${instance}.${name}()
+                #if ($instance.isEmpty())
+                #set($instance="this")
+                #end
+                ${instance}.${name}(${arguments})
             </velocity>
         </template>
         <!--<template id="assign" scope="flow-code, assign-code">-->

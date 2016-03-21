@@ -103,11 +103,22 @@ public class XMLLangParser {
             if (velocity == null) {
                 throw new NullPointerException("Velocity not found");
             }
-            final String velocityContext = velocity.getTextContent();
+            final String[] velocityContextLines = velocity.getTextContent().split("\n");
+            final StringBuilder velocityContext = new StringBuilder();
+            for (int i = 0; i < velocityContextLines.length; i++) {
+                if (velocityContext.length() == 0 && velocityContextLines[i].isEmpty()) {
+                    continue;
+                }
+                velocityContext.append(velocityContextLines[i].trim());
+                if (velocityContextLines.length - 1 == i) {
+                    continue;
+                }
+                velocityContext.append("\n");
+            }
             final TemplateModel model = new TemplateModel();
             templateModels.add(model);
             model.setId(id);
-            model.setTemplate(velocityContext);
+            model.setTemplate(velocityContext.toString());
             model.setVariables(new HashSet<>(variables));
             model.setScopes(new HashSet<>(Arrays.asList(scopes)));
         }

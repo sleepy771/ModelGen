@@ -17,14 +17,8 @@
  */
 package me.sleepyprojects.modelgen;
 
-import java.util.Map;
+import java.util.Collection;
 
-public interface Language {
-    Map<String, String> getPredefined();
-
-    TemplateManager getManager();
-
-    <T extends Assigner> T getAssigner(Class<T> type);
-
-    ArgumentValidator getArgumentValidator();
+public interface ArgumentValidator {
+    void validate(final Collection<Argument> arguments);
 }

@@ -19,15 +19,21 @@ package me.sleepyprojects.modelgen;
 
 import com.sun.org.apache.xpath.internal.operations.Mod;
 import me.sleepyprojects.modelgen.data.DefaultClassBinder;
+import me.sleepyprojects.modelgen.data.ITemplateModel;
 import me.sleepyprojects.modelgen.data.TemplateManagerImpl;
 import me.sleepyprojects.modelgen.language.BaseMeta;
 import me.sleepyprojects.modelgen.language.SuperTypeAssigner;
 
 import java.io.File;
+import java.util.Collection;
+import java.util.Comparator;
 import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.Set;
+import java.util.TreeSet;
+import java.util.function.Function;
 
 public class TestJavaClass {
 
@@ -77,8 +83,8 @@ public class TestJavaClass {
         builder.addSuperClass(iBar);
         builder.addSuperClass(iBaz);
         builder.addSuperClass(aBax);
-        builder.addModifier(Modifier.Factory.getInstance().get("final"));
-        builder.addModifier(Modifier.Factory.getInstance().get("public"));
+//        builder.addModifier(Modifier.Factory.getInstance().get("final"));
+//        builder.addModifier(Modifier.Factory.getInstance().get("public"));
         builder.addMethod(methodBuilder.build());
 
 
@@ -114,6 +120,19 @@ public class TestJavaClass {
                         return (T) new SuperTypeAssigner();
                     }
                     throw new RuntimeException("NOPE 3");
+                }
+
+                @Override
+                public ArgumentValidator getArgumentValidator() {
+                    return arguments -> {
+                        Set<Argument> set = new TreeSet<>((o1, o2) -> {
+                            return o1.getName().compareTo(o2.getName());
+                        });
+                        set.addAll(arguments);
+                        if (set.size() != arguments.size()) {
+                            throw new RuntimeException("Invalid arguments");
+                        }
+                    };
                 }
             };
         }
