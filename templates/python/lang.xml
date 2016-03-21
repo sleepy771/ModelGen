@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<lang id="python" version="2.0 < $version < 3.0">
+    <templates>
+        <template id="class">
+            <velocity>
+                $decorators${LN}
+                class $name($supertypes):${LN}
+                #if (!$classmeta.isEmpty())
+                ${TAB}__classmeta__ = $classmeta${LN}
+                #end
+                ${TAB}${code}
+            </velocity>
+        </template>
+        <template id="function,method">
+            $decorators${LN}
+            def $name($args):${LN}
+            ${TAB}$code${LN}
+        </template>
+        <template id="field" in="def-init">
+            self._$name = $assign${LN}
+        </template>
+        <template id="assign">
+            $asignee = $assigner
+        </template>
+        <template id="call">
+            #set($call="")
+            #for ($element in $stack)
+            #if ($element.isMethod())
+            #set($call = "$call.$element($element.args())"
+            #else
+            #set($call = "$call.$element")
+            #end
+            #end
+            $call
+        </template>
+        <template id="decorator">
+            #if (!$args.isEmpty())
+            #set($args = "($args)")
+            #end
+            @$name$args{LN}
+        </template>
+    </templates>
+</lang>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<lang id="php">
+    <templates>
+        <template id="class">
+
+        </template>
+        <template id="function">
+
+        </template>
+        <template id="constant">
+
+        </template>
+        <template id="field">
+
+        </template>
+        <template id="variable">
+
+        </template>
+        <template id="method">
+
+        </template>
+        <template id="modifiers">
+
+        </template>
+        <template id="trait">
+
+        </template>
+        <template id="arguments">
+
+        </template>
+        <template id="argument">
+
+        </template>
+        <template id="assign">
+
+        </template>
+        <template id="call">
+
+        </template>
+        <template id="static-call">
+            #if ($callee.isMethod())
+            #set ($callee = "$callee($callee.args())")
+            #end
+            ${class}::${callee}
+        </template>
+    </templates>
+</lang>
