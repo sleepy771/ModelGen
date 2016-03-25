@@ -26,7 +26,7 @@ public class BaseBlock implements Block {
     private final Map<String, Part> subParts;
     private final String template;
 
-    protected BaseBlock(final Map<String, Block> subBlocks, final Map<String, Part> subParts, final String template) {
+    public BaseBlock(final Map<String, Block> subBlocks, final Map<String, Part> subParts, final String template) {
         this.subBlocks = subBlocks;
         this.subParts = subParts;
         this.template = template;
