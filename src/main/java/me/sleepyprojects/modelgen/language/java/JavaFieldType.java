@@ -9,7 +9,7 @@ import me.sleepyprojects.modelgen.language.*;
 
 import java.util.Map;
 
-public class JavaFieldType extends BaseNamedType implements FieldType, HasModifiers, HasAnnotations, HasType {
+public class JavaFieldType extends InstanceType implements FieldType, HasModifiers, HasAnnotations, HasType {
     private Meta meta;
 
     @Override
@@ -39,6 +39,6 @@ public class JavaFieldType extends BaseNamedType implements FieldType, HasModifi
 
     @Override
     public Signature createSignature() {
-        return new JavaFieldSignature(this);
+        return new JavaFieldSignature(this, getDeclaringType());
     }
 }

@@ -1,10 +1,26 @@
 package me.sleepyprojects.modelgen.language.java;
 
 import com.sun.istack.internal.NotNull;
-import me.sleepyprojects.modelgen.*;
-import me.sleepyprojects.modelgen.language.*;
+import me.sleepyprojects.modelgen.Block;
+import me.sleepyprojects.modelgen.BlockType;
+import me.sleepyprojects.modelgen.FlatPart;
+import me.sleepyprojects.modelgen.Meta;
+import me.sleepyprojects.modelgen.Modifier;
+import me.sleepyprojects.modelgen.Part;
+import me.sleepyprojects.modelgen.language.AnnotationType;
+import me.sleepyprojects.modelgen.language.BaseNamedType;
+import me.sleepyprojects.modelgen.language.BuildMultiple;
+import me.sleepyprojects.modelgen.language.CanAppend;
+import me.sleepyprojects.modelgen.language.ClassType;
+import me.sleepyprojects.modelgen.language.FieldType;
+import me.sleepyprojects.modelgen.language.HasAnnotations;
+import me.sleepyprojects.modelgen.language.HasInterfaces;
+import me.sleepyprojects.modelgen.language.HasModifiers;
+import me.sleepyprojects.modelgen.language.MethodType;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Map;
+import java.util.TreeSet;
 
 public class JavaClassType extends BaseNamedType implements ClassType, HasModifiers, HasAnnotations, HasInterfaces {
 

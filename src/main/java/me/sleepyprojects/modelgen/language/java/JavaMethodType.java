@@ -1,13 +1,25 @@
 package me.sleepyprojects.modelgen.language.java;
 
-import me.sleepyprojects.modelgen.*;
-import me.sleepyprojects.modelgen.language.*;
+import me.sleepyprojects.modelgen.Block;
+import me.sleepyprojects.modelgen.FlatPart;
+import me.sleepyprojects.modelgen.Meta;
+import me.sleepyprojects.modelgen.Modifier;
+import me.sleepyprojects.modelgen.Part;
+import me.sleepyprojects.modelgen.language.AnnotationType;
+import me.sleepyprojects.modelgen.language.BuildMultiple;
+import me.sleepyprojects.modelgen.language.FlowCode;
+import me.sleepyprojects.modelgen.language.HasAnnotations;
+import me.sleepyprojects.modelgen.language.HasModifiers;
+import me.sleepyprojects.modelgen.language.HasType;
+import me.sleepyprojects.modelgen.language.InstanceType;
+import me.sleepyprojects.modelgen.language.MethodType;
+import me.sleepyprojects.modelgen.language.Signature;
 
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-public class JavaMethodType extends BaseNamedType implements MethodType<JavaArgumentType>, HasAnnotations, HasModifiers, HasType {
+public class JavaMethodType extends InstanceType implements MethodType<JavaArgumentType>, HasAnnotations, HasModifiers, HasType {
     private BuildMultiple<AnnotationType> annotationsStack;
     private HasModifiers modifiers;
     private BuildMultiple<JavaArgumentType> arguments;
@@ -58,6 +70,6 @@ public class JavaMethodType extends BaseNamedType implements MethodType<JavaArgu
 
     @Override
     public Signature createSignature() {
-        return new JavaMethodSignature(this);
+        return new JavaMethodSignature(this, getDeclaringType());
     }
 }

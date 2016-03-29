@@ -9,4 +9,6 @@ public interface Signature {
     String getName();
 
     Meta getMetaType();
+
+    Meta getDeclaringType();
 }
