@@ -15,36 +15,10 @@
  * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
  * DEALINGS IN THE SOFTWARE.
  */
-package me.sleepyprojects.modelgen;
+package me.sleepyprojects.modelgen.language;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+public interface HasArgumentValues extends CreateBlock {
+    void addValue(Object value);
 
-@TemplateId("class-code")
-public class ClassCodeDefinition extends BaseDefinition {
-
-    private final List<MethodDefinition> methods;
-
-    ClassCodeDefinition(List<MethodDefinition> methods) {
-        this.methods = methods;
-    }
-
-    public static class Builder implements Block.Builder<ClassCodeDefinition> {
-
-        private List<MethodDefinition> methods;
-
-        public Builder() {
-            methods = new ArrayList<>();
-        }
-
-        public void addMethod(MethodDefinition method) {
-            methods.add(method);
-        }
-
-        @Override
-        public ClassCodeDefinition build() {
-            return new ClassCodeDefinition(methods);
-        }
-    }
+    boolean hasValues();
 }

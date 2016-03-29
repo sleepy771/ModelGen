@@ -3,7 +3,6 @@
     <type id="String" class="java.lang.String" wrapped="me.sleepyprojects.modelgen.FlatPart"/>
     <type id="Meta" class="me.sleepyprojects.modelgen.Type"/>
     <type id="ModifiersDefinition" class="me.sleepyprojects.modelgen.ModifiersDefinition"/>
-    <type id="ClassCodeDefinition" class="me.sleepyprojects.modelgen.ClassCodeDefinition"/>
     <type id="MethodDefinition" class="me.sleepyprojects.modelgen.MethodDefinition">
         <factory class="me.sleepyprojects.modelgen.Modifier.Factory"/>
     </type>

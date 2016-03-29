@@ -23,8 +23,7 @@ import me.sleepyprojects.modelgen.language.AnnotationType;
 import java.util.ArrayList;
 import java.util.List;
 
-@TemplateId("argument")
-public class ArgumentDefinition extends BaseDefinition {
+public class ArgumentDefinition {
     public static final BlockType TYPE = BlockType.VARIABLE;
     private final String name;
     private final Type type;
@@ -49,46 +48,4 @@ public class ArgumentDefinition extends BaseDefinition {
         return modifiers;
     }
 
-    public static class Builder implements Block.Builder<ArgumentDefinition> {
-
-        private final String name;
-        private Type argType;
-        private final List<Modifier> modifiers;
-        private final List<AnnotationType> annotations;
-
-        public Builder(String name) {
-            this.name = name;
-            this.modifiers = new ArrayList<>();
-            this.annotations = new ArrayList<>();
-        }
-
-        public void setType(final @NotNull Type argType) {
-            this.argType = argType;
-        }
-
-        public boolean hasType() {
-            return this.argType != null;
-        }
-
-        public boolean hasModifiers() {
-            return !modifiers.isEmpty();
-        }
-
-        public boolean hasAnnotations() {
-            return !annotations.isEmpty();
-        }
-
-        public void addModifier(final @NotNull Modifier modifier) {
-            this.modifiers.add(modifier);
-        }
-
-        public void addAnnotation(final @NotNull AnnotationType annotation) {
-            this.annotations.add(annotation);
-        }
-
-        @Override
-        public ArgumentDefinition build() {
-            return new ArgumentDefinition(name, argType, modifiers);
-        }
-    }
 }

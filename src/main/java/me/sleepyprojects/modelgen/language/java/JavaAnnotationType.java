@@ -18,21 +18,20 @@
 package me.sleepyprojects.modelgen.language.java;
 
 import me.sleepyprojects.modelgen.Block;
-import me.sleepyprojects.modelgen.language.ArgumentType;
 import me.sleepyprojects.modelgen.language.BaseNamedType;
-import me.sleepyprojects.modelgen.language.BuildMultiple;
 import me.sleepyprojects.modelgen.language.CanAppend;
-import me.sleepyprojects.modelgen.language.HasArguments;
+import me.sleepyprojects.modelgen.language.HasArgumentValues;
+import me.sleepyprojects.modelgen.language.MultiPart;
 
 import java.util.ArrayList;
 import java.util.Map;
 
-public class JavaAnnotationType extends BaseNamedType implements HasArguments {
+public class JavaAnnotationType extends BaseNamedType implements HasArgumentValues {
 
-    private final BuildMultiple<JavaArgumentType> argumentTypes;
+    private final MultiPart<Object> argumentTypes;
 
     JavaAnnotationType() {
-        this.argumentTypes = new BuildMultiple<>(new ArrayList<>(), "arguments", "annotation", CanAppend.unique());
+        this.argumentTypes = new MultiPart<>(new ArrayList<>(), "annotation", CanAppend.all());
     }
 
     @Override
@@ -42,12 +41,12 @@ public class JavaAnnotationType extends BaseNamedType implements HasArguments {
     }
 
     @Override
-    public boolean addArgument(ArgumentType argument) {
-        return JavaArgumentType.class.equals(argument.getClass()) && argumentTypes.add((JavaArgumentType) argument);
+    public void addValue(Object value) {
+        argumentTypes.add(value);
     }
 
     @Override
-    public boolean hasArguments() {
+    public boolean hasValues() {
         return !argumentTypes.isEmpty();
     }
 }

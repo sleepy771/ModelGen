@@ -24,7 +24,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.NoSuchElementException;
 
-public class PartsIterable<T extends Part> implements Iterable<String>, Part {
+public class PartsIterable<T> implements Iterable<String>, Part {
 
     private final Iterable<T> parts;
     private Filter<T> filter;
@@ -98,7 +98,7 @@ public class PartsIterable<T extends Part> implements Iterable<String>, Part {
                 current = null;
                 return out;
             }
-            final Part part = partIterator.next();
+            final Object part = partIterator.next();
             return part.toString();
         }
     }

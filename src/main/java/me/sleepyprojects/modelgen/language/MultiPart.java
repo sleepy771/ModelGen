@@ -1,4 +1,4 @@
-package me.sleepyprojects.modelgen.language.java;
+package me.sleepyprojects.modelgen.language;
 
 import com.sun.istack.internal.NotNull;
 import me.sleepyprojects.modelgen.Block;
@@ -10,7 +10,7 @@ import me.sleepyprojects.modelgen.language.CanAppend;
 import java.util.Collection;
 import java.util.Map;
 
-public class MultiPart<T extends Part> extends BuildableType {
+public class MultiPart<T> extends BuildableType {
 
     private CanAppend<T> canAppend;
     private Collection<T> elements;
@@ -29,5 +29,9 @@ public class MultiPart<T extends Part> extends BuildableType {
 
     public boolean add(final @NotNull T part) {
         return canAppend.canAppend(elements, part) && elements.add(part);
+    }
+
+    public boolean isEmpty() {
+        return elements.isEmpty();
     }
 }

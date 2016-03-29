@@ -24,8 +24,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
-@TemplateId("method")
-public class MethodDefinition extends BaseDefinition {
+public class MethodDefinition {
     private static final BlockType TYPE = BlockType.METHOD;
     private final String name;
     private final Set<Modifier> modifiers;
@@ -49,35 +48,4 @@ public class MethodDefinition extends BaseDefinition {
         this.declaringType = declaringType;
     }
 
-    public static class Builder implements Block.Builder<MethodDefinition> {
-
-        private final String name;
-        private final Set<Modifier> modifiers;
-        private final List<ArgumentDefinition> arguments;
-        private Type returnType;
-
-        public Builder(String name) {
-            this.name = name;
-            this.modifiers = new TreeSet<>();
-            this.arguments = new ArrayList<>();
-
-        }
-
-        public void addModifier(Modifier modifier) {
-            modifiers.add(modifier);
-        }
-
-        public void setReturnType(final @NotNull Type returnType) {
-            this.returnType = returnType;
-        }
-
-        public void addArgument(ArgumentDefinition argument) {
-            this.arguments.add(argument);
-        }
-
-        @Override
-        public MethodDefinition build() {
-            return new MethodDefinition(name, modifiers, arguments, returnType);
-        }
-    }
 }

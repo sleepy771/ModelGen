@@ -17,12 +17,16 @@
  */
 package me.sleepyprojects.modelgen;
 
-import java.util.HashMap;
-import java.util.Map;
+import com.sun.istack.internal.NotNull;
 
-public abstract class BaseDefinition implements Block.Definition {
-    @Override
-    public final Block create(Language language) {
-        return null;
+public abstract class NamedDefinition {
+    private String name;
+
+    public final void setName(final @NotNull String name) {
+        this.name = name;
+    }
+
+    public final String getName() {
+        return this.name;
     }
 }

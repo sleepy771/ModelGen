@@ -20,9 +20,11 @@ package me.sleepyprojects.modelgen.language.java;
 import me.sleepyprojects.modelgen.ArgumentDefinition;
 import me.sleepyprojects.modelgen.BlockType;
 import me.sleepyprojects.modelgen.ClassDefinition;
+import me.sleepyprojects.modelgen.Meta;
 import me.sleepyprojects.modelgen.MethodDefinition;
 import me.sleepyprojects.modelgen.Modifier;
 import me.sleepyprojects.modelgen.Modifiers;
+import me.sleepyprojects.modelgen.Type;
 import me.sleepyprojects.modelgen.language.ClassType;
 import me.sleepyprojects.modelgen.language.Converter;
 import me.sleepyprojects.modelgen.language.FieldType;
@@ -34,14 +36,14 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class JavaConverter implements Converter {
-    private static final Map<Modifier, JavaModifierType> JAVA_MODIFIERS;
+    private static final Map<Meta, JavaModifierType> JAVA_MODIFIERS;
 
     static {
-        HashMap<Modifier, JavaModifierType> modifiers = new HashMap<>();
+        HashMap<Meta, JavaModifierType> modifiers = new HashMap<>();
         final EnumSet<BlockType> visibilitySet = EnumSet.of(BlockType.TYPE, BlockType.METHOD, BlockType.FIELD);
 
         modifiers.put(Modifiers.PRIVATE, new JavaModifierType(visibilitySet, 1, "private"));
-        modifiers.put(Modifiers.PACKAGE_LOCAL, new JavaModifierType(visibilitySet, 1, ""));
+        modifiers.put(JavaModifiers.PACKAGE_LOCAL, new JavaModifierType(visibilitySet, 1, ""));
         modifiers.put(Modifiers.PROTECTED, new JavaModifierType(visibilitySet, 1, "protected"));
         modifiers.put(Modifiers.PUBLIC, new JavaModifierType(visibilitySet, 1, "private"));
 
@@ -49,14 +51,14 @@ public class JavaConverter implements Converter {
 
         modifiers.put(Modifiers.ABSTRACT, new JavaModifierType(EnumSet.of(BlockType.TYPE, BlockType.METHOD), 3, "abstract"));
 
-        modifiers.put(Modifiers.SYNCHRONISED, new JavaModifierType(EnumSet.of(BlockType.BLOCK, BlockType.METHOD), 4, "synchronised")); // TODO remove lang specific
+        modifiers.put(JavaModifiers.SYNCHRONISED, new JavaModifierType(EnumSet.of(BlockType.BLOCK, BlockType.METHOD), 4, "synchronised"));
 
-        modifiers.put(Modifiers.TRANSIENT, new JavaModifierType(EnumSet.of(BlockType.FIELD), 5, "transient"));
-        modifiers.put(Modifiers.VOLATILE, new JavaModifierType(EnumSet.of(BlockType.FIELD), 5, "volatile")); // TODO remove specific for java
+        modifiers.put(JavaModifiers.TRANSIENT, new JavaModifierType(EnumSet.of(BlockType.FIELD), 5, "transient"));
+        modifiers.put(JavaModifiers.VOLATILE, new JavaModifierType(EnumSet.of(BlockType.FIELD), 5, "volatile"));
 
         modifiers.put(Modifiers.FINAL, new JavaModifierType(EnumSet.of(BlockType.TYPE, BlockType.METHOD, BlockType.VARIABLE, BlockType.FIELD), 6, "final"));
 
-        modifiers.put(Modifiers.NATIVE, new JavaModifierType(EnumSet.of(BlockType.METHOD), 7, "native")); // TODO remove
+        modifiers.put(JavaModifiers.NATIVE, new JavaModifierType(EnumSet.of(BlockType.METHOD), 7, "native"));
 
         JAVA_MODIFIERS = Collections.unmodifiableMap(modifiers);
     }
@@ -82,7 +84,11 @@ public class JavaConverter implements Converter {
     }
 
     @Override
-    public ClassType convert(ClassDefinition classDefinition) {
+    public JavaClassType convert(ClassDefinition classDefinition) {
+        JavaClassType jClass = new JavaClassType();
+        jClass.setName(classDefinition.getName());
+        // set supetypes
+        classDefinition.getSuperTypes().forEach(jClass::addSuperType);
         return null;
     }
 

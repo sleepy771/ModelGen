@@ -15,10 +15,10 @@
  * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
  * DEALINGS IN THE SOFTWARE.
  */
-package me.sleepyprojects.modelgen;
+package me.sleepyprojects.modelgen.language.java;
 
-import java.util.Map;
+import me.sleepyprojects.modelgen.Meta;
 
-public interface Assigner<T> {
-    void assign(Map<String, Block> blocks, Map<String, Object> parts, T data);
+public enum JavaModifiers implements Meta {
+    PACKAGE_LOCAL, TRANSIENT, SYNCHRONISED, VOLATILE, NATIVE
 }

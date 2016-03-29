@@ -24,5 +24,4 @@ public interface Language {
 
     TemplateManager getManager();
 
-    <T extends Assigner> T getAssigner(Class<T> type);
 }

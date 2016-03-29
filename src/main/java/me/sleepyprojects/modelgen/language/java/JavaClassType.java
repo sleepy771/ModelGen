@@ -3,6 +3,7 @@ package me.sleepyprojects.modelgen.language.java;
 import com.sun.istack.internal.NotNull;
 import me.sleepyprojects.modelgen.Bind;
 import me.sleepyprojects.modelgen.Block;
+import me.sleepyprojects.modelgen.BlockType;
 import me.sleepyprojects.modelgen.ClassDefinition;
 import me.sleepyprojects.modelgen.Type;
 import me.sleepyprojects.modelgen.Modifier;
@@ -16,17 +17,18 @@ import me.sleepyprojects.modelgen.language.HasAnnotations;
 import me.sleepyprojects.modelgen.language.HasInterfaces;
 import me.sleepyprojects.modelgen.language.HasModifiers;
 import me.sleepyprojects.modelgen.language.MethodType;
+import me.sleepyprojects.modelgen.language.MultiPart;
 
 import java.util.ArrayList;
 import java.util.Map;
+import java.util.TreeSet;
 
-@Bind(ClassDefinition.class)
 public class JavaClassType extends BaseNamedType implements ClassType, HasModifiers, HasAnnotations, HasInterfaces {
 
     private BuildMultiple<FieldType> fieldList;
     private BuildMultiple<MethodType> methodList;
     private BuildMultiple<AnnotationType> annotations;
-    private MultiPart<Modifier> modifiers;
+    private MultiPart<JavaModifierType> modifiers;
     private Type superClass;
     private MultiPart<Type> interfaces;
 
@@ -34,7 +36,7 @@ public class JavaClassType extends BaseNamedType implements ClassType, HasModifi
         fieldList = new BuildMultiple<>(new ArrayList<>(), "fields", "class-fields", CanAppend.uniqueSignature());
         methodList = new BuildMultiple<>(new ArrayList<>(), "methods", "class-methods", CanAppend.uniqueSignature());
         annotations = new BuildMultiple<>(new ArrayList<>(), "annotations", "class-annotations", CanAppend.unique());
-//        modifiers = new MultiPart<>(new TreeSet<>(), "modifiers", ((collection, element) -> element.getSupportedTypes().contains(BlockType.TYPE) && !collection.contains(element)));
+        modifiers = new MultiPart<>(new TreeSet<>(), "modifiers", ((collection, element) -> element.getSupportedTypes().contains(BlockType.TYPE) && !collection.contains(element)));
         interfaces = new MultiPart<>(new ArrayList<>(), "interfaces", CanAppend.unique());
     }
 
@@ -69,7 +71,7 @@ public class JavaClassType extends BaseNamedType implements ClassType, HasModifi
 
     @Override
     public boolean addModifier(final @NotNull Modifier modifier) {
-        return modifiers.add(modifier);
+        return JavaModifierType.class.equals(modifier.getClass()) && modifiers.add((JavaModifierType) modifier);
     }
 
     @Override

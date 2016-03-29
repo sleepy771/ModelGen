@@ -17,45 +17,50 @@
  */
 package me.sleepyprojects.modelgen;
 
-import java.util.ArrayList;
+import com.sun.istack.internal.NotNull;
+
 import java.util.List;
 
-public class ClassDefinition extends NamedDefinition {
+public class FieldDefinition {
 
-    private List<Type> superTypes;
     private List<Meta> metas;
-    private List<FieldDefinition> fields;
-    private List<MethodDefinition> methods;
-    private List<MethodDefinition> constructors;
+    private Type fieldType;
+    private Type declaringType;
+    private String name;
 
-    ClassDefinition() {
-        fields = new ArrayList<>();
-        metas = new ArrayList<>();
-        methods = new ArrayList<>();
-        constructors = new ArrayList<>();
-        superTypes = new ArrayList<>();
+    public void addMeta(final @NotNull Meta meta) {
+        this.metas.add(meta);
     }
 
-    // TODO create setters
+    public void removeMeta(final Meta meta) {
+        this.metas.remove(meta);
+    }
 
+    public void setType(final @NotNull Type fieldType) {
+        this.fieldType = fieldType;
+    }
 
-    public List<Type> getSuperTypes() {
-        return superTypes;
+    public void setName(final @NotNull String name) {
+        this.name = name;
+    }
+
+    public void setDeclaringType(final @NotNull Type declaringType) {
+        this.declaringType = declaringType;
     }
 
     public List<Meta> getMetas() {
         return metas;
     }
 
-    public List<FieldDefinition> getFields() {
-        return fields;
+    public String getName() {
+        return name;
     }
 
-    public List<MethodDefinition> getMethods() {
-        return methods;
+    public Type getDeclaringType() {
+        return declaringType;
     }
 
-    public List<MethodDefinition> getConstructors() {
-        return constructors;
+    public Type getType() {
+        return fieldType;
     }
 }
