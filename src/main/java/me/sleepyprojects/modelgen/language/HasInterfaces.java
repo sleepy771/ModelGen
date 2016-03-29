@@ -1,7 +1,7 @@
 package me.sleepyprojects.modelgen.language;
 
-import me.sleepyprojects.modelgen.Meta;
+import me.sleepyprojects.modelgen.Type;
 
 public interface HasInterfaces {
-    void addInterface(Meta superType);
+    void addInterface(Type superType);
 }

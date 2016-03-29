@@ -15,36 +15,39 @@
  * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
  * DEALINGS IN THE SOFTWARE.
  */
-package me.sleepyprojects.modelgen;
+package me.sleepyprojects.modelgen.language.java;
+
+import me.sleepyprojects.modelgen.Block;
+import me.sleepyprojects.modelgen.language.ArgumentType;
+import me.sleepyprojects.modelgen.language.BaseNamedType;
+import me.sleepyprojects.modelgen.language.BuildMultiple;
+import me.sleepyprojects.modelgen.language.CanAppend;
+import me.sleepyprojects.modelgen.language.HasArguments;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
-@TemplateId("class-code")
-public class ClassCodeDefinition extends BaseDefinition {
+public class JavaAnnotationType extends BaseNamedType implements HasArguments {
 
-    private final List<MethodDefinition> methods;
+    private final BuildMultiple<JavaArgumentType> argumentTypes;
 
-    ClassCodeDefinition(List<MethodDefinition> methods) {
-        this.methods = methods;
+    JavaAnnotationType() {
+        this.argumentTypes = new BuildMultiple<>(new ArrayList<>(), "arguments", "annotation", CanAppend.unique());
     }
 
-    public static class Builder implements Block.Builder<ClassCodeDefinition> {
+    @Override
+    protected void assign(Map<String, Block> blockMap, Map<String, Object> partMap) {
+        partMap.put("name", getName());
+        blockMap.put("arguments", argumentTypes.create());
+    }
 
-        private List<MethodDefinition> methods;
+    @Override
+    public boolean addArgument(ArgumentType argument) {
+        return JavaArgumentType.class.equals(argument.getClass()) && argumentTypes.add((JavaArgumentType) argument);
+    }
 
-        public Builder() {
-            methods = new ArrayList<>();
-        }
-
-        public void addMethod(MethodDefinition method) {
-            methods.add(method);
-        }
-
-        @Override
-        public ClassCodeDefinition build() {
-            return new ClassCodeDefinition(methods);
-        }
+    @Override
+    public boolean hasArguments() {
+        return !argumentTypes.isEmpty();
     }
 }

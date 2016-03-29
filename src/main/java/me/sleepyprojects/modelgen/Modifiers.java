@@ -17,8 +17,6 @@
  */
 package me.sleepyprojects.modelgen;
 
-import java.util.EnumSet;
-
 public enum Modifiers implements Modifier {
     PRIVATE, PACKAGE_LOCAL, PROTECTED, PUBLIC, FINAL, STATIC, TRANSIENT, ABSTRACT, SYNCHRONISED, VOLATILE, NATIVE;
 }

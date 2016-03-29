@@ -1,7 +1,7 @@
 package me.sleepyprojects.modelgen.language.java;
 
 import me.sleepyprojects.modelgen.BlockType;
-import me.sleepyprojects.modelgen.Meta;
+import me.sleepyprojects.modelgen.Type;
 import me.sleepyprojects.modelgen.language.Signature;
 
 import java.util.List;
@@ -9,10 +9,10 @@ import java.util.List;
 public class JavaMethodSignature implements Signature {
 
     private JavaMethodType methodType;
-    private final Meta declaringType;
+    private final Type declaringType;
     private volatile int hashCode;
 
-    JavaMethodSignature(JavaMethodType methodType, Meta declaringType) {
+    JavaMethodSignature(JavaMethodType methodType, Type declaringType) {
         this.methodType = methodType;
         this.declaringType = declaringType;
     }
@@ -28,16 +28,16 @@ public class JavaMethodSignature implements Signature {
     }
 
     @Override
-    public Meta getMetaType() {
-        return methodType.getMeta();
+    public Type getMetaType() {
+        return methodType.getType();
     }
 
     @Override
-    public Meta getDeclaringType() {
+    public Type getDeclaringType() {
         return declaringType;
     }
 
-    private List<Meta> getArgumentTypes() {
+    private List<Type> getArgumentTypes() {
         return methodType.getArgumentTypes();
     }
 

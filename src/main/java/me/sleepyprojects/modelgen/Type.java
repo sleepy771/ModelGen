@@ -15,39 +15,16 @@
  * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
  * DEALINGS IN THE SOFTWARE.
  */
-package me.sleepyprojects.modelgen.language;
+package me.sleepyprojects.modelgen;
 
-import me.sleepyprojects.modelgen.Meta;
+public interface Type extends Part {
+    String getName();
 
-public class BaseMeta implements Meta {
+    String getPackage();
 
-    private String name;
-    private String pkg;
-    private Type type;
+    MetaType getMetaType();
 
-    public BaseMeta(String name, String pkg, Type type) {
-        this.name = name;
-        this.pkg = pkg;
-        this.type = type;
-    }
-
-    @Override
-    public String getName() {
-        return name;
-    }
-
-    @Override
-    public String getPackage() {
-        return pkg;
-    }
-
-    @Override
-    public Type getType() {
-        return type;
-    }
-
-    @Override
-    public String toString() {
-        return getName();
+    enum MetaType {
+        INTERFACE, CLASS, TYPE, ANNOTATION, TRAIT;
     }
 }

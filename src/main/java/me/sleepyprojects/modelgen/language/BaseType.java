@@ -17,17 +17,36 @@
  */
 package me.sleepyprojects.modelgen.language;
 
-import com.sun.istack.internal.NotNull;
 import me.sleepyprojects.modelgen.Type;
 
-public abstract class InstanceType extends BaseNamedType {
-    private Type declaringType;
+public class BaseType implements Type {
 
-    public final Type getDeclaringType() {
-        return declaringType;
+    private String name;
+    private String pkg;
+    private MetaType metaType;
+
+    public BaseType(String name, String pkg, MetaType metaType) {
+        this.name = name;
+        this.pkg = pkg;
+        this.metaType = metaType;
     }
 
-    public final void setDeclaringType(final @NotNull Type declaringType) {
-        this.declaringType = declaringType;
+    @Override
+    public String getName() {
+        return name;
+    }
+
+    @Override
+    public String getPackage() {
+        return pkg;
+    }
+
+    public MetaType getMetaType() {
+        return metaType;
+    }
+
+    @Override
+    public String toString() {
+        return getName();
     }
 }

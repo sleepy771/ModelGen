@@ -1,16 +1,16 @@
 package me.sleepyprojects.modelgen.language.java;
 
 import me.sleepyprojects.modelgen.BlockType;
-import me.sleepyprojects.modelgen.Meta;
+import me.sleepyprojects.modelgen.Type;
 import me.sleepyprojects.modelgen.language.Signature;
 
 public class JavaFieldSignature implements Signature {
 
     private JavaFieldType fieldType;
-    private final Meta declaringType;
+    private final Type declaringType;
     private volatile int hashCode;
 
-    JavaFieldSignature(JavaFieldType fieldType, Meta declaringType) {
+    JavaFieldSignature(JavaFieldType fieldType, Type declaringType) {
         this.fieldType = fieldType;
         this.declaringType = declaringType;
     }
@@ -26,12 +26,12 @@ public class JavaFieldSignature implements Signature {
     }
 
     @Override
-    public Meta getMetaType() {
-        return fieldType.getMeta();
+    public Type getMetaType() {
+        return fieldType.getType();
     }
 
     @Override
-    public Meta getDeclaringType() {
+    public Type getDeclaringType() {
         return declaringType;
     }
 

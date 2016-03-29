@@ -17,7 +17,7 @@
  */
 package me.sleepyprojects.modelgen;
 
-import me.sleepyprojects.modelgen.language.BaseMeta;
+import me.sleepyprojects.modelgen.language.BaseType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,30 +26,30 @@ import java.util.List;
 public class ClassDefinition extends BaseDefinition {
     public static final BlockType TYPE = BlockType.TYPE;
 
-    private List<Meta> superTypes;
-    private final List<Modifier> modifiers;
-    private Meta thisClass;
-    private ClassCodeDefinition code;
+    private List<Type> superTypes;
+    private final List<Meta> metas;
+    private final Type thisClass;
+    private final ClassCodeDefinition codeDefinition;
 
-    ClassDefinition(Meta thisClass, List<Meta> superTypes, List<Modifier> modifiers, ClassCodeDefinition definition) {
-        this.thisClass = thisClass;
+    ClassDefinition(Type thisClass, List<Type> superTypes, ClassCodeDefinition definition, List<Meta> metas) {
+        this.metas = metas;
         this.superTypes = superTypes;
-        this.modifiers = modifiers;
-        this.code = definition;
+        this.thisClass = thisClass;
+        this.codeDefinition = definition;
     }
 
     public static class Builder implements Block.Builder<ClassDefinition> {
 
         private String className;
         private String pkg;
-        private List<Meta> superClasses;
-        private Meta.Type type;
-        private List<Modifier> modifiers;
+        private List<Type> superClasses;
+        private Type.MetaType metaType;
+        private List<Meta> metas;
         private ClassCodeDefinition.Builder codeBuilder;
 
         public Builder() {
             this.superClasses = new ArrayList<>();
-            this.modifiers = new ArrayList<>();
+            this.metas = new ArrayList<>();
             this.codeBuilder = new ClassCodeDefinition.Builder();
         }
 
@@ -57,16 +57,16 @@ public class ClassDefinition extends BaseDefinition {
             this.className = name;
         }
 
-        public void setClassType(Meta.Type type) {
-            this.type = type;
+        public void setClassType(Type.MetaType metaType) {
+            this.metaType = metaType;
         }
 
         public void setPackage(String pkg) {
             this.pkg = pkg;
         }
 
-        public void addModifier(Modifier modifier) {
-            modifiers.add(modifier);
+        public void addMeta(Meta meta) {
+            this.metas.add(meta);
         }
 
         public void addField() {
@@ -88,21 +88,21 @@ public class ClassDefinition extends BaseDefinition {
             this.codeBuilder.addMethod(method);
         }
 
-        public void addSuperClass(Meta meta) {
-            if (meta == null || superClasses.contains(meta)) {
+        public void addSuperClass(Type type) {
+            if (type == null || superClasses.contains(type)) {
                 return;
             }
-            this.superClasses.add(meta);
+            this.superClasses.add(type);
         }
 
-        public void removeSuperClass(Meta meta) {
-            this.superClasses.remove(meta);
+        public void removeSuperClass(Type type) {
+            this.superClasses.remove(type);
         }
 
         @Override
         public ClassDefinition build() {
-            Meta classMeta = new BaseMeta(this.className, this.pkg, this.type);
-            return new ClassDefinition(classMeta, superClasses, modifiers, codeBuilder.build());
+            Type classType = new BaseType(this.className, this.pkg, this.metaType);
+            return new ClassDefinition(classType, superClasses, codeBuilder.build(), metas);
         }
     }
 }

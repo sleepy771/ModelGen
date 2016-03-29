@@ -28,11 +28,11 @@
                 #end\\
                 #set($implements="")\\
                 #if ($interfaces)\\
-                    #foreach ($meta in $interfaces)\\
+                    #foreach ($type in $interfaces)\\
                         #if ($implements.isEmpty())\\
-                            #set($implements=" implements ${meta}")\\
+                            #set($implements=" implements ${type}")\\
                         #else\\
-                            #set($implements=$implements+", "+$meta)\\
+                            #set($implements=$implements+", "+$type)\\
                         #end\\
                     #end\\
                 #end\\

@@ -18,20 +18,6 @@ public class BuildMultiple<T extends CreateBlock> extends BuildableType implemen
         return elementCollection;
     }
 
-    public enum AppendType implements CanAppend {
-        UNIQUE {
-            @Override
-            public boolean canAppend(Collection collection, Object element) {
-                return !collection.contains(element);
-            }
-        }, ALL {
-            @Override
-            public boolean canAppend(Collection collection, Object element) {
-                return true;
-            }
-        };
-    }
-
     private final Collection<T> elementCollection;
     private final String commonName;
     private final String templateId;
@@ -44,20 +30,24 @@ public class BuildMultiple<T extends CreateBlock> extends BuildableType implemen
         this.type = type;
     }
 
+    public boolean add(T element) {
+        return this.type.canAppend(elementCollection, element) && elementCollection.add(element);
+    }
+
     @Override
-    protected void assign(Map<String, Block> blockMap, Map<String, Part> partMap) {
+    protected void assign(Map<String, Block> blockMap, Map<String, Object> partMap) {
         int i = 0;
         for (final T element : elementCollection) {
             blockMap.put("L:" + commonName + "#" + i++, element.create());
         }
     }
 
-    public boolean add(T element) {
-        return this.type.canAppend(elementCollection, element) && elementCollection.add(element);
-    }
-
     @Override
     protected String getId() {
         return templateId;
+    }
+
+    public boolean isEmpty() {
+        return elementCollection.isEmpty();
     }
 }

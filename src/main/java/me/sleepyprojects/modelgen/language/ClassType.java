@@ -1,10 +1,10 @@
 package me.sleepyprojects.modelgen.language;
 
-import me.sleepyprojects.modelgen.Meta;
+import me.sleepyprojects.modelgen.Type;
 
 public interface ClassType extends HasName, CreateBlock {
 
-    void addSuperType(Meta superType);
+    void addSuperType(Type superType);
 
     void addMethod(MethodType method);
 

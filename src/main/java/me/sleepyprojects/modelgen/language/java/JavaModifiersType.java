@@ -36,7 +36,7 @@ public class JavaModifiersType extends BuildableType implements HasModifiers {
 
     @Override
     public boolean addModifier(Modifier modifier) {
-        if (JavaModifierType.class != modifier.getClass()) {
+        if (!JavaModifierType.class.equals(modifier.getClass())) {
             throw new ClassCastException("Expected JavaModifierType");
         }
         return addModifier((JavaModifierType) modifier);

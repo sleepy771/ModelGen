@@ -1,9 +1,9 @@
 package me.sleepyprojects.modelgen.language;
 
-import me.sleepyprojects.modelgen.Meta;
+import me.sleepyprojects.modelgen.Type;
 
 public interface HasType {
-    void setMeta(Meta type);
+    void setType(Type type);
 
-    Meta getMeta();
+    Type getType();
 }

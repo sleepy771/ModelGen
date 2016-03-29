@@ -2,7 +2,7 @@ package me.sleepyprojects.modelgen.language.java;
 
 import me.sleepyprojects.modelgen.Bind;
 import me.sleepyprojects.modelgen.Block;
-import me.sleepyprojects.modelgen.Meta;
+import me.sleepyprojects.modelgen.Type;
 import me.sleepyprojects.modelgen.MethodDefinition;
 import me.sleepyprojects.modelgen.Modifier;
 import me.sleepyprojects.modelgen.language.AnnotationType;
@@ -25,7 +25,7 @@ public class JavaMethodType extends InstanceType implements MethodType, HasAnnot
     private BuildMultiple<AnnotationType> annotationsStack;
     private HasModifiers modifiers;
     private BuildMultiple<JavaArgumentType> arguments;
-    private Meta type;
+    private Type type;
 
     @Override
     public boolean addAnnotation(AnnotationType annotation) {
@@ -37,8 +37,8 @@ public class JavaMethodType extends InstanceType implements MethodType, HasAnnot
         return modifiers.addModifier(modifier);
     }
 
-    public List<Meta> getArgumentTypes() {
-        return arguments.getCollection().stream().map(JavaArgumentType::getMeta).collect(Collectors.toList());
+    public List<Type> getArgumentTypes() {
+        return arguments.getCollection().stream().map(JavaArgumentType::getType).collect(Collectors.toList());
     }
 
     @Override
@@ -46,13 +46,11 @@ public class JavaMethodType extends InstanceType implements MethodType, HasAnnot
 
     }
 
-    @Override
-    public void setMeta(Meta type) {
+    public void setType(Type type) {
         this.type = type;
     }
 
-    @Override
-    public Meta getMeta() {
+    public Type getType() {
         return this.type;
     }
 

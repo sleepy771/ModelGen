@@ -30,10 +30,10 @@ public class MethodDefinition extends BaseDefinition {
     private final String name;
     private final Set<Modifier> modifiers;
     private final List<ArgumentDefinition> arguments;
-    private final Meta returnType;
-    private Meta declaringType;
+    private final Type returnType;
+    private Type declaringType;
 
-    private MethodDefinition(String name, Set<Modifier> modifiers, List<ArgumentDefinition> args, Meta returnType) {
+    private MethodDefinition(String name, Set<Modifier> modifiers, List<ArgumentDefinition> args, Type returnType) {
 
         this.name = name;
         this.modifiers = modifiers;
@@ -41,11 +41,11 @@ public class MethodDefinition extends BaseDefinition {
         this.returnType = returnType;
     }
 
-    public Meta getDeclaringType() {
+    public Type getDeclaringType() {
         return declaringType;
     }
 
-    public void setDeclaringType(Meta declaringType) {
+    public void setDeclaringType(Type declaringType) {
         this.declaringType = declaringType;
     }
 
@@ -54,7 +54,7 @@ public class MethodDefinition extends BaseDefinition {
         private final String name;
         private final Set<Modifier> modifiers;
         private final List<ArgumentDefinition> arguments;
-        private Meta returnType;
+        private Type returnType;
 
         public Builder(String name) {
             this.name = name;
@@ -67,7 +67,7 @@ public class MethodDefinition extends BaseDefinition {
             modifiers.add(modifier);
         }
 
-        public void setReturnType(final @NotNull Meta returnType) {
+        public void setReturnType(final @NotNull Type returnType) {
             this.returnType = returnType;
         }
 

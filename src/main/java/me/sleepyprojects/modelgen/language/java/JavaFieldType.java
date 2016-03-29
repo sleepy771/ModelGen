@@ -3,17 +3,16 @@ package me.sleepyprojects.modelgen.language.java;
 import com.sun.istack.internal.NotNull;
 import me.sleepyprojects.modelgen.Bind;
 import me.sleepyprojects.modelgen.Block;
-import me.sleepyprojects.modelgen.Meta;
+import me.sleepyprojects.modelgen.Type;
 import me.sleepyprojects.modelgen.MethodDefinition;
 import me.sleepyprojects.modelgen.Modifier;
-import me.sleepyprojects.modelgen.Part;
 import me.sleepyprojects.modelgen.language.*;
 
 import java.util.Map;
 
 @Bind(MethodDefinition.class)
 public class JavaFieldType extends InstanceType implements FieldType, HasModifiers, HasAnnotations, HasType {
-    private Meta meta;
+    private Type type;
 
     @Override
     public boolean addAnnotation(AnnotationType annotation) {
@@ -25,14 +24,12 @@ public class JavaFieldType extends InstanceType implements FieldType, HasModifie
         return false;
     }
 
-    @Override
-    public void setMeta(final @NotNull Meta meta) {
-        this.meta = meta;
+    public void setType(final @NotNull Type type) {
+        this.type = type;
     }
 
-    @Override
-    public Meta getMeta() {
-        return meta;
+    public Type getType() {
+        return type;
     }
 
     @Override

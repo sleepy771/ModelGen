@@ -17,14 +17,5 @@
  */
 package me.sleepyprojects.modelgen;
 
-public interface Meta extends Part {
-    String getName();
-
-    String getPackage();
-
-    Type getType();
-
-    enum Type {
-        INTERFACE, CLASS, TYPE, ANNOTATION, TRAIT;
-    }
+public interface Meta {
 }

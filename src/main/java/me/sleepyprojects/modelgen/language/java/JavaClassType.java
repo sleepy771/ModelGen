@@ -3,9 +3,8 @@ package me.sleepyprojects.modelgen.language.java;
 import com.sun.istack.internal.NotNull;
 import me.sleepyprojects.modelgen.Bind;
 import me.sleepyprojects.modelgen.Block;
-import me.sleepyprojects.modelgen.BlockType;
 import me.sleepyprojects.modelgen.ClassDefinition;
-import me.sleepyprojects.modelgen.Meta;
+import me.sleepyprojects.modelgen.Type;
 import me.sleepyprojects.modelgen.Modifier;
 import me.sleepyprojects.modelgen.language.AnnotationType;
 import me.sleepyprojects.modelgen.language.BaseNamedType;
@@ -20,7 +19,6 @@ import me.sleepyprojects.modelgen.language.MethodType;
 
 import java.util.ArrayList;
 import java.util.Map;
-import java.util.TreeSet;
 
 @Bind(ClassDefinition.class)
 public class JavaClassType extends BaseNamedType implements ClassType, HasModifiers, HasAnnotations, HasInterfaces {
@@ -29,8 +27,8 @@ public class JavaClassType extends BaseNamedType implements ClassType, HasModifi
     private BuildMultiple<MethodType> methodList;
     private BuildMultiple<AnnotationType> annotations;
     private MultiPart<Modifier> modifiers;
-    private Meta superClass;
-    private MultiPart<Meta> interfaces;
+    private Type superClass;
+    private MultiPart<Type> interfaces;
 
     public JavaClassType() {
         fieldList = new BuildMultiple<>(new ArrayList<>(), "fields", "class-fields", CanAppend.uniqueSignature());
@@ -41,14 +39,14 @@ public class JavaClassType extends BaseNamedType implements ClassType, HasModifi
     }
 
     @Override
-    public void addSuperType(final @NotNull Meta superType) {
-        if (superType.getType() == Meta.Type.TYPE) {
+    public void addSuperType(final @NotNull Type superType) {
+        if (superType.getMetaType() == Type.MetaType.TYPE) {
             if (superClass != null) {
                 throw new RuntimeException("Java does not support multidimensional inheritance");
             }
             superClass = superType;
         }
-        if (superType.getType() == Meta.Type.INTERFACE) {
+        if (superType.getMetaType() == Type.MetaType.INTERFACE) {
             addInterface(superType);
         }
         throw new RuntimeException("Can not set supper type");
@@ -75,7 +73,7 @@ public class JavaClassType extends BaseNamedType implements ClassType, HasModifi
     }
 
     @Override
-    public void addInterface(Meta superType) {
+    public void addInterface(Type superType) {
         interfaces.add(superType);
     }
 

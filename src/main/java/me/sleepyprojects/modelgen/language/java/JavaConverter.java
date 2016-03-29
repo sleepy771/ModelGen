@@ -66,7 +66,7 @@ public class JavaConverter implements Converter {
     public JavaArgumentType convert(ArgumentDefinition argument) {
         JavaArgumentType argumentType = new JavaArgumentType();
         argumentType.setName(argument.getName());
-        argumentType.setMeta(argument.getType());
+        argumentType.setType(argument.getType());
 
         return null;
     }

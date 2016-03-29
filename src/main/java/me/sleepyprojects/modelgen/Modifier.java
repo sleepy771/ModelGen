@@ -17,9 +17,5 @@
  */
 package me.sleepyprojects.modelgen;
 
-import java.util.EnumSet;
-import java.util.HashMap;
-import java.util.Map;
-
-public interface Modifier extends Part {
+public interface Modifier extends Part, Meta {
 }

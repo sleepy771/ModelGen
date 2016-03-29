@@ -12,7 +12,7 @@ import java.util.Map;
 public class JavaArgumentType extends BaseNamedType implements ArgumentType, HasModifiers, HasAnnotations, HasType {
     private JavaModifiersType modifiers;
     private BuildMultiple<AnnotationType> annotationsStack;
-    private Meta argumentType;
+    private Type argumentType;
 
     public JavaArgumentType() {
         annotationsStack = new BuildMultiple<>(new ArrayList<>(), "annotations", "variable-annotations", CanAppend.unique());
@@ -37,13 +37,11 @@ public class JavaArgumentType extends BaseNamedType implements ArgumentType, Has
         partMap.put("name", getName());
     }
 
-    @Override
-    public void setMeta(final @NotNull Meta type) {
+    public void setType(final @NotNull Type type) {
         this.argumentType = type;
     }
 
-    @Override
-    public Meta getMeta() {
+    public Type getType() {
         return this.argumentType;
     }
 }

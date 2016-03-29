@@ -27,11 +27,11 @@ import java.util.List;
 public class ArgumentDefinition extends BaseDefinition {
     public static final BlockType TYPE = BlockType.VARIABLE;
     private final String name;
-    private final Meta type;
+    private final Type type;
     private final Iterable<Modifier> modifiers;
 
 
-    private ArgumentDefinition(String name, Meta type, Iterable<Modifier> modifiers) {
+    private ArgumentDefinition(String name, Type type, Iterable<Modifier> modifiers) {
         this.name = name;
         this.type = type;
         this.modifiers = modifiers;
@@ -41,7 +41,7 @@ public class ArgumentDefinition extends BaseDefinition {
         return this.name;
     }
 
-    public final Meta getType() {
+    public final Type getType() {
         return this.type;
     }
 
@@ -52,7 +52,7 @@ public class ArgumentDefinition extends BaseDefinition {
     public static class Builder implements Block.Builder<ArgumentDefinition> {
 
         private final String name;
-        private Meta argType;
+        private Type argType;
         private final List<Modifier> modifiers;
         private final List<AnnotationType> annotations;
 
@@ -62,7 +62,7 @@ public class ArgumentDefinition extends BaseDefinition {
             this.annotations = new ArrayList<>();
         }
 
-        public void setType(final @NotNull Meta argType) {
+        public void setType(final @NotNull Type argType) {
             this.argType = argType;
         }
 
