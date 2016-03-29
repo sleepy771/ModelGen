@@ -13,13 +13,13 @@ public abstract class BuildableType implements CreateBlock {
     @Override
     public final Block create() {
         Map<String, Block> blockMap = new HashMap<>();
-        Map<String, Part> partMap = new HashMap<>();
+        Map<String, Object> partMap = new HashMap<>();
         final String id = getId();
         assign(blockMap, partMap);
         return new BaseBlock(blockMap, partMap, id);
     }
 
-    protected abstract void assign(Map<String, Block> blockMap, Map<String, Part> partMap);
+    protected abstract void assign(Map<String, Block> blockMap, Map<String, Object> partMap);
 
     protected String getId() {
         TemplateId id = getClass().getAnnotation(TemplateId.class);

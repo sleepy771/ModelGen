@@ -15,20 +15,21 @@
  * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
  * DEALINGS IN THE SOFTWARE.
  */
-package me.sleepyprojects.modelgen;
+package me.sleepyprojects.modelgen.language;
 
-import java.util.Map;
-import java.util.Set;
+import me.sleepyprojects.modelgen.ArgumentDefinition;
+import me.sleepyprojects.modelgen.ClassDefinition;
+import me.sleepyprojects.modelgen.MethodDefinition;
+import me.sleepyprojects.modelgen.Modifier;
 
-public interface Definition {
+public interface Converter {
+    ArgumentType convert(ArgumentDefinition argument);
 
-    Map<String, String> getOptional();
+    MethodType convert(MethodDefinition method);
 
-    Set<String> getRequired();
+    FieldType convert();
 
-    String getDefault(String name);
+    ClassType convert(ClassDefinition classDefinition);
 
-    boolean isRequired(String name);
-
-    boolean isOptional(String name);
+    ModifierType convert(Modifier modifier);
 }

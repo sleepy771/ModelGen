@@ -23,7 +23,7 @@ public class MultiPart<T extends Part> extends BuildableType {
     }
 
     @Override
-    protected void assign(Map<String, Block> blockMap, Map<String, Part> partMap) {
+    protected void assign(Map<String, Block> blockMap, Map<String, Object> partMap) {
         partMap.put(commonName, new PartsIterable<>(elements));
     }
 

@@ -19,52 +19,51 @@ package me.sleepyprojects.modelgen;
 
 import com.sun.istack.internal.NotNull;
 
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
 @TemplateId("method")
 public class MethodDefinition extends BaseDefinition {
-    public static final BlockType TYPE = BlockType.METHOD;
+    private static final BlockType TYPE = BlockType.METHOD;
     private final String name;
     private final Set<Modifier> modifiers;
-    private final ArgumentsDefinition args;
+    private final List<ArgumentDefinition> arguments;
     private final Meta returnType;
+    private Meta declaringType;
 
-    private MethodDefinition(String name, Set<Modifier> modifiers, ArgumentsDefinition args, Meta returnType) {
+    private MethodDefinition(String name, Set<Modifier> modifiers, List<ArgumentDefinition> args, Meta returnType) {
 
         this.name = name;
         this.modifiers = modifiers;
-        this.args = args;
+        this.arguments = args;
         this.returnType = returnType;
     }
 
-    @Override
-    protected void assign(Language language, Map<String, Part> parts, Map<String, Block> blocks) {
-        parts.put("name", new FlatPart(name));
-        parts.put("type", returnType);
-        blocks.put("arguments", this.args.create(language));
-        // TODO create Modifiers assigner
-        parts.put("mods", new PartsIterable<>(modifiers));
+    public Meta getDeclaringType() {
+        return declaringType;
+    }
+
+    public void setDeclaringType(Meta declaringType) {
+        this.declaringType = declaringType;
     }
 
     public static class Builder implements Block.Builder<MethodDefinition> {
 
         private final String name;
         private final Set<Modifier> modifiers;
-        private final ArgumentsDefinition.Builder arguments;
+        private final List<ArgumentDefinition> arguments;
         private Meta returnType;
 
         public Builder(String name) {
             this.name = name;
-            this.modifiers = new TreeSet<>(Modifier.Comparator.INSTANCE);
-            this.arguments = new ArgumentsDefinition.Builder();
+            this.modifiers = new TreeSet<>();
+            this.arguments = new ArrayList<>();
+
         }
 
         public void addModifier(Modifier modifier) {
-            if (!modifier.getSupportedTypes().contains(MethodDefinition.TYPE)) {
-                throw new RuntimeException("Can't do it!");
-            }
             modifiers.add(modifier);
         }
 
@@ -72,13 +71,13 @@ public class MethodDefinition extends BaseDefinition {
             this.returnType = returnType;
         }
 
-        public void addArgument(Argument argument) {
-            this.arguments.addArgument(argument);
+        public void addArgument(ArgumentDefinition argument) {
+            this.arguments.add(argument);
         }
 
         @Override
         public MethodDefinition build() {
-            return new MethodDefinition(name, modifiers, arguments.build(), returnType);
+            return new MethodDefinition(name, modifiers, arguments, returnType);
         }
     }
 }

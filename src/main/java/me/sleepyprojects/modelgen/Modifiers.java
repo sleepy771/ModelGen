@@ -17,6 +17,8 @@
  */
 package me.sleepyprojects.modelgen;
 
-public interface SuperTypeDiff {
-    String getTemplateByType(Meta.Type type);
+import java.util.EnumSet;
+
+public enum Modifiers implements Modifier {
+    PRIVATE, PACKAGE_LOCAL, PROTECTED, PUBLIC, FINAL, STATIC, TRANSIENT, ABSTRACT, SYNCHRONISED, VOLATILE, NATIVE;
 }

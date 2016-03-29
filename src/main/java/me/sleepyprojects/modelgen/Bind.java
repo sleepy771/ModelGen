@@ -17,32 +17,13 @@
  */
 package me.sleepyprojects.modelgen;
 
-import java.util.EnumSet;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
-class ModifierImpl implements Modifier {
-
-    private final String name;
-    private final int order;
-    private final EnumSet<BlockType> supported;
-
-    ModifierImpl(String name, int order, EnumSet<BlockType> supported) {
-        this.name = name;
-        this.order = order;
-        this.supported = supported;
-    }
-
-    @Override
-    public EnumSet<BlockType> getSupportedTypes() {
-        return supported;
-    }
-
-    @Override
-    public int getOrder() {
-        return order;
-    }
-
-    @Override
-    public String toString() {
-        return this.name;
-    }
+@Retention(RetentionPolicy.RUNTIME)
+@Target(ElementType.TYPE)
+public @interface Bind {
+    Class<? extends Block.Definition> value();
 }

@@ -9,6 +9,5 @@
     </type>
     <type id="FieldDefinition" class="me.sleepyprojects.modelgen.FieldDefinition"/>
     <type id="Modifier" class="me.sleepyprojects.modelgen.Modifier"/>
-    <type id="Argument" class="me.sleepyprojects.modelgen.Argument"/>
-    <type id="ArgumentsDefinition" class="me.sleepyprojects.modelgen.ArgumentsDefinition"/>
+    <type id="Argument" class="me.sleepyprojects.modelgen.ArgumentDefinition"/>
 </bind>

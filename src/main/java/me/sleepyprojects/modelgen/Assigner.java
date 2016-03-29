@@ -20,5 +20,5 @@ package me.sleepyprojects.modelgen;
 import java.util.Map;
 
 public interface Assigner<T> {
-    void assign(Map<String, Block> blocks, Map<String, Part> parts, T data);
+    void assign(Map<String, Block> blocks, Map<String, Object> parts, T data);
 }

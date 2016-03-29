@@ -1,14 +1,17 @@
 package me.sleepyprojects.modelgen.language.java;
 
 import com.sun.istack.internal.NotNull;
+import me.sleepyprojects.modelgen.Bind;
 import me.sleepyprojects.modelgen.Block;
 import me.sleepyprojects.modelgen.Meta;
+import me.sleepyprojects.modelgen.MethodDefinition;
 import me.sleepyprojects.modelgen.Modifier;
 import me.sleepyprojects.modelgen.Part;
 import me.sleepyprojects.modelgen.language.*;
 
 import java.util.Map;
 
+@Bind(MethodDefinition.class)
 public class JavaFieldType extends InstanceType implements FieldType, HasModifiers, HasAnnotations, HasType {
     private Meta meta;
 
@@ -33,7 +36,7 @@ public class JavaFieldType extends InstanceType implements FieldType, HasModifie
     }
 
     @Override
-    protected void assign(Map<String, Block> blockMap, Map<String, Part> partMap) {
+    protected void assign(Map<String, Block> blockMap, Map<String, Object> partMap) {
 
     }
 

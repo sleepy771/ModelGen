@@ -18,5 +18,5 @@
 package me.sleepyprojects.modelgen;
 
 public enum BlockType {
-    TYPE, METHOD, FIELD, BLOCK, ARGUMENT;
+    TYPE, METHOD, FIELD, BLOCK, VARIABLE;
 }

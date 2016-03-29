@@ -1,12 +1,12 @@
 package me.sleepyprojects.modelgen.language.java;
 
 import com.sun.istack.internal.NotNull;
+import me.sleepyprojects.modelgen.Bind;
 import me.sleepyprojects.modelgen.Block;
 import me.sleepyprojects.modelgen.BlockType;
-import me.sleepyprojects.modelgen.FlatPart;
+import me.sleepyprojects.modelgen.ClassDefinition;
 import me.sleepyprojects.modelgen.Meta;
 import me.sleepyprojects.modelgen.Modifier;
-import me.sleepyprojects.modelgen.Part;
 import me.sleepyprojects.modelgen.language.AnnotationType;
 import me.sleepyprojects.modelgen.language.BaseNamedType;
 import me.sleepyprojects.modelgen.language.BuildMultiple;
@@ -22,6 +22,7 @@ import java.util.ArrayList;
 import java.util.Map;
 import java.util.TreeSet;
 
+@Bind(ClassDefinition.class)
 public class JavaClassType extends BaseNamedType implements ClassType, HasModifiers, HasAnnotations, HasInterfaces {
 
     private BuildMultiple<FieldType> fieldList;
@@ -35,7 +36,7 @@ public class JavaClassType extends BaseNamedType implements ClassType, HasModifi
         fieldList = new BuildMultiple<>(new ArrayList<>(), "fields", "class-fields", CanAppend.uniqueSignature());
         methodList = new BuildMultiple<>(new ArrayList<>(), "methods", "class-methods", CanAppend.uniqueSignature());
         annotations = new BuildMultiple<>(new ArrayList<>(), "annotations", "class-annotations", CanAppend.unique());
-        modifiers = new MultiPart<>(new TreeSet<>(), "modifiers", ((collection, element) -> element.getSupportedTypes().contains(BlockType.TYPE) && !collection.contains(element)));
+//        modifiers = new MultiPart<>(new TreeSet<>(), "modifiers", ((collection, element) -> element.getSupportedTypes().contains(BlockType.TYPE) && !collection.contains(element)));
         interfaces = new MultiPart<>(new ArrayList<>(), "interfaces", CanAppend.unique());
     }
 
@@ -79,8 +80,8 @@ public class JavaClassType extends BaseNamedType implements ClassType, HasModifi
     }
 
     @Override
-    protected void assign(Map<String, Block> blockMap, Map<String, Part> partMap) {
-        partMap.put("name", new FlatPart(getName()));
+    protected void assign(Map<String, Block> blockMap, Map<String, Object> partMap) {
+        partMap.put("name", getName());
         if (superClass != null) {
             partMap.put("superClass", superClass);
         }

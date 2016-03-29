@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Map;
 
 @TemplateId("argument")
+@Bind(ArgumentDefinition.class)
 public class JavaArgumentType extends BaseNamedType implements ArgumentType, HasModifiers, HasAnnotations, HasType {
     private JavaModifiersType modifiers;
     private BuildMultiple<AnnotationType> annotationsStack;
@@ -29,11 +30,11 @@ public class JavaArgumentType extends BaseNamedType implements ArgumentType, Has
     }
 
     @Override
-    protected void assign(Map<String, Block> blockMap, Map<String, Part> partMap) {
+    protected void assign(Map<String, Block> blockMap, Map<String, Object> partMap) {
         blockMap.put("modifiers", modifiers.create());
         blockMap.put("annotations", annotationsStack.create());
         partMap.put("type", argumentType);
-        partMap.put("name", new FlatPart(getName()));
+        partMap.put("name", getName());
     }
 
     @Override

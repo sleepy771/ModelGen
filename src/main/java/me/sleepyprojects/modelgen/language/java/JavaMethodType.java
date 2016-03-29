@@ -1,11 +1,12 @@
 package me.sleepyprojects.modelgen.language.java;
 
+import me.sleepyprojects.modelgen.Bind;
 import me.sleepyprojects.modelgen.Block;
-import me.sleepyprojects.modelgen.FlatPart;
 import me.sleepyprojects.modelgen.Meta;
+import me.sleepyprojects.modelgen.MethodDefinition;
 import me.sleepyprojects.modelgen.Modifier;
-import me.sleepyprojects.modelgen.Part;
 import me.sleepyprojects.modelgen.language.AnnotationType;
+import me.sleepyprojects.modelgen.language.ArgumentType;
 import me.sleepyprojects.modelgen.language.BuildMultiple;
 import me.sleepyprojects.modelgen.language.FlowCode;
 import me.sleepyprojects.modelgen.language.HasAnnotations;
@@ -19,7 +20,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-public class JavaMethodType extends InstanceType implements MethodType<JavaArgumentType>, HasAnnotations, HasModifiers, HasType {
+@Bind(MethodDefinition.class)
+public class JavaMethodType extends InstanceType implements MethodType, HasAnnotations, HasModifiers, HasType {
     private BuildMultiple<AnnotationType> annotationsStack;
     private HasModifiers modifiers;
     private BuildMultiple<JavaArgumentType> arguments;
@@ -55,8 +57,8 @@ public class JavaMethodType extends InstanceType implements MethodType<JavaArgum
     }
 
     @Override
-    protected void assign(Map<String, Block> blockMap, Map<String, Part> partMap) {
-        partMap.put("name", new FlatPart(getName()));
+    protected void assign(Map<String, Block> blockMap, Map<String, Object> partMap) {
+        partMap.put("name", getName());
         partMap.put("type", type);
         blockMap.put("modifiers", modifiers.create());
         blockMap.put("arguments", arguments.create());
@@ -64,8 +66,13 @@ public class JavaMethodType extends InstanceType implements MethodType<JavaArgum
     }
 
     @Override
-    public boolean addArgument(JavaArgumentType argument) {
-        return arguments.add(argument);
+    public boolean addArgument(ArgumentType argument) {
+        return false;
+    }
+
+    @Override
+    public boolean hasArguments() {
+        return false;
     }
 
     @Override

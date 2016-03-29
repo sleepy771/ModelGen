@@ -23,15 +23,6 @@ import java.util.Map;
 public abstract class BaseDefinition implements Block.Definition {
     @Override
     public final Block create(Language language) {
-        final TemplateId id = getClass().getAnnotation(TemplateId.class);
-        if (id == null) {
-            throw new RuntimeException("Annotation not defined in definition class");
-        }
-        Map<String, Part> parts = new HashMap<>();
-        Map<String, Block> blocks = new HashMap<>();
-        assign(language, parts, blocks);
-        return new BaseBlock(blocks, parts, id.value());
+        return null;
     }
-
-    protected abstract void assign(Language language, Map<String, Part> parts, Map<String, Block> blocks);
 }

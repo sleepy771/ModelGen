@@ -109,7 +109,7 @@ public class Generator {
                 context.put(partEntry.getKey(), new PartsIterable<>(partEntry.getValue()));
             }
         }
-        for (Map.Entry<String, Part> partsEntry : block.getPartIterator()) {
+        for (Map.Entry<String, ?> partsEntry : block.getPartIterator()) {
             context.put(partsEntry.getKey(), partsEntry.getValue());
         }
         Template tpl = lang.getManager().loadTemplate(block);

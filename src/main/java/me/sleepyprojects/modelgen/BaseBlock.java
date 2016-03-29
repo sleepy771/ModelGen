@@ -23,10 +23,10 @@ import java.util.Set;
 public class BaseBlock implements Block {
 
     private final Map<String, Block> subBlocks;
-    private final Map<String, Part> subParts;
+    private final Map<String, ?> subParts;
     private final String template;
 
-    public BaseBlock(final Map<String, Block> subBlocks, final Map<String, Part> subParts, final String template) {
+    public BaseBlock(final Map<String, Block> subBlocks, final Map<String, ?> subParts, final String template) {
         this.subBlocks = subBlocks;
         this.subParts = subParts;
         this.template = template;
@@ -40,7 +40,7 @@ public class BaseBlock implements Block {
 
 
     @Override
-    public Iterable<Map.Entry<String, Part>> getPartIterator() {
+    public Set<? extends Map.Entry<String, ?>> getPartIterator() {
         return subParts.entrySet();
     }
 

@@ -17,17 +17,6 @@
  */
 package me.sleepyprojects.modelgen;
 
-import java.util.Map;
-import java.util.Set;
-
-public interface Buildable {
-    Set<String> getBlockNames();
-
-    Set<? extends Map.Entry<String, ?>> getPartIterator();
-
-    Iterable<Map.Entry<String, Block>> getBlockIterator();
-
-    int getBlockCount();
-
-    boolean hasBlocks();
+public enum MetaDefaults {
+    BOOL, U_INT8, U_INT16, U_INT32, U_INT64, INT8, INT16, INT32, INT64, FLOAT32, FLOAT64, STRING, NONE;
 }

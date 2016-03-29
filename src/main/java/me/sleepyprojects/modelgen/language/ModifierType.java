@@ -15,19 +15,9 @@
  * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
  * DEALINGS IN THE SOFTWARE.
  */
-package me.sleepyprojects.modelgen;
+package me.sleepyprojects.modelgen.language;
 
-import java.util.Map;
-import java.util.Set;
+import me.sleepyprojects.modelgen.Part;
 
-public interface Buildable {
-    Set<String> getBlockNames();
-
-    Set<? extends Map.Entry<String, ?>> getPartIterator();
-
-    Iterable<Map.Entry<String, Block>> getBlockIterator();
-
-    int getBlockCount();
-
-    boolean hasBlocks();
+public interface ModifierType extends Part {
 }

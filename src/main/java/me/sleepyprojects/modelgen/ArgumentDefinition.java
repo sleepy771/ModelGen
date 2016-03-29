@@ -18,57 +18,77 @@
 package me.sleepyprojects.modelgen;
 
 import com.sun.istack.internal.NotNull;
+import me.sleepyprojects.modelgen.language.AnnotationType;
 
-import java.util.Map;
-import java.util.Set;
-import java.util.TreeSet;
+import java.util.ArrayList;
+import java.util.List;
 
 @TemplateId("argument")
-public class Argument extends BaseDefinition {
-    public static final BlockType TYPE = BlockType.ARGUMENT;
+public class ArgumentDefinition extends BaseDefinition {
+    public static final BlockType TYPE = BlockType.VARIABLE;
     private final String name;
     private final Meta type;
     private final Iterable<Modifier> modifiers;
 
 
-    private Argument(String name, Meta type, Iterable<Modifier> modifiers) {
+    private ArgumentDefinition(String name, Meta type, Iterable<Modifier> modifiers) {
         this.name = name;
         this.type = type;
         this.modifiers = modifiers;
     }
 
-    @Override
-    protected void assign(Language language, Map<String, Part> parts, Map<String, Block> blocks) {
-        parts.put("name", new FlatPart(name));
-        parts.put("type", type);
-        parts.put("mods", new PartsIterable<>(modifiers));
+    public final String getName() {
+        return this.name;
     }
 
-    public static class Builder implements Block.Builder<Argument> {
+    public final Meta getType() {
+        return this.type;
+    }
+
+    public final Iterable<Modifier> getModifiers() {
+        return modifiers;
+    }
+
+    public static class Builder implements Block.Builder<ArgumentDefinition> {
 
         private final String name;
         private Meta argType;
-        private final Set<Modifier> modifiers;
+        private final List<Modifier> modifiers;
+        private final List<AnnotationType> annotations;
 
         public Builder(String name) {
             this.name = name;
-            this.modifiers = new TreeSet<>(Modifier.Comparator.INSTANCE);
+            this.modifiers = new ArrayList<>();
+            this.annotations = new ArrayList<>();
         }
 
         public void setType(final @NotNull Meta argType) {
             this.argType = argType;
         }
 
+        public boolean hasType() {
+            return this.argType != null;
+        }
+
+        public boolean hasModifiers() {
+            return !modifiers.isEmpty();
+        }
+
+        public boolean hasAnnotations() {
+            return !annotations.isEmpty();
+        }
+
         public void addModifier(final @NotNull Modifier modifier) {
-            if (!modifier.getSupportedTypes().contains(Argument.TYPE)) {
-                throw new RuntimeException("NOPE");
-            }
             this.modifiers.add(modifier);
         }
 
+        public void addAnnotation(final @NotNull AnnotationType annotation) {
+            this.annotations.add(annotation);
+        }
+
         @Override
-        public Argument build() {
-            return new Argument(name, argType, modifiers);
+        public ArgumentDefinition build() {
+            return new ArgumentDefinition(name, argType, modifiers);
         }
     }
 }

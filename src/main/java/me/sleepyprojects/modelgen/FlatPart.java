@@ -17,6 +17,8 @@
  */
 package me.sleepyprojects.modelgen;
 
+import com.sun.istack.internal.NotNull;
+
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
@@ -67,7 +69,7 @@ public class FlatPart implements Part, Iterable<String> {
         private final String prefix;
         private final String postfix;
 
-        FlatPartIterator(Iterable<String> iterable, String prefix, String postfix) {
+        FlatPartIterator(final @NotNull Iterable<String> iterable, String prefix, String postfix) {
             this.iterator = iterable.iterator();
             this.prefix = prefix != null ? prefix : "";
             this.postfix = postfix != null ? postfix : "";

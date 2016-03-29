@@ -13,29 +13,36 @@ import java.util.TreeSet;
 public class JavaModifiersType extends BuildableType implements HasModifiers {
 
     public static final String MODIFIERS = "modifiers";
-    private TreeSet<Modifier> modifiers;
+    private TreeSet<JavaModifierType> modifiers;
 
-    public JavaModifiersType(Comparator<Modifier> comparator) {
+    public JavaModifiersType(Comparator<JavaModifierType> comparator) {
         modifiers = new TreeSet<>(comparator);
     }
 
     public JavaModifiersType() {
-        this(Modifier.Comparator.INSTANCE);
+        this(JavaModifierType.Comparator.INSTANCE);
     }
 
-    public void setComparator(Comparator<Modifier> comparator) {
-        final Set<Modifier> modifiers = this.modifiers;
+    public void setComparator(Comparator<JavaModifierType> comparator) {
+        final Set<JavaModifierType> modifiers = this.modifiers;
         this.modifiers = new TreeSet<>(comparator);
         this.modifiers.addAll(modifiers);
     }
 
     @Override
-    protected void assign(Map<String, Block> blockMap, Map<String, Part> partMap) {
+    protected void assign(Map<String, Block> blockMap, Map<String, Object> partMap) {
         partMap.put(MODIFIERS, new PartsIterable<>(modifiers));
     }
 
     @Override
     public boolean addModifier(Modifier modifier) {
-        return modifiers.add(modifier);
+        if (JavaModifierType.class != modifier.getClass()) {
+            throw new ClassCastException("Expected JavaModifierType");
+        }
+        return addModifier((JavaModifierType) modifier);
+    }
+
+    private boolean addModifier(JavaModifierType modifierType) {
+        return modifiers.add(modifierType);
     }
 }
