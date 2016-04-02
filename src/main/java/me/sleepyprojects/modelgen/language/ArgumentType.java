@@ -1,4 +1,4 @@
 package me.sleepyprojects.modelgen.language;
 
-public interface ArgumentType extends HasName, CreateBlock {
+public interface ArgumentType<Language> extends VariableType<Language>, HasName, CreateBlock {
 }

@@ -17,35 +17,9 @@
  */
 package me.sleepyprojects.modelgen;
 
-import com.sun.istack.internal.NotNull;
-import me.sleepyprojects.modelgen.language.AnnotationType;
+public class ArgumentDefinition extends VariableDefinition {
 
-import java.util.ArrayList;
-import java.util.List;
-
-public class ArgumentDefinition {
-    public static final BlockType TYPE = BlockType.VARIABLE;
-    private final String name;
-    private final Type type;
-    private final Iterable<Modifier> modifiers;
-
-
-    private ArgumentDefinition(String name, Type type, Iterable<Modifier> modifiers) {
-        this.name = name;
-        this.type = type;
-        this.modifiers = modifiers;
+    ArgumentDefinition(String name, Type type, Iterable<Meta> metas) {
+        super(name, type, metas);
     }
-
-    public final String getName() {
-        return this.name;
-    }
-
-    public final Type getType() {
-        return this.type;
-    }
-
-    public final Iterable<Modifier> getModifiers() {
-        return modifiers;
-    }
-
 }

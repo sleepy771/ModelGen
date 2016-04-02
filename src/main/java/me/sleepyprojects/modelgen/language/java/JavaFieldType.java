@@ -20,7 +20,7 @@ public class JavaFieldType extends InstanceType implements FieldType, HasModifie
     }
 
     @Override
-    public boolean addModifier(Modifier modifier) {
+    public boolean addModifier(ModifierType modifier) {
         return false;
     }
 

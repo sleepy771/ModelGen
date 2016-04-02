@@ -1,6 +1,6 @@
 package me.sleepyprojects.modelgen.language;
 
-public interface MethodType extends HasName, CreateBlock, HasArguments, Significant {
+public interface MethodType<Language> extends HasName, CreateBlock, HasArguments<Language>, HasAnnotations<Language>, HasModifiers<Language>, Significant {
 
-    void setBody(FlowCode code);
+    void setBody(FlowCode<Language> code);
 }

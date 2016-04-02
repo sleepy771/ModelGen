@@ -17,17 +17,18 @@ import me.sleepyprojects.modelgen.language.HasAnnotations;
 import me.sleepyprojects.modelgen.language.HasInterfaces;
 import me.sleepyprojects.modelgen.language.HasModifiers;
 import me.sleepyprojects.modelgen.language.MethodType;
+import me.sleepyprojects.modelgen.language.ModifierType;
 import me.sleepyprojects.modelgen.language.MultiPart;
 
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.TreeSet;
 
-public class JavaClassType extends BaseNamedType implements ClassType, HasModifiers, HasAnnotations, HasInterfaces {
+public class JavaClassType extends BaseNamedType implements ClassType<JavaMarker>, HasInterfaces, HasModifiers<JavaMarker>, HasAnnotations<JavaMarker> {
 
-    private BuildMultiple<FieldType> fieldList;
-    private BuildMultiple<MethodType> methodList;
-    private BuildMultiple<AnnotationType> annotations;
+    private BuildMultiple<JavaFieldType> fieldList;
+    private BuildMultiple<JavaMethodType> methodList;
+    private BuildMultiple<JavaAnnotationType> annotations;
     private MultiPart<JavaModifierType> modifiers;
     private Type superClass;
     private MultiPart<Type> interfaces;
@@ -55,23 +56,21 @@ public class JavaClassType extends BaseNamedType implements ClassType, HasModifi
     }
 
     @Override
-    public void addMethod(MethodType method) {
+    public void addMethod(MethodType<JavaMarker> method) {
+
+    }
+
+    @Override
+    public void addField(FieldType<JavaMarker> field) {
+
+    }
+
+    public void addMethod(JavaMethodType method) {
         methodList.add(method);
     }
 
-    @Override
-    public void addField(FieldType field) {
+    public void addField(JavaFieldType field) {
         fieldList.add(field);
-    }
-
-    @Override
-    public boolean addAnnotation(final @NotNull AnnotationType annotation) {
-        return annotations.add(annotation);
-    }
-
-    @Override
-    public boolean addModifier(final @NotNull Modifier modifier) {
-        return JavaModifierType.class.equals(modifier.getClass()) && modifiers.add((JavaModifierType) modifier);
     }
 
     @Override
@@ -90,5 +89,15 @@ public class JavaClassType extends BaseNamedType implements ClassType, HasModifi
         blockMap.put("methods", methodList.create());
         blockMap.put("fields", fieldList.create());
 
+    }
+
+    @Override
+    public boolean addAnnotation(AnnotationType<JavaMarker> annotation) {
+        return annotations.add((JavaAnnotationType) annotation);
+    }
+
+    @Override
+    public boolean addModifier(ModifierType<JavaMarker> modifier) {
+        return modifiers.add((JavaModifierType) modifier);
     }
 }

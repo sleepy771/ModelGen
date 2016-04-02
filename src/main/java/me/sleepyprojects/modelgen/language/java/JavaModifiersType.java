@@ -3,6 +3,7 @@ package me.sleepyprojects.modelgen.language.java;
 import me.sleepyprojects.modelgen.*;
 import me.sleepyprojects.modelgen.language.BuildableType;
 import me.sleepyprojects.modelgen.language.HasModifiers;
+import me.sleepyprojects.modelgen.language.ModifierType;
 
 import java.util.Comparator;
 import java.util.Map;
@@ -10,7 +11,7 @@ import java.util.Set;
 import java.util.TreeSet;
 
 @TemplateId("modifiers")
-public class JavaModifiersType extends BuildableType implements HasModifiers {
+public class JavaModifiersType extends BuildableType implements HasModifiers<JavaMarker> {
 
     public static final String MODIFIERS = "modifiers";
     private TreeSet<JavaModifierType> modifiers;
@@ -34,15 +35,12 @@ public class JavaModifiersType extends BuildableType implements HasModifiers {
         partMap.put(MODIFIERS, new PartsIterable<>(modifiers));
     }
 
-    @Override
-    public boolean addModifier(Modifier modifier) {
-        if (!JavaModifierType.class.equals(modifier.getClass())) {
-            throw new ClassCastException("Expected JavaModifierType");
-        }
-        return addModifier((JavaModifierType) modifier);
+    private boolean addMod(JavaModifierType modifierType) {
+        return modifiers.add(modifierType);
     }
 
-    private boolean addModifier(JavaModifierType modifierType) {
-        return modifiers.add(modifierType);
+    @Override
+    public boolean addModifier(ModifierType<JavaMarker> modifier) {
+        return addMod((JavaModifierType) modifier);
     }
 }

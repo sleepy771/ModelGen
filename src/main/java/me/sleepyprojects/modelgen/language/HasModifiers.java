@@ -1,7 +1,5 @@
 package me.sleepyprojects.modelgen.language;
 
-import me.sleepyprojects.modelgen.Modifier;
-
-public interface HasModifiers extends CreateBlock {
-    boolean addModifier(Modifier modifier);
+public interface HasModifiers<Language> extends CreateBlock {
+    boolean addModifier(ModifierType<Language> modifier);
 }

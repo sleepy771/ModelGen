@@ -1,6 +1,6 @@
 package me.sleepyprojects.modelgen.language;
 
-public interface HasAnnotations extends CreateBlock {
+public interface HasAnnotations<Language> extends CreateBlock {
 
-    boolean addAnnotation(AnnotationType annotation);
+    boolean addAnnotation(AnnotationType<Language> annotation);
 }

@@ -1,7 +1,7 @@
 package me.sleepyprojects.modelgen.language;
 
-public interface HasArguments extends CreateBlock {
-    boolean addArgument(ArgumentType argument);
+public interface HasArguments<Language> extends CreateBlock {
+    boolean addArgument(ArgumentType<Language> argument);
 
     boolean hasArguments();
 }

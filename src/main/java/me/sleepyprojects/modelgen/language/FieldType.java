@@ -1,4 +1,4 @@
 package me.sleepyprojects.modelgen.language;
 
-public interface FieldType extends HasName, CreateBlock, Significant {
+public interface FieldType<Language> extends HasName, CreateBlock, Significant {
 }

@@ -1,43 +1,37 @@
 package me.sleepyprojects.modelgen.language.java;
 
-import me.sleepyprojects.modelgen.Bind;
 import me.sleepyprojects.modelgen.Block;
 import me.sleepyprojects.modelgen.Type;
-import me.sleepyprojects.modelgen.MethodDefinition;
-import me.sleepyprojects.modelgen.Modifier;
 import me.sleepyprojects.modelgen.language.AnnotationType;
 import me.sleepyprojects.modelgen.language.ArgumentType;
 import me.sleepyprojects.modelgen.language.BuildMultiple;
+import me.sleepyprojects.modelgen.language.CanAppend;
 import me.sleepyprojects.modelgen.language.FlowCode;
-import me.sleepyprojects.modelgen.language.HasAnnotations;
-import me.sleepyprojects.modelgen.language.HasModifiers;
-import me.sleepyprojects.modelgen.language.HasType;
 import me.sleepyprojects.modelgen.language.InstanceType;
 import me.sleepyprojects.modelgen.language.MethodType;
+import me.sleepyprojects.modelgen.language.ModifierType;
+import me.sleepyprojects.modelgen.language.MultiPart;
 import me.sleepyprojects.modelgen.language.Signature;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeSet;
 import java.util.stream.Collectors;
 
-@Bind(MethodDefinition.class)
-public class JavaMethodType extends InstanceType implements MethodType, HasAnnotations, HasModifiers, HasType {
-    private BuildMultiple<AnnotationType> annotationsStack;
-    private HasModifiers modifiers;
+class JavaMethodType extends InstanceType implements MethodType<JavaMarker> {
+    private BuildMultiple<AnnotationType<JavaMarker>> annotationsStack;
+    private MultiPart<JavaModifierType> modifiers;
     private BuildMultiple<JavaArgumentType> arguments;
     private Type type;
 
-    @Override
-    public boolean addAnnotation(AnnotationType annotation) {
-        return annotationsStack.add(annotation);
+    JavaMethodType() {
+        this.annotationsStack = new BuildMultiple<>(new ArrayList<>(), "annotations", "method-annotations", CanAppend.unique());
+        this.modifiers = new MultiPart<>(new TreeSet<>(JavaModifierType.Comparator.INSTANCE), "modifiers", CanAppend.unique());
+        this.arguments = new BuildMultiple<>(new ArrayList<>(), "arguments", "method-arguments", CanAppend.unique());
     }
 
-    @Override
-    public boolean addModifier(Modifier modifier) {
-        return modifiers.addModifier(modifier);
-    }
-
-    public List<Type> getArgumentTypes() {
+    List<Type> getArgumentTypes() {
         return arguments.getCollection().stream().map(JavaArgumentType::getType).collect(Collectors.toList());
     }
 
@@ -64,17 +58,27 @@ public class JavaMethodType extends InstanceType implements MethodType, HasAnnot
     }
 
     @Override
-    public boolean addArgument(ArgumentType argument) {
-        return false;
+    public boolean addArgument(ArgumentType<JavaMarker> argument) {
+        return arguments.add((JavaArgumentType) argument);
     }
 
     @Override
     public boolean hasArguments() {
-        return false;
+        return !arguments.isEmpty();
     }
 
     @Override
     public Signature createSignature() {
         return new JavaMethodSignature(this, getDeclaringType());
+    }
+
+    @Override
+    public boolean addAnnotation(AnnotationType<JavaMarker> annotation) {
+        return annotationsStack.add(annotation);
+    }
+
+    @Override
+    public boolean addModifier(ModifierType<JavaMarker> modifier) {
+        return modifiers.add((JavaModifierType) modifier);
     }
 }

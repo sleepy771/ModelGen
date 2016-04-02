@@ -19,5 +19,5 @@ package me.sleepyprojects.modelgen.language;
 
 import me.sleepyprojects.modelgen.Part;
 
-public interface ModifierType extends Part {
+public interface ModifierType<Language> extends Part {
 }

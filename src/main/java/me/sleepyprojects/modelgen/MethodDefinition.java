@@ -27,16 +27,16 @@ import java.util.TreeSet;
 public class MethodDefinition {
     private static final BlockType TYPE = BlockType.METHOD;
     private final String name;
-    private final Set<Modifier> modifiers;
-    private final List<ArgumentDefinition> arguments;
+    private final List<Meta> metas;
+    private final List<ArgumentDefinition> args;
     private final Type returnType;
     private Type declaringType;
 
-    private MethodDefinition(String name, Set<Modifier> modifiers, List<ArgumentDefinition> args, Type returnType) {
+    private MethodDefinition(String name, List<Meta> metas, List<ArgumentDefinition> args, Type returnType) {
 
         this.name = name;
-        this.modifiers = modifiers;
-        this.arguments = args;
+        this.metas = metas;
+        this.args = args;
         this.returnType = returnType;
     }
 
@@ -48,4 +48,19 @@ public class MethodDefinition {
         this.declaringType = declaringType;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public List<Meta> getMetas() {
+        return metas;
+    }
+
+    public List<ArgumentDefinition> getArgs() {
+        return args;
+    }
+
+    public Type getReturnType() {
+        return returnType;
+    }
 }

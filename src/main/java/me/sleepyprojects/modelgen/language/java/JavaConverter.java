@@ -24,10 +24,11 @@ import me.sleepyprojects.modelgen.Meta;
 import me.sleepyprojects.modelgen.MethodDefinition;
 import me.sleepyprojects.modelgen.Modifier;
 import me.sleepyprojects.modelgen.Modifiers;
-import me.sleepyprojects.modelgen.Type;
-import me.sleepyprojects.modelgen.language.ClassType;
 import me.sleepyprojects.modelgen.language.Converter;
+import me.sleepyprojects.modelgen.language.FieldFactory;
 import me.sleepyprojects.modelgen.language.FieldType;
+import me.sleepyprojects.modelgen.language.MetaFactory;
+import me.sleepyprojects.modelgen.language.MethodFactory;
 import me.sleepyprojects.modelgen.language.MethodType;
 
 import java.util.Collections;
@@ -37,6 +38,10 @@ import java.util.Map;
 
 public class JavaConverter implements Converter {
     private static final Map<Meta, JavaModifierType> JAVA_MODIFIERS;
+    private MetaFactory<JavaAnnotationType> annotationFactory;
+    private MetaFactory<JavaModifierType> modifierFactory;
+    private MethodFactory<JavaMethodType> methodFactory;
+    private FieldFactory<JavaFieldType> fieldFactory;
 
     static {
         HashMap<Meta, JavaModifierType> modifiers = new HashMap<>();
@@ -75,6 +80,15 @@ public class JavaConverter implements Converter {
 
     @Override
     public MethodType convert(MethodDefinition method) {
+        JavaMethodType jMethod = new JavaMethodType(annotationsStack, modifiers, arguments);
+        jMethod.setName(method.getName());
+        jMethod.setType(method.getReturnType());
+        method.getMetas().stream().filter(meta -> {
+            return modifierFactory.is(meta);
+        }).forEach(meta -> jMethod.addModifier(modifierFactory.get(meta)));
+        method.getMetas().stream().filter(meta -> {
+            return annotationFactory.is(meta);
+        }).forEach(meta -> jMethod.addAnnotation(annotationFactory.get(meta)));
         return null;
     }
 
@@ -89,6 +103,12 @@ public class JavaConverter implements Converter {
         jClass.setName(classDefinition.getName());
         // set supetypes
         classDefinition.getSuperTypes().forEach(jClass::addSuperType);
+        classDefinition.getMetas().stream().filter(meta -> {
+            return annotationFactory.is(meta);
+        }).forEach(meta -> jClass.addAnnotation(annotationFactory.get(meta)));
+        classDefinition.getMetas().stream().filter(meta -> {
+            return modifierFactory.is(meta);
+        }).forEach(meta -> jClass.addModifier(modifierFactory.get(meta)));
         return null;
     }
 

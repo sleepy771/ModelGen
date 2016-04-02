@@ -7,26 +7,21 @@ import me.sleepyprojects.modelgen.language.*;
 import java.util.ArrayList;
 import java.util.Map;
 
+
 @TemplateId("argument")
-@Bind(ArgumentDefinition.class)
-public class JavaArgumentType extends BaseNamedType implements ArgumentType, HasModifiers, HasAnnotations, HasType {
-    private JavaModifiersType modifiers;
-    private BuildMultiple<AnnotationType> annotationsStack;
+class JavaArgumentType extends BaseNamedType implements ArgumentType<JavaMarker>, HasModifiers<JavaMarker>, HasAnnotations<JavaMarker>, HasType {
+    private MultiPart<ModifierType<JavaMarker>> modifiers;
+    private BuildMultiple<AnnotationType<JavaMarker>> annotationsStack;
     private Type argumentType;
 
-    public JavaArgumentType() {
+    JavaArgumentType() {
         annotationsStack = new BuildMultiple<>(new ArrayList<>(), "annotations", "variable-annotations", CanAppend.unique());
-        modifiers = new JavaModifiersType();
+        modifiers = new MultiPart<>(new ArrayList<>(), "modifiers", CanAppend.unique());
     }
 
     @Override
-    public boolean addAnnotation(AnnotationType annotation) {
+    public boolean addAnnotation(AnnotationType<JavaMarker> annotation) {
         return annotationsStack.add(annotation);
-    }
-
-    @Override
-    public boolean addModifier(Modifier modifier) {
-        return modifiers.addModifier(modifier);
     }
 
     @Override
@@ -43,5 +38,10 @@ public class JavaArgumentType extends BaseNamedType implements ArgumentType, Has
 
     public Type getType() {
         return this.argumentType;
+    }
+
+    @Override
+    public boolean addModifier(ModifierType<JavaMarker> modifier) {
+        return modifiers.add(modifier);
     }
 }

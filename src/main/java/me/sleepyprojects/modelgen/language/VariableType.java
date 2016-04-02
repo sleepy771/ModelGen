@@ -1,4 +1,4 @@
 package me.sleepyprojects.modelgen.language;
 
-public interface FlowCode<Language> {
+public interface VariableType<Language> {
 }
