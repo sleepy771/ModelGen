@@ -10,17 +10,16 @@ import me.sleepyprojects.modelgen.language.*;
 
 import java.util.Map;
 
-@Bind(MethodDefinition.class)
-public class JavaFieldType extends InstanceType implements FieldType, HasModifiers, HasAnnotations, HasType {
+class JavaFieldType extends InstanceType implements FieldType<JavaMarker>, HasModifiers<JavaMarker>, HasAnnotations<JavaMarker>, HasType {
     private Type type;
 
     @Override
-    public boolean addAnnotation(AnnotationType annotation) {
+    public boolean addAnnotation(AnnotationType<JavaMarker> annotation) {
         return false;
     }
 
     @Override
-    public boolean addModifier(ModifierType modifier) {
+    public boolean addModifier(ModifierType<JavaMarker> modifier) {
         return false;
     }
 

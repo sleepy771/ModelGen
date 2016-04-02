@@ -36,7 +36,7 @@ class JavaMethodType extends InstanceType implements MethodType<JavaMarker> {
     }
 
     @Override
-    public void setBody(FlowCode code) {
+    public void setBody(FlowCode<JavaMarker> code) {
 
     }
 
