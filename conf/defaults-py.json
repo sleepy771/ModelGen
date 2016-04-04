@@ -1,0 +1,127 @@
+{
+  "@Comparable": {
+    "name": "py_cmp",
+    "type": "A",
+    "methods": {
+      "@gt": {
+        "call": "${SELF_OBJ} > $value"
+      },
+      "@ge": {
+        "call": "${SELF_OBJ} >= $value"
+      },
+      "@eq": {
+        "call": "${SELF_OBJ} == $value"
+      },
+      "@le": {
+        "call": "${SELF_OBJ} <= $value"
+      },
+      "@lt": {
+        "call": "${SELF_OBJ} < $value"
+      },
+      "ne": {
+        "call": "${SELF_OBJ} != $value"
+      }
+    }
+  },
+  "@Integer": {
+    "name": "int",
+    "extends": [
+      "@py_cmp"
+    ],
+    "methods": {
+      "@toString": {
+        "call": "str(${SELF_OBJ})"
+      },
+      "@toFloat": {
+        "call": "float(${SELF_OBJ})"
+      },
+      "@toInteger": {
+        "call": "${SELF_OBJ}"
+      },
+      "@parse": {
+        "call": "int($value)"
+      }
+    }
+  },
+  "@Float": {
+    "name": "float",
+    "extends": [
+      "@py-cmp"
+    ],
+    "methods": {
+      "@toString": {
+        "call": "str(${SELF_OBJ})"
+      },
+      "@toFloat": {
+        "call": "${SELF_OBJ}"
+      },
+      "@toInteger": {
+        "call": "int(${SELF_OBJ})"
+      },
+      "@parse": {
+        "call": "float($value)"
+      }
+    }
+  },
+  "@String": {
+    "name": "str",
+    "extends": [
+      "@py-cmp"
+    ],
+    "methods": {
+      "@length": {
+        "call": "len(${SELF_OBJ})"
+      },
+      "@charAt": {
+        "call": "${SELF_OBJ}[$index]"
+      }
+    }
+  },
+  "@DataStruct": {
+    "name": "py-data-struct",
+    "type": "A",
+    "methods": {
+      "@size": "len(${SELF_OBJ})",
+      "@contains": "$value in ${SELF_OBJ}"
+    }
+  },
+  "@Map": {
+    "name": "dict",
+    "extends": [
+      "@py-data-struct"
+    ],
+    "methods": {
+      "@put": "${SELF_OBJ}[$key] = $value",
+      "@get": "${SELF_OBJ}[$key]",
+      "@remove": "del ${SELF_OBJ}[$key]"
+    }
+  },
+  "@List": {
+    "name": "list",
+    "extends": [
+      "@py-data-struct"
+    ],
+    "methods": {
+      "@add": "${SELF_OBJ}.append($value)",
+      "@remove": "${SELF_OBJ}.remove($value)",
+      "@removeIndex": "del ${SELF_OBJ}[$index]",
+      "@removeAll": "for r in $values:${LN}${TAB}${SELF_OBJ}.remove(r)",
+      "@addAll": "${SELF_OBJ}.extend($values)",
+      "@insert": "${SELF_OBJ}.insert($index, $value)",
+      "@set": "${SELF_OBJ}[$index] = $value",
+      "@get": "${SELF_OBJ}[$index]"
+    }
+  },
+  "@Set": {
+    "name": "set",
+    "extends": [
+      "@py-data-struct"
+    ],
+    "methods": {
+      "@add": "${SELF_OBJ}.add($value)",
+      "@remove": "${SELF_OBJ}.remove($value)",
+      "@addAll": "${SELF_OBJ}.update($values)",
+      "@removeAll": "${SELF_OBJ}.difference_update($values)",
+    }
+  }
+}

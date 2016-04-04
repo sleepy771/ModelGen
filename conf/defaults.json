@@ -1,0 +1,277 @@
+[
+  {
+    "name": "Class",
+    "type": "I",
+    "methods": [
+      {
+        "name": "getSimpleName",
+        "r_type": "@String"
+      },
+      {
+        "name": "getPackage",
+        "r_type": "@String"
+      },
+      {
+        "name": "getFullName",
+        "r_type": "@String"
+      }
+    ]
+  },
+  {
+    "name": "Object",
+    "type": "A",
+    "methods": [
+      {
+        "name": "#equals",
+        "r_type": "@Boolean",
+        "args": [
+          {
+            "name": "object"
+          }
+        ]
+      },
+      {
+        "name": "#getClass",
+        "r_type": "@Class"
+      }
+    ]
+  },
+  {
+    "name": "DataStruct",
+    "type": "A",
+    "extends": [
+      "@Object"
+    ],
+    "methods": [
+      {
+        "name": "size",
+        "r_type": "@Integer"
+      },
+      {
+        "name": "contains",
+        "r_type": "@Boolean",
+        "args": [
+          {
+            "name": "value"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Collection",
+    "extends": [
+      "@DataStruct"
+    ],
+    "type": "A",
+    "methods": [
+      {
+        "name": "add",
+        "args": [
+          {
+            "name": "value"
+          }
+        ]
+      },
+      {
+        "name": "remove",
+        "args": [
+          {
+            "name": "value"
+          }
+        ]
+      },
+      {
+        "name": "addAll",
+        "args": [
+          {
+            "name": "values"
+          }
+        ]
+      },
+      {
+        "name": "removeAll",
+        "args": [
+          {
+            "name": "values"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Comparable",
+    "type": "A",
+    "create-methods": "name",
+    "methods": {
+      "name": [
+        "gt",
+        "ge",
+        "eq",
+        "le",
+        "lt",
+        "ne"
+      ],
+      "r_type": "@Boolean",
+      "args": [
+        {
+          "name": "value"
+        }
+      ]
+    }
+  },
+  {
+    "name": "String",
+    "extends": [
+      "@Object",
+      "@Comparable"
+    ],
+    "type": "I",
+    "methods": [
+      {
+        "name": "length",
+        "r_type": "@Integer"
+      },
+      {
+        "name": "charAt",
+        "args": [
+          {
+            "name": "index",
+            "type": "@Integer"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Number",
+    "extends": [
+      "@Object",
+      "@Comparable"
+    ],
+    "type": "A",
+    "methods": [
+      {
+        "name": "toString",
+        "r_type": "@String"
+      },
+      {
+        "name": "toFloat",
+        "r_type": "@Float"
+      },
+      {
+        "name": "toInteger",
+        "r_type": "@Integer"
+      },
+      {
+        "name": "parse",
+        "r_type": "@this",
+        "args": [
+          {
+            "name": "value",
+            "type": "@String"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Integer",
+    "extends": "@Number"
+  },
+  {
+    "name": "Float",
+    "extends": "@Number"
+  },
+  {
+    "name": "Map",
+    "extends": [
+      "@DataStruct"
+    ],
+    "methods": [
+      {
+        "name": "put",
+        "args": [
+          {
+            "name": "key"
+          },
+          {
+            "name": "value"
+          }
+        ]
+      },
+      {
+        "name": "get",
+        "args": [
+          {
+            "name": "key"
+          }
+        ]
+      },
+      {
+        "name": "remove",
+        "args": [
+          {
+            "name": "key"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "List",
+    "extends": [
+      "@Collection"
+    ],
+    "methods": [
+      {
+        "name": "insert",
+        "args": [
+          {
+            "name": "index",
+            "type": "@Integer"
+          },
+          {
+            "name": "value"
+          }
+        ]
+      },
+      {
+        "name": "set",
+        "args": [
+          {
+            "name": "index",
+            "type": "@Integer"
+          },
+          {
+            "name": "value"
+          }
+        ]
+      },
+      {
+        "name": "removeIndex",
+        "args": [
+          {
+            "name": "index",
+            "type": "@Integer"
+          }
+        ]
+      },
+      {
+        "name": "get",
+        "args": [
+          {
+            "name": "index",
+            "type": "@Integer"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Set",
+    "extends": [
+      "@Collection"
+    ]
+  }
+]
