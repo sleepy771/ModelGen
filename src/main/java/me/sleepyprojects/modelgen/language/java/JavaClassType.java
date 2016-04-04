@@ -22,14 +22,14 @@ import java.util.Map;
 import java.util.TreeSet;
 
 public class JavaClassType extends BaseNamedType
-        implements ClassType<JavaMarker>, HasInterfaces, HasModifiers<JavaMarker>, HasAnnotations<JavaMarker> {
+        implements ClassType<JavaMarker>, HasInterfaces<JavaMarker>, HasModifiers<JavaMarker>, HasAnnotations<JavaMarker> {
 
     private BuildMultiple<JavaFieldType> fieldList;
     private BuildMultiple<JavaMethodType> methodList;
     private BuildMultiple<JavaAnnotationType> annotations;
     private MultiPart<JavaModifierType> modifiers;
-    private Type superClass;
-    private MultiPart<Type> interfaces;
+    private Type<JavaMarker> superClass;
+    private MultiPart<Type<JavaMarker>> interfaces;
 
     public JavaClassType() {
         fieldList = new BuildMultiple<>(new ArrayList<>(), "fields", "class-fields", CanAppend.uniqueSignature());
@@ -47,27 +47,19 @@ public class JavaClassType extends BaseNamedType
         return annotations.add((JavaAnnotationType) annotation);
     }
 
-    public void addField(JavaFieldType field) {
-        fieldList.add(field);
-    }
-
     @Override
     public void addField(FieldType<JavaMarker> field) {
-
+        fieldList.add((JavaFieldType) field);
     }
 
     @Override
-    public void addInterface(Type superType) {
+    public void addInterface(Type<JavaMarker> superType) {
         interfaces.add(superType);
-    }
-
-    public void addMethod(JavaMethodType method) {
-        methodList.add(method);
     }
 
     @Override
     public void addMethod(MethodType<JavaMarker> method) {
-
+        methodList.add((JavaMethodType) method);
     }
 
     @Override
@@ -76,7 +68,7 @@ public class JavaClassType extends BaseNamedType
     }
 
     @Override
-    public void addSuperType(final @NotNull Type superType) {
+    public void addSuperType(final @NotNull Type<JavaMarker> superType) {
         if (superType.getMetaType() == Type.MetaType.TYPE) {
             if (superClass != null) {
                 throw new RuntimeException("Java does not support multidimensional inheritance");
@@ -95,7 +87,7 @@ public class JavaClassType extends BaseNamedType
         if (superClass != null) {
             partMap.put("superClass", superClass);
         }
-        blockMap.put("interfaces", modifiers.create());
+        blockMap.put("interfaces", interfaces.create());
         blockMap.put("modifiers", modifiers.create());
         blockMap.put("methods", methodList.create());
         blockMap.put("fields", fieldList.create());

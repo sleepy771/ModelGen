@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<bindings>
+    <bind name="java-class" to="@Class" class="java.lang.Class">
+    </bind>
+    <bind name="java-string" to="@String" class="java.lang.String">
+    </bind>
+    <bind name="java-int" to="@Integer" class="int,java.lang.Integer">
+        <method name="parseString" to="java.lang.Integer::parseString">
+            <argument name="value" type="java.lang.String"/>
+            <return-type value="int"/>
+        </method>
+        <method name="toString" to="java.lang.Integer::toString">
+            <argument name="value" type="int"/>
+            <return-type value="java.lang.String"/>
+        </method>
+    </bind>
+</bindings>

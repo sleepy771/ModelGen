@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<default-types>
+    <type name="Class">
+        <methods>
+            <method name="getSimpleName" type="@String"/>
+            <method name="getModule" type="@String"/>
+            <method name="getFullName" type="@String"/>
+        </methods>
+    </type>
+    <abstract-type name="Object">
+        <methods>
+            <method name="#equals">
+
+                <argument name="object" type=""/>
+
+            </method>
+            <method name="#getClass"/>
+        </methods>
+    </abstract-type>
+    <abstract-type name="Collection" extends="@Object">
+        <methods>
+            <method name="add">
+                <argument name="value" type=""/>
+            </method>
+            <method name="remove">
+                <argument name="value" type=""/>
+            </method>
+            <method name="addAll">
+                <argument name="values" type=""/>
+            </method>
+            <method name="removeAll">
+                <argument name="values" type=""/>
+            </method>
+            <method name="size"/>
+            <method name="contains">
+                <argument name="value" type=""/>
+            </method>
+        </methods>
+    </abstract-type>
+    <type name="Set" extends="@Collection"/>
+    <type name="List" extends="@Collection">
+        <methods>
+            <method name="addIndex">
+                <argument name="index" type="@Integer"/>
+                <argument name="value" type=""/>
+            </method>
+            <method name="set">
+                <argument name="index" type="@Integer"/>
+                <argument name="value" type=""/>
+            </method>
+            <method name="removeIndex">
+                <argument name="index" type="@Integer"/>
+            </method>
+            <method name="get">
+                <argument name="index" type="@Integer"/>
+            </method>
+        </methods>
+    </type>
+    <type name="Map">
+        <methods>
+            <method name="put">
+                <argument name="key" type=""/>
+                <argument name="value" type=""/>
+            </method>
+            <method name="get">
+                <argument name="key" type=""/>
+            </method>
+            <method name="remove">
+                <argument name="key" type=""/>
+            </method>
+        </methods>
+    </type>
+    <abstract-type name="Comparable">
+        <methods>
+            <method name="gt">
+                <argument name="object" type=""/>
+            </method>
+            <method name="lt">
+                <argument name="object" type=""/>
+            </method>
+            <method name="le">
+                <argument name="object" type=""/>
+            </method>
+            <method name="ge">
+                <argument name="object" type=""/>
+            </method>
+            <method name="ne">
+                <argument name="object" type=""/>
+            </method>
+            <method name="equals">
+                <argument name="object" type=""/>
+            </method>
+        </methods>
+    </abstract-type>
+    <type name="String" extends="@Object,@Comparable">
+        <methods>
+            <method name="length"/>
+            <method name="charAt">
+                <argument name="index" type="@Integer"/>
+            </method>
+        </methods>
+    </type>
+    <abstract-type name="Number" extends="@Object,@Comparable">
+        <methods>
+            <method name="toString"/>
+            <method name="parseString">
+                <argument name="value" type="@String"/>
+            </method>
+            <method name="toFloat"/>
+            <method name="toInteger"/>
+        </methods>
+    </abstract-type>
+    <type name="Integer" extends="@Number"/>
+    <type name="Float" extends="@Number"/>
+</default-types>

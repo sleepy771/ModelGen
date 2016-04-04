@@ -17,9 +17,16 @@
  */
 package me.sleepyprojects.modelgen;
 
+import java.util.List;
+
 public class ArgumentDefinition extends VariableDefinition {
 
-    ArgumentDefinition(String name, Type type, Iterable<Meta> metas) {
+    ArgumentDefinition(String name, Type type, List<Meta> metas) {
         super(name, type, metas);
+    }
+
+    @Override
+    public VariableType getVariableType() {
+        return VariableType.ARGUMENT;
     }
 }

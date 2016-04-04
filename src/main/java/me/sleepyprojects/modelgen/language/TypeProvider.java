@@ -19,6 +19,10 @@ package me.sleepyprojects.modelgen.language;
 
 import me.sleepyprojects.modelgen.Type;
 
+import java.util.Set;
+
 public interface TypeProvider<Language> {
     Type<Language> get(Type general);
+
+    Set<Type<Language>> getUsedTypes();
 }

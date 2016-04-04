@@ -15,9 +15,24 @@
  * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
  * DEALINGS IN THE SOFTWARE.
  */
-package me.sleepyprojects.modelgen.language.java;
+package me.sleepyprojects.modelgen.language.flowcode;
 
-import me.sleepyprojects.modelgen.language.ValueType;
+import com.sun.istack.internal.NotNull;
+import me.sleepyprojects.modelgen.FieldDefinition;
+import me.sleepyprojects.modelgen.VariableDefinition;
+import me.sleepyprojects.modelgen.language.FieldType;
 
-class JavaValueType implements ValueType {
+public class AssignmentFactory {
+
+    public void createVariableAssignment(VariableDefinition variable) {
+
+    }
+
+    public void createVariableAssignmentBuilder(final @NotNull String name) {
+
+    }
+
+    public void createFieldAssignment(FieldDefinition definition) {
+
+    }
 }

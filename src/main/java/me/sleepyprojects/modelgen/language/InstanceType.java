@@ -20,14 +20,14 @@ package me.sleepyprojects.modelgen.language;
 import com.sun.istack.internal.NotNull;
 import me.sleepyprojects.modelgen.Type;
 
-public abstract class InstanceType extends BaseNamedType {
-    private Type declaringType;
+public abstract class InstanceType<Language> extends BaseNamedType {
+    private Type<Language> declaringType;
 
-    public final Type getDeclaringType() {
+    public final Type<Language> getDeclaringType() {
         return declaringType;
     }
 
-    public final void setDeclaringType(final @NotNull Type declaringType) {
+    public final void setDeclaringType(final @NotNull Type<Language> declaringType) {
         this.declaringType = declaringType;
     }
 }

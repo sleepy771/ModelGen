@@ -8,5 +8,5 @@ public interface ClassType<Language> extends HasName, CreateBlock {
 
     void addMethod(MethodType<Language> method);
 
-    void addSuperType(Type superType);
+    void addSuperType(Type<Language> superType);
 }

@@ -15,55 +15,42 @@
  * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
  * DEALINGS IN THE SOFTWARE.
  */
-package me.sleepyprojects.modelgen;
+package me.sleepyprojects.modelgen.language.flowcode;
 
 import me.sleepyprojects.modelgen.data.types.DefaultType;
+import me.sleepyprojects.modelgen.language.FlowCode;
 
-import java.util.List;
-import java.util.stream.Collectors;
+public class FlowCodeBuilder {
 
-public class MethodDefinition implements MethodProxy<DefaultType> {
-    private static final BlockType TYPE = BlockType.METHOD;
-    private final String name;
-    private final List<Meta> metas;
-    private final List<ArgumentDefinition> args;
-    private final Type returnType;
-    private Type declaringType;
-
-    private MethodDefinition(String name, List<Meta> metas, List<ArgumentDefinition> args, Type returnType) {
-
-        this.name = name;
-        this.metas = metas;
-        this.args = args;
-        this.returnType = returnType;
+    public FlowCode<DefaultType> build() {
+        return null;
     }
 
-    public List<ArgumentDefinition> getArgs() {
-        return args;
+    public AssignmentFactory addAssignment() {
+        return null;
     }
 
-    public Type getDeclaringType() {
-        return declaringType;
+    public IfStatement addIfStatement() {
+        return null;
     }
 
-    public void setDeclaringType(Type declaringType) {
-        this.declaringType = declaringType;
+    public SwitchStatement addSwitch() {
+        return null;
     }
 
-    public List<Meta> getMetas() {
-        return metas;
+    public ForeachLoop addForeach() {
+        return null;
     }
 
-    public String getName() {
-        return name;
+    public ForLoop addForLoop() {
+        return null;
     }
 
-    @Override
-    public List<String> getArguments() {
-        return args.stream().map(ArgumentDefinition::getName).collect(Collectors.toList());
+    public WhileLoop addWhile() {
+        return null;
     }
 
-    public Type getReturnType() {
-        return returnType;
+    public ReturnStatement addReturn() {
+        return null;
     }
 }

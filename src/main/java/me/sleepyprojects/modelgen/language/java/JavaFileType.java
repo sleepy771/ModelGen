@@ -17,7 +17,19 @@
  */
 package me.sleepyprojects.modelgen.language.java;
 
-import me.sleepyprojects.modelgen.language.ValueType;
+import me.sleepyprojects.modelgen.Block;
+import me.sleepyprojects.modelgen.language.ClassType;
+import me.sleepyprojects.modelgen.language.CreateBlock;
 
-class JavaValueType implements ValueType {
+// TODO create FileTypeFactory
+public class JavaFileType implements CreateBlock{
+
+    @Override
+    public Block create() {
+        return null;
+    }
+
+    public void setClass(ClassType<JavaMarker> javaClass) {
+
+    }
 }

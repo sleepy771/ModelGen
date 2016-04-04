@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<bindings>
+    <bind name="py-str" to="@String" class="str">
+        <method name="length" to="@length" call="len">
+            <argument name="value" to="@py-str"/>
+        </method>
+        <method name="charAt" to="@charAt" call="@self[$index]">
+            <argument name="index" to="@index"/>
+        </method>
+    </bind>
+    <bind name="py-int" to="@Integer" class="int">
+        <method name="toString" to="@toString" call="str">
+            <argument name="value" to="@self"/>
+        </method>
+        <method name="parse" to="@parseString" call="int">
+            <argument name="value" to="@value"/>
+        </method>
+        <method name="toFloat" to="@toFloat" call="float">
+            <argument name="value" to="@self"/>
+        </method>
+        <method name="toInt" to="@toInteger" call="int">
+            <argument name="value" to="@self"/>
+        </method>
+    </bind>
+    <bind name="py-float" to="@Float" class="float">
+        <method name="toString" to="@toString" call="str">
+            <argument name="value" to="@self"/>
+        </method>
+        <method name="parse" to="@parseString" call="float">
+            <argument name="value" to="@value"/>
+        </method>
+        <method name="toFloat" to="@toFloat" call="float">
+            <argument name="value" to="@self"/>
+        </method>
+        <method name="toInt" to="@toInteger" call="int">
+            <argument name="value" to="@self"/>
+        </method>
+    </bind>
+    <abstract name="py-collection" to="@Collection" class="-">
+        <method name="size" call="len" to="@size">
+            <argument name="value" to="@self"/>
+        </method>
+        <method name="contains" call="$value in @self" to="@contains">
+            <argument name="value" to="@value"/>
+        </method>
+    </abstract>
+    <bind name="py-dict" to="@Map" class="dict" extends="@py-collection">
+        <method name="put" to="@put" call="[$key]=$value">
+            <argument name="key" to="@key"/>
+            <argument name="value" to="@value"/>
+        </method>
+        <method name="remove" to="@remove" call="del @self[$key]">
+            <argument name="key" to="@key"/>
+        </method>
+        <method name="get" to="@get" call="@self[$key]">
+            <argument name="key" to="@key"/>
+        </method>
+    </bind>
+    <bind name="py-list" to="@List" class="list" extends="@py-collection">
+        <method name="add"/>
+        <method name="remove"/>
+        <method name="addAll"/>
+        <method name="removeAll"/>
+        <method name="addIndex"/>
+        <method name="removeIndex"/>
+        <method name="set"/>
+        <method name="get"/>
+    </bind>
+    <bind name="py-set" to="@Set" class="set" extends="@py-collection">
+        <method name="add"/>
+        <method name="remove"/>
+        <method name="addAll"/>
+        <method name="removeAll"/>
+    </bind>
+    <!-- TODO create object and class -->
+</bindings>

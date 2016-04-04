@@ -15,21 +15,7 @@
  * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
  * DEALINGS IN THE SOFTWARE.
  */
-package me.sleepyprojects.modelgen.language;
+package me.sleepyprojects.modelgen.language.php5;
 
-import me.sleepyprojects.modelgen.ArgumentDefinition;
-import me.sleepyprojects.modelgen.ClassDefinition;
-import me.sleepyprojects.modelgen.MethodDefinition;
-import me.sleepyprojects.modelgen.Modifier;
-
-public interface Converter {
-    ArgumentType convert(ArgumentDefinition argument);
-
-    MethodType convert(MethodDefinition method);
-
-    FieldType convert();
-
-    ClassType convert(ClassDefinition classDefinition);
-
-    ModifierType convert(Modifier modifier);
+public interface Php5Marker {
 }

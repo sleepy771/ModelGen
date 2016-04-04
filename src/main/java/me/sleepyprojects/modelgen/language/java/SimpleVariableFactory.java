@@ -21,18 +21,22 @@ import me.sleepyprojects.modelgen.VariableDefinition;
 import me.sleepyprojects.modelgen.language.AnnotationType;
 import me.sleepyprojects.modelgen.language.HasAssignment;
 import me.sleepyprojects.modelgen.language.MetaFactory;
+import me.sleepyprojects.modelgen.language.TypeProvider;
 import me.sleepyprojects.modelgen.language.VariableFactory;
 
 public class SimpleVariableFactory implements VariableFactory<JavaVariableType> {
 
     private final MetaFactory<JavaAnnotationType> annotationFactory;
     private final MetaFactory<JavaModifierType> modifierFactory;
+    private final TypeProvider<JavaMarker> typeProvider;
     private boolean isArgument;
 
     public SimpleVariableFactory(MetaFactory<JavaAnnotationType> annotationFactory,
-                                 MetaFactory<JavaModifierType> modifierFactory) {
+                                 MetaFactory<JavaModifierType> modifierFactory,
+                                 TypeProvider<JavaMarker> typeProvider) {
         this.annotationFactory = annotationFactory;
         this.modifierFactory = modifierFactory;
+        this.typeProvider = typeProvider;
     }
 
     @Override
@@ -40,7 +44,7 @@ public class SimpleVariableFactory implements VariableFactory<JavaVariableType> 
     public JavaVariableType create(VariableDefinition definition) {
         final JavaVariableType jVar = createVariable();
         jVar.setName(definition.getName());
-        jVar.setType(definition.getType());
+        jVar.setType(typeProvider.get(definition.getType()));
         definition.getMetas()
                   .stream()
                   .filter(annotationFactory::is)

@@ -1,8 +1,10 @@
 package me.sleepyprojects.modelgen;
 
+import me.sleepyprojects.modelgen.data.types.DefaultType;
+
 import java.util.List;
 
-public class VariableDefinition {
+public class VariableDefinition implements VariableProxy<DefaultType>{
     public static final BlockType TYPE = BlockType.VARIABLE;
     private final String name;
     private final Type type;
@@ -21,6 +23,11 @@ public class VariableDefinition {
 
     public final String getName() {
         return this.name;
+    }
+
+    @Override
+    public VariableType getVariableType() {
+        return VariableType.VARIABLE;
     }
 
     public final Type getType() {

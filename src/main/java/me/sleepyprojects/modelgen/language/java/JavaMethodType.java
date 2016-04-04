@@ -1,5 +1,6 @@
 package me.sleepyprojects.modelgen.language.java;
 
+import com.sun.istack.internal.NotNull;
 import me.sleepyprojects.modelgen.Block;
 import me.sleepyprojects.modelgen.Type;
 import me.sleepyprojects.modelgen.language.AnnotationType;
@@ -7,12 +8,13 @@ import me.sleepyprojects.modelgen.language.ArgumentType;
 import me.sleepyprojects.modelgen.language.BuildMultiple;
 import me.sleepyprojects.modelgen.language.CanAppend;
 import me.sleepyprojects.modelgen.language.FlowCode;
+import me.sleepyprojects.modelgen.language.HasAnnotations;
+import me.sleepyprojects.modelgen.language.HasModifiers;
 import me.sleepyprojects.modelgen.language.InstanceType;
 import me.sleepyprojects.modelgen.language.MethodType;
 import me.sleepyprojects.modelgen.language.ModifierType;
 import me.sleepyprojects.modelgen.language.MultiPart;
 import me.sleepyprojects.modelgen.language.Signature;
-import me.sleepyprojects.modelgen.language.TypeProvider;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,11 +22,10 @@ import java.util.Map;
 import java.util.TreeSet;
 import java.util.stream.Collectors;
 
-class JavaMethodType extends InstanceType implements MethodType<JavaMarker> {
+class JavaMethodType extends InstanceType<JavaMarker> implements MethodType<JavaMarker>, HasAnnotations<JavaMarker>, HasModifiers<JavaMarker> {
     private BuildMultiple<AnnotationType<JavaMarker>> annotationsStack;
     private MultiPart<JavaModifierType> modifiers;
     private BuildMultiple<JavaArgumentType> arguments;
-    private TypeProvider<JavaMarker> typeProvider;
     private Type<JavaMarker> type;
 
     JavaMethodType() {
@@ -32,7 +33,7 @@ class JavaMethodType extends InstanceType implements MethodType<JavaMarker> {
                 new BuildMultiple<>(new ArrayList<>(), "annotations", "method-annotations", CanAppend.unique());
         this.modifiers =
                 new MultiPart<>(new TreeSet<>(JavaModifierType.Comparator.INSTANCE), "modifiers", CanAppend.unique());
-        this.arguments = new BuildMultiple<>(new ArrayList<>(), "arguments", "method-arguments", CanAppend.unique());
+        this.arguments = new BuildMultiple<>(new ArrayList<>(), "arguments", "method-arguments", CanAppend.uniqueName());
     }
 
     @Override
@@ -61,8 +62,8 @@ class JavaMethodType extends InstanceType implements MethodType<JavaMarker> {
     }
 
     @Override
-    public void setType(Type type) {
-        this.type = typeProvider.get(type);
+    public void setType(final @NotNull Type<JavaMarker> type) {
+        this.type = type;
     }
 
     @Override

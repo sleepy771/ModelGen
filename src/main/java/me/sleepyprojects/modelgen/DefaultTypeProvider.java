@@ -17,53 +17,31 @@
  */
 package me.sleepyprojects.modelgen;
 
+import me.sleepyprojects.modelgen.data.Utils;
 import me.sleepyprojects.modelgen.data.types.DefaultType;
 
-import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Map;
 
-public class MethodDefinition implements MethodProxy<DefaultType> {
-    private static final BlockType TYPE = BlockType.METHOD;
-    private final String name;
-    private final List<Meta> metas;
-    private final List<ArgumentDefinition> args;
-    private final Type returnType;
-    private Type declaringType;
+public class DefaultTypeProvider {
 
-    private MethodDefinition(String name, List<Meta> metas, List<ArgumentDefinition> args, Type returnType) {
+    // String, Float, Integer, Boolean, List, Map, Set
 
-        this.name = name;
-        this.metas = metas;
-        this.args = args;
-        this.returnType = returnType;
+    private Map<String, Type<DefaultType>> typeMap;
+
+    public Type<DefaultType> get(String id) {
+        if (!typeMap.containsKey(id)) {
+            throw new RuntimeException("undefined type");
+        }
+        return typeMap.get(id);
     }
 
-    public List<ArgumentDefinition> getArgs() {
-        return args;
-    }
-
-    public Type getDeclaringType() {
-        return declaringType;
-    }
-
-    public void setDeclaringType(Type declaringType) {
-        this.declaringType = declaringType;
-    }
-
-    public List<Meta> getMetas() {
-        return metas;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    @Override
-    public List<String> getArguments() {
-        return args.stream().map(ArgumentDefinition::getName).collect(Collectors.toList());
-    }
-
-    public Type getReturnType() {
-        return returnType;
+    public void register(Type<DefaultType> type) {
+        if (typeMap.containsKey(type.getName())) {
+            if(!Utils.isEqual(type, typeMap.get(type.getName()))) {
+                throw new RuntimeException("Can not redefine already defined type");
+            }
+            return;
+        }
+        typeMap.put(type.getName(), type);
     }
 }

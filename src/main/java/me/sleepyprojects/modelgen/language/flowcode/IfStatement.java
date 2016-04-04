@@ -15,9 +15,17 @@
  * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
  * DEALINGS IN THE SOFTWARE.
  */
-package me.sleepyprojects.modelgen.language.java;
+package me.sleepyprojects.modelgen.language.flowcode;
 
-import me.sleepyprojects.modelgen.language.ValueType;
+import me.sleepyprojects.modelgen.language.FlowCode;
 
-class JavaValueType implements ValueType {
+public interface IfStatement<Language> {
+
+    void setCondition(Condition condition);
+
+    void setThenBlock(FlowCode<Language> flowCode);
+
+    void addIfCondition(Condition condition, FlowCode<Language> flowCode);
+
+    void setElseBlock(FlowCode<Language> flowCode);
 }

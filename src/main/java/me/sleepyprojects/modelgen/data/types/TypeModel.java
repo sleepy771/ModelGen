@@ -15,9 +15,53 @@
  * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
  * DEALINGS IN THE SOFTWARE.
  */
-package me.sleepyprojects.modelgen.language.java;
+package me.sleepyprojects.modelgen.data.types;
 
-import me.sleepyprojects.modelgen.language.ValueType;
+import me.sleepyprojects.modelgen.MethodProxy;
+import me.sleepyprojects.modelgen.Type;
 
-class JavaValueType implements ValueType {
+import java.util.List;
+
+public class TypeModel implements Type<DefaultType> {
+    private String name;
+    private String pkg;
+    private List<MethodProxy<DefaultType>> methods;
+    private MetaType metaType;
+
+    @Override
+    public MetaType getMetaType() {
+        return metaType;
+    }
+
+    @Override
+    public String getName() {
+        return name;
+    }
+
+    @Override
+    public String getPackage() {
+        return pkg;
+    }
+
+    @Override
+    public List<MethodProxy<DefaultType>> getMethods() {
+        return methods;
+    }
+
+    public void setMetaType(MetaType metaType) {
+        this.metaType = metaType;
+    }
+
+
+    public void setMethods(List<MethodProxy<DefaultType>> methods) {
+        this.methods = methods;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setPackage(String pkg) {
+        this.pkg = pkg;
+    }
 }

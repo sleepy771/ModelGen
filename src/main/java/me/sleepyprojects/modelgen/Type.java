@@ -17,6 +17,8 @@
  */
 package me.sleepyprojects.modelgen;
 
+import me.sleepyprojects.modelgen.data.types.DefaultType;
+
 import java.util.List;
 
 public interface Type<Language> extends Part {
@@ -26,9 +28,7 @@ public interface Type<Language> extends Part {
 
     String getPackage();
 
-    List<String> getMethods();
-
-    List<String> getFields();
+    List<MethodProxy<Language>> getMethods();
 
     enum MetaType {
         INTERFACE,

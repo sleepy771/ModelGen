@@ -14,7 +14,7 @@ import me.sleepyprojects.modelgen.language.Signature;
 
 import java.util.Map;
 
-class JavaFieldType extends InstanceType
+class JavaFieldType extends InstanceType<JavaMarker>
         implements FieldType<JavaMarker>, HasModifiers<JavaMarker>, HasAnnotations<JavaMarker>, HasType {
     private Type type;
 

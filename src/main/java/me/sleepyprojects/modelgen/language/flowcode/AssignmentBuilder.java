@@ -15,59 +15,49 @@
  * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
  * DEALINGS IN THE SOFTWARE.
  */
-package me.sleepyprojects.modelgen;
+package me.sleepyprojects.modelgen.language.flowcode;
 
 import com.sun.istack.internal.NotNull;
+import me.sleepyprojects.modelgen.FieldDefinition;
+import me.sleepyprojects.modelgen.FunctionProxy;
+import me.sleepyprojects.modelgen.VariableDefinition;
+import me.sleepyprojects.modelgen.VariableProxy;
 import me.sleepyprojects.modelgen.data.types.DefaultType;
-import me.sleepyprojects.modelgen.language.FieldProxy;
 
-import java.util.List;
+public class AssignmentBuilder {
+    private Assigner assigner;
+    private Assignee assignee;
 
-public class FieldDefinition implements FieldProxy<DefaultType> {
+    private VariableBuilderFactory builderFactory;
+    private VariableBuilder varBuilder;
 
-    private List<Meta> metas;
-    private Type<DefaultType> fieldType;
-    private Type<DefaultType> declaringType;
-    private String name;
-
-    public void addMeta(final @NotNull Meta meta) {
-        this.metas.add(meta);
+    public static AssignmentBuilder assignField(FieldDefinition definition) {
+        return null;
     }
 
-    public Type<DefaultType> getDeclaringType() {
-        return declaringType;
+    public static AssignmentBuilder assignVariable(VariableDefinition definition) {
+        return null;
     }
 
-    public void setDeclaringType(final @NotNull Type<DefaultType> declaringType) {
-        this.declaringType = declaringType;
+    public static AssignmentBuilder assignVariable(final @NotNull String name) {
+        return null;
     }
 
-    public List<Meta> getMetas() {
-        return metas;
+    public void setAssigner(final @NotNull Assigner assigner) {
+        this.assigner = assigner;
     }
 
-    public String getName() {
-        return name;
+    public void setAssignee(final @NotNull Assignee assignee) {
+        this.assignee = assignee;
     }
 
-    @Override
-    public VariableType getVariableType() {
-        return VariableType.FIELD;
+    public void setFromCall(final @NotNull String provider, final @NotNull FunctionProxy<DefaultType> definition) {
+
     }
 
-    public void setName(final @NotNull String name) {
-        this.name = name;
+    public void setFromField(final @NotNull String provider, final @NotNull VariableProxy<DefaultType> proxy) {
+
     }
 
-    public Type<DefaultType> getType() {
-        return fieldType;
-    }
 
-    public void setType(final @NotNull Type<DefaultType> fieldType) {
-        this.fieldType = fieldType;
-    }
-
-    public void removeMeta(final Meta meta) {
-        this.metas.remove(meta);
-    }
 }

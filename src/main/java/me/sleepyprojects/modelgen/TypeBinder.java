@@ -15,9 +15,13 @@
  * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
  * DEALINGS IN THE SOFTWARE.
  */
-package me.sleepyprojects.modelgen.language.java;
+package me.sleepyprojects.modelgen;
 
-import me.sleepyprojects.modelgen.language.ValueType;
+import me.sleepyprojects.modelgen.data.types.DefaultType;
+import me.sleepyprojects.modelgen.language.TypeProvider;
 
-class JavaValueType implements ValueType {
+public interface TypeBinder<Language> {
+    TypeProvider<Language> createProvider();
+
+    void bind(Type<DefaultType> defualt, Type<Language> languageType);
 }
