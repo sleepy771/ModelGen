@@ -20,5 +20,9 @@ package me.sleepyprojects.modelgen.language.java;
 import me.sleepyprojects.modelgen.Meta;
 
 public enum JavaModifiers implements Meta {
-    PACKAGE_LOCAL, TRANSIENT, SYNCHRONISED, VOLATILE, NATIVE
+    PACKAGE_LOCAL,
+    TRANSIENT,
+    SYNCHRONISED,
+    VOLATILE,
+    NATIVE
 }

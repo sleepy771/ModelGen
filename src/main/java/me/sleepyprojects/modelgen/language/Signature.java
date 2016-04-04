@@ -6,9 +6,9 @@ import me.sleepyprojects.modelgen.Type;
 public interface Signature {
     BlockType getBlockType();
 
-    String getName();
+    Type getDeclaringType();
 
     Type getMetaType();
 
-    Type getDeclaringType();
+    String getName();
 }

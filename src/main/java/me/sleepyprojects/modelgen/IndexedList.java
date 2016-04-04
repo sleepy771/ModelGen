@@ -38,62 +38,17 @@ public class IndexedList<T> implements List<T> {
     }
 
     @Override
-    public int size() {
-        return listMap.size();
-    }
-
-    @Override
-    public boolean isEmpty() {
-        return listMap.isEmpty();
-    }
-
-    @Override
-    public boolean contains(Object o) {
-        return listMap.containsValue(o);
-    }
-
-    @Override
-    public Iterator<T> iterator() {
-        return new ListIter(this.listMap);
-    }
-
-    @Override
-    public Object[] toArray() {
-        return listMap.values().toArray();
-    }
-
-    @Override
-    public <T1> T1[] toArray(T1[] a) {
-        return listMap.values().toArray(a);
-    }
-
-    @Override
     public boolean add(T t) {
         listMap.put(createIndex(), t);
         return true;
     }
 
-    private Integer createIndex() {
-        if (listMap.isEmpty()) {
-            return 0;
-        }
-        final int lastIndex = listMap.lastKey();
-        return lastIndex + 1;
-    }
-
     @Override
-    public boolean remove(Object o) {
-        final int index = indexOf(o);
-        return index >= 0 && listMap.remove(index, o);
-    }
-
-    @Override
-    public boolean containsAll(Collection<?> c) {
-        boolean containsAll = true;
-        for (Object o : c){
-            containsAll &= listMap.containsValue(o);
+    public void add(int index, T element) {
+        if (listMap.containsKey(index)) {
+            throw new RuntimeException("Clashing indices: " + index);
         }
-        return containsAll;
+        this.listMap.put(index, element);
     }
 
     @Override
@@ -111,7 +66,8 @@ public class IndexedList<T> implements List<T> {
         if (!isEmpty()) {
             final int lastFloorStored = listMap.floorKey(last);
             final int firstCeilStored = listMap.ceilingKey(index);
-            if ((lastFloorStored < last && lastFloorStored > index) || (firstCeilStored > index && firstCeilStored < lastFloorStored)) {
+            if ((lastFloorStored < last && lastFloorStored > index) || (firstCeilStored > index
+                                                                        && firstCeilStored < lastFloorStored)) {
                 return false;
             }
         }
@@ -121,6 +77,82 @@ public class IndexedList<T> implements List<T> {
             idx++;
         }
         return true;
+    }
+
+    @Override
+    public void clear() {
+        this.listMap.clear();
+    }
+
+    @Override
+    public boolean contains(Object o) {
+        return listMap.containsValue(o);
+    }
+
+    @Override
+    public boolean containsAll(Collection<?> c) {
+        boolean containsAll = true;
+        for (Object o : c) {
+            containsAll &= listMap.containsValue(o);
+        }
+        return containsAll;
+    }
+
+    @Override
+    public T get(int index) {
+        return listMap.get(index);
+    }
+
+    @Override
+    public int indexOf(Object o) {
+        for (Map.Entry<Integer, T> entry : listMap.entrySet()) {
+            if (entry.getValue().equals(o)) {
+                return entry.getKey();
+            }
+        }
+        return -1;
+    }
+
+    @Override
+    public boolean isEmpty() {
+        return listMap.isEmpty();
+    }
+
+    @Override
+    public Iterator<T> iterator() {
+        return new ListIter(this.listMap);
+    }
+
+    @Override
+    public int lastIndexOf(Object o) {
+        int index = -1;
+        for (Map.Entry<Integer, T> entry : listMap.entrySet()) {
+            if (entry.getValue().equals(o)) {
+                index = entry.getKey();
+            }
+        }
+        return index;
+    }
+
+    @Override
+    public ListIterator<T> listIterator() {
+        return new ListIter(this.listMap);
+    }
+
+    @Override
+    public ListIterator<T> listIterator(int index) {
+        return new ListIter(this.listMap, index);
+    }
+
+    @Override
+    public boolean remove(Object o) {
+        final int index = indexOf(o);
+        return index >= 0 && listMap.remove(index, o);
+    }
+
+    @Override
+    public T remove(int index) {
+        return this.listMap.remove(index);
     }
 
     @Override
@@ -150,67 +182,36 @@ public class IndexedList<T> implements List<T> {
     }
 
     @Override
-    public void clear() {
-        this.listMap.clear();
-    }
-
-    @Override
-    public T get(int index) {
-        return listMap.get(index);
-    }
-
-    @Override
     public T set(int index, T element) {
         return this.listMap.put(index, element);
     }
 
     @Override
-    public void add(int index, T element) {
-        if (listMap.containsKey(index)) {
-            throw new RuntimeException("Clashing indices: " + index);
-        }
-        this.listMap.put(index, element);
-    }
-
-    @Override
-    public T remove(int index) {
-        return this.listMap.remove(index);
-    }
-
-    @Override
-    public int indexOf(Object o) {
-        for (Map.Entry<Integer, T> entry : listMap.entrySet()) {
-            if (entry.getValue().equals(o)) {
-                return entry.getKey();
-            }
-        }
-        return -1;
-    }
-
-    @Override
-    public int lastIndexOf(Object o) {
-        int index = -1;
-        for (Map.Entry<Integer, T> entry : listMap.entrySet()) {
-            if (entry.getValue().equals(o)) {
-                index = entry.getKey();
-            }
-        }
-        return index;
-    }
-
-    @Override
-    public ListIterator<T> listIterator() {
-        return new ListIter(this.listMap);
-    }
-
-    @Override
-    public ListIterator<T> listIterator(int index) {
-        return new ListIter(this.listMap, index);
+    public int size() {
+        return listMap.size();
     }
 
     @Override
     public List<T> subList(int fromIndex, int toIndex) {
         throw new NotImplementedException();
+    }
+
+    @Override
+    public Object[] toArray() {
+        return listMap.values().toArray();
+    }
+
+    @Override
+    public <T1> T1[] toArray(T1[] a) {
+        return listMap.values().toArray(a);
+    }
+
+    private Integer createIndex() {
+        if (listMap.isEmpty()) {
+            return 0;
+        }
+        final int lastIndex = listMap.lastKey();
+        return lastIndex + 1;
     }
 
     private class ListIter implements ListIterator<T> {
@@ -226,13 +227,13 @@ public class IndexedList<T> implements List<T> {
         }
 
         @Override
-        public boolean hasNext() {
-            return innerIterator.hasNext();
+        public void add(T t) {
+            throw new UnsupportedOperationException("Iterator can not change indexed list");
         }
 
         @Override
-        public T next() {
-            return innerIterator.next();
+        public boolean hasNext() {
+            return innerIterator.hasNext();
         }
 
         @Override
@@ -241,13 +242,18 @@ public class IndexedList<T> implements List<T> {
         }
 
         @Override
-        public T previous() {
-            return innerIterator.previous();
+        public T next() {
+            return innerIterator.next();
         }
 
         @Override
         public int nextIndex() {
             return innerIterator.nextIndex();
+        }
+
+        @Override
+        public T previous() {
+            return innerIterator.previous();
         }
 
         @Override
@@ -262,11 +268,6 @@ public class IndexedList<T> implements List<T> {
 
         @Override
         public void set(T t) {
-            throw new UnsupportedOperationException("Iterator can not change indexed list");
-        }
-
-        @Override
-        public void add(T t) {
             throw new UnsupportedOperationException("Iterator can not change indexed list");
         }
     }

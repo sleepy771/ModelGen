@@ -22,11 +22,11 @@ import com.sun.istack.internal.NotNull;
 public abstract class NamedDefinition {
     private String name;
 
-    public final void setName(final @NotNull String name) {
-        this.name = name;
-    }
-
     public final String getName() {
         return this.name;
+    }
+
+    public final void setName(final @NotNull String name) {
+        this.name = name;
     }
 }

@@ -17,37 +17,52 @@
  */
 package me.sleepyprojects.modelgen.language.java;
 
+import com.sun.istack.internal.NotNull;
 import me.sleepyprojects.modelgen.Block;
-import me.sleepyprojects.modelgen.ValuePart;
+import me.sleepyprojects.modelgen.Type;
+import me.sleepyprojects.modelgen.language.AnnotationType;
 import me.sleepyprojects.modelgen.language.BaseNamedType;
-import me.sleepyprojects.modelgen.language.CanAppend;
-import me.sleepyprojects.modelgen.language.HasArgumentValues;
+import me.sleepyprojects.modelgen.language.BuildMultiple;
+import me.sleepyprojects.modelgen.language.HasAnnotations;
+import me.sleepyprojects.modelgen.language.HasModifiers;
+import me.sleepyprojects.modelgen.language.HasType;
+import me.sleepyprojects.modelgen.language.ModifierType;
 import me.sleepyprojects.modelgen.language.MultiPart;
+import me.sleepyprojects.modelgen.language.VariableType;
 
-import java.util.ArrayList;
 import java.util.Map;
 
-public class JavaAnnotationType extends BaseNamedType implements HasArgumentValues {
+abstract class JavaVariableType extends BaseNamedType
+        implements VariableType<JavaMarker>, HasModifiers<JavaMarker>, HasAnnotations<JavaMarker>, HasType {
+    private Type variableType;
+    private BuildMultiple<JavaAnnotationType> annotations;
+    private MultiPart<JavaModifierType> modifiers;
 
-    private final MultiPart<Object> argumentTypes;
-
-    JavaAnnotationType() {
-        this.argumentTypes = new MultiPart<>(new ArrayList<>(), "annotation", CanAppend.all());
+    @Override
+    public final boolean addAnnotation(final @NotNull AnnotationType<JavaMarker> annotation) {
+        return this.annotations.add((JavaAnnotationType) annotation);
     }
 
     @Override
-    public void addValue(Object value) {
-        argumentTypes.add(new ValuePart(value));
+    public final boolean addModifier(final @NotNull ModifierType<JavaMarker> modifier) {
+        return modifiers.add((JavaModifierType) modifier);
     }
 
     @Override
-    public boolean hasValues() {
-        return !argumentTypes.isEmpty();
+    public final Type getType() {
+        return variableType;
+    }
+
+    @Override
+    public final void setType(final @NotNull Type type) {
+        this.variableType = type;
     }
 
     @Override
     protected void assign(Map<String, Block> blockMap, Map<String, Object> partMap) {
+        blockMap.put("annotations", annotations.create());
+        blockMap.put("modifiers", modifiers.create());
         partMap.put("name", getName());
-        blockMap.put("arguments", argumentTypes.create());
+        partMap.put("type", getType());
     }
 }

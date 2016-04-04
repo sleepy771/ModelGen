@@ -2,7 +2,6 @@ package me.sleepyprojects.modelgen.language;
 
 import me.sleepyprojects.modelgen.BaseBlock;
 import me.sleepyprojects.modelgen.Block;
-import me.sleepyprojects.modelgen.Part;
 import me.sleepyprojects.modelgen.TemplateId;
 import me.sleepyprojects.modelgen.data.Utils;
 

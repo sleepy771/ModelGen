@@ -17,12 +17,7 @@
  */
 package me.sleepyprojects.modelgen;
 
-import com.sun.istack.internal.NotNull;
-
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
-import java.util.TreeSet;
 
 public class MethodDefinition {
     private static final BlockType TYPE = BlockType.METHOD;
@@ -40,6 +35,10 @@ public class MethodDefinition {
         this.returnType = returnType;
     }
 
+    public List<ArgumentDefinition> getArgs() {
+        return args;
+    }
+
     public Type getDeclaringType() {
         return declaringType;
     }
@@ -48,16 +47,12 @@ public class MethodDefinition {
         this.declaringType = declaringType;
     }
 
-    public String getName() {
-        return name;
-    }
-
     public List<Meta> getMetas() {
         return metas;
     }
 
-    public List<ArgumentDefinition> getArgs() {
-        return args;
+    public String getName() {
+        return name;
     }
 
     public Type getReturnType() {

@@ -8,8 +8,8 @@ import java.util.List;
 
 public class JavaMethodSignature implements Signature {
 
-    private JavaMethodType methodType;
     private final Type declaringType;
+    private JavaMethodType methodType;
     private volatile int hashCode;
 
     JavaMethodSignature(JavaMethodType methodType, Type declaringType) {
@@ -18,13 +18,18 @@ public class JavaMethodSignature implements Signature {
     }
 
     @Override
+    public boolean equals(Object obj) {
+        return obj != null && obj.getClass() == JavaMethodSignature.class && equals((JavaMethodSignature) obj);
+    }
+
+    @Override
     public BlockType getBlockType() {
         return BlockType.METHOD;
     }
 
     @Override
-    public String getName() {
-        return methodType.getName();
+    public Type getDeclaringType() {
+        return declaringType;
     }
 
     @Override
@@ -33,12 +38,8 @@ public class JavaMethodSignature implements Signature {
     }
 
     @Override
-    public Type getDeclaringType() {
-        return declaringType;
-    }
-
-    private List<Type> getArgumentTypes() {
-        return methodType.getArgumentTypes();
+    public String getName() {
+        return methodType.getName();
     }
 
     @Override
@@ -54,12 +55,12 @@ public class JavaMethodSignature implements Signature {
         return this.hashCode;
     }
 
-    @Override
-    public boolean equals(Object obj) {
-        return obj != null && obj.getClass() == JavaMethodSignature.class && equals((JavaMethodSignature) obj);
+    private boolean equals(JavaMethodSignature other) {
+        return hashCode() == other.hashCode() && this.declaringType.equals(other.declaringType)
+               && getName().equals(other.getName()) && getArgumentTypes().equals(other.getArgumentTypes());
     }
 
-    private boolean equals(JavaMethodSignature other) {
-        return hashCode() == other.hashCode() && this.declaringType.equals(other.declaringType) && getName().equals(other.getName()) && getArgumentTypes().equals(other.getArgumentTypes());
+    private List<Type> getArgumentTypes() {
+        return methodType.getArgumentTypes();
     }
 }

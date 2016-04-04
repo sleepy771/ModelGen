@@ -7,45 +7,44 @@ import java.util.HashMap;
  */
 public abstract class ClassBinder {
 
-  private HashMap<String, Class<?>> bindingMap;
-  private static ClassBinder INSTANCE;
+    private static ClassBinder INSTANCE;
 
-
-  protected ClassBinder() {
-    if (INSTANCE != null) {
-      throw new RuntimeException("Can not instantiate another binder");
+    public static ClassBinder getInstance() {
+        return INSTANCE;
     }
-    bindingMap = new HashMap<>();
-    init();
-    INSTANCE = this;
-  }
+    private HashMap<String, Class<?>> bindingMap;
 
-  public abstract void init();
-
-  protected void register(String name, Class<?> type) {
-    if (bindingMap.containsKey(name)) {
-      if (bindingMap.get(name) != type) {
-        throw new RuntimeException("can not rebind");
-      }
+    protected ClassBinder() {
+        if (INSTANCE != null) {
+            throw new RuntimeException("Can not instantiate another binder");
+        }
+        bindingMap = new HashMap<>();
+        init();
+        INSTANCE = this;
     }
-    bindingMap.put(name, type);
-  }
 
-  protected void register(Class<?> type) {
-    this.register(type.getSimpleName(), type);
-  }
-
-  public Class<?> get(String bound) {
-    if (bound.endsWith("[]")) {
-      bound = bound.substring(0, bound.length() - 2);
+    public Class<?> get(String bound) {
+        if (bound.endsWith("[]")) {
+            bound = bound.substring(0, bound.length() - 2);
+        }
+        if (!bindingMap.containsKey(bound)) {
+            throw new RuntimeException("Can not find class");
+        }
+        return this.bindingMap.get(bound);
     }
-    if (!bindingMap.containsKey(bound)) {
-      throw new RuntimeException("Can not find class");
-    }
-    return this.bindingMap.get(bound);
-  }
 
-  public static ClassBinder getInstance() {
-    return INSTANCE;
-  }
+    public abstract void init();
+
+    protected void register(String name, Class<?> type) {
+        if (bindingMap.containsKey(name)) {
+            if (bindingMap.get(name) != type) {
+                throw new RuntimeException("can not rebind");
+            }
+        }
+        bindingMap.put(name, type);
+    }
+
+    protected void register(Class<?> type) {
+        this.register(type.getSimpleName(), type);
+    }
 }

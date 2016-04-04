@@ -17,56 +17,55 @@
  */
 package me.sleepyprojects.modelgen.data;
 
-import java.util.Set;
-
 import com.sun.istack.internal.NotNull;
 
+import java.util.Set;
+
 public class TemplateModel {
-  private String id;
-  private String template;
-  private Set<VariableModel> variables;
-  private Set<String> scopes;
+    private String id;
+    private String template;
+    private Set<VariableModel> variables;
+    private Set<String> scopes;
 
-  public String getId() {
-    return id;
-  }
+    @Override
+    public boolean equals(Object obj) {
+        return this == obj || (obj instanceof TemplateModel) && Utils.isEqual(((TemplateModel) obj).id, this.id);
+    }
 
-  public void setId(final @NotNull String id) {
-    this.id = id;
-  }
+    public String getId() {
+        return id;
+    }
 
-  public String getTemplate() {
-    return template;
-  }
+    public void setId(final @NotNull String id) {
+        this.id = id;
+    }
 
-  public void setTemplate(final @NotNull String template) {
-    this.template = template;
-  }
+    public Set<String> getScopes() {
+        return scopes;
+    }
 
-  public Set<VariableModel> getVariables() {
-    return variables;
-  }
+    public void setScopes(final @NotNull Set<String> scopes) {
+        this.scopes = scopes;
+    }
 
-  public void setVariables(final @NotNull Set<VariableModel> variables) {
-    this.variables = variables;
-  }
+    public String getTemplate() {
+        return template;
+    }
 
-  public Set<String> getScopes() {
-    return scopes;
-  }
+    public void setTemplate(final @NotNull String template) {
+        this.template = template;
+    }
 
-  public void setScopes(final @NotNull Set<String> scopes) {
-    this.scopes = scopes;
-  }
+    public Set<VariableModel> getVariables() {
+        return variables;
+    }
 
-  @Override
-  public int hashCode() {
-    return 17 * 31 + (this.id != null ? this.id.hashCode() : 0);
-  }
+    public void setVariables(final @NotNull Set<VariableModel> variables) {
+        this.variables = variables;
+    }
 
-  @Override
-  public boolean equals(Object obj) {
-    return this == obj || (obj instanceof TemplateModel) &&
-        Utils.isEqual(((TemplateModel) obj).id, this.id);
-  }
+    @Override
+    public int hashCode() {
+        return 17 * 31 + (this.id != null ? this.id.hashCode() : 0);
+    }
 }

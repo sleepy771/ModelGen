@@ -32,16 +32,8 @@ public class FieldDefinition {
         this.metas.add(meta);
     }
 
-    public void removeMeta(final Meta meta) {
-        this.metas.remove(meta);
-    }
-
-    public void setType(final @NotNull Type fieldType) {
-        this.fieldType = fieldType;
-    }
-
-    public void setName(final @NotNull String name) {
-        this.name = name;
+    public Type getDeclaringType() {
+        return declaringType;
     }
 
     public void setDeclaringType(final @NotNull Type declaringType) {
@@ -56,11 +48,19 @@ public class FieldDefinition {
         return name;
     }
 
-    public Type getDeclaringType() {
-        return declaringType;
+    public void setName(final @NotNull String name) {
+        this.name = name;
     }
 
     public Type getType() {
         return fieldType;
+    }
+
+    public void setType(final @NotNull Type fieldType) {
+        this.fieldType = fieldType;
+    }
+
+    public void removeMeta(final Meta meta) {
+        this.metas.remove(meta);
     }
 }

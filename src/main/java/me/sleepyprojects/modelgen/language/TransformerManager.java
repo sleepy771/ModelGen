@@ -7,8 +7,23 @@ import java.util.Map;
 
 public class TransformerManager {
 
-    private Map<Class<?>, Transformer<?,?>> transformerMap;
     private static TransformerManager INSTANCE;
+
+    public static TransformerManager getInstance() {
+        if (INSTANCE == null) {
+            throw new RuntimeException("TransformerManager was not instantiated");
+        }
+        return INSTANCE;
+    }
+
+    public static <T, E> Transformer<T, E> getStatic(Class<T> cls) {
+        return getInstance().get(cls);
+    }
+
+    public static void release() {
+        INSTANCE = null;
+    }
+    private Map<Class<?>, Transformer<?, ?>> transformerMap;
 
     protected TransformerManager() {
         transformerMap = new HashMap<>();
@@ -17,11 +32,14 @@ public class TransformerManager {
     }
 
     @SuppressWarnings("unchecked")
-    public <T,E> Transformer<T, E> get(Class<T> cls) {
+    public <T, E> Transformer<T, E> get(Class<T> cls) {
         if (!transformerMap.containsKey(cls)) {
             throw new RuntimeException("Transformer for class " + cls.getSimpleName() + " does not exist");
         }
         return (Transformer<T, E>) transformerMap.get(cls);
+    }
+
+    protected void init() {
     }
 
     protected void register(final @NotNull Transformer transformer) {
@@ -31,23 +49,5 @@ public class TransformerManager {
             }
         }
         transformerMap.put(transformer.getType(), transformer);
-    }
-
-    protected void init() {
-    }
-
-    public static TransformerManager getInstance() {
-        if (INSTANCE == null) {
-            throw new RuntimeException("TransformerManager was not instantiated");
-        }
-        return INSTANCE;
-    }
-
-    public static void release() {
-        INSTANCE = null;
-    }
-
-    public static <T,E> Transformer<T,E> getStatic(Class<T> cls) {
-        return getInstance().get(cls);
     }
 }

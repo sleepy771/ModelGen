@@ -20,42 +20,41 @@ package me.sleepyprojects.modelgen.data;
 import com.sun.istack.internal.NotNull;
 
 public class VariableModel {
-  private String id;
-  private Class baseType;
-  private boolean isIterable;
+    private String id;
+    private Class baseType;
+    private boolean isIterable;
 
-  public String getId() {
-    return id;
-  }
+    @Override
+    public boolean equals(Object obj) {
+        return this == obj || (obj instanceof VariableModel) && Utils.isEqual(((VariableModel) obj).id, this.id);
+    }
 
-  public void setId(final @NotNull String id) {
-    this.id = id;
-  }
+    public Class getBaseType() {
+        return baseType;
+    }
 
-  public Class getBaseType() {
-    return baseType;
-  }
+    public void setBaseType(final @NotNull Class baseType) {
+        this.baseType = baseType;
+    }
 
-  public void setBaseType(final @NotNull Class baseType) {
-    this.baseType = baseType;
-  }
+    public String getId() {
+        return id;
+    }
 
-  public boolean isIterable() {
-    return isIterable;
-  }
+    public void setId(final @NotNull String id) {
+        this.id = id;
+    }
 
-  public void setIterable(boolean iterable) {
-    isIterable = iterable;
-  }
+    @Override
+    public int hashCode() {
+        return 31 * 17 + (this.id != null ? this.id.hashCode() : 0);
+    }
 
-  @Override
-  public int hashCode() {
-    return 31 * 17 + (this.id != null ? this.id.hashCode() : 0);
-  }
+    public boolean isIterable() {
+        return isIterable;
+    }
 
-  @Override
-  public boolean equals(Object obj) {
-    return this == obj || (obj instanceof VariableModel) &&
-        Utils.isEqual(((VariableModel) obj).id, this.id);
-  }
+    public void setIterable(boolean iterable) {
+        isIterable = iterable;
+    }
 }

@@ -37,13 +37,13 @@ import java.util.Map;
  */
 public class Generator {
 
-    private OutputStream os;
-    private Block block;
     private final Deque<Block> blockStack;
     private final Deque<Part> partStack;
     private final LinkedList<String> partNames;
     private final Deque<String> blockName;
     private final Language lang;
+    private OutputStream os;
+    private Block block;
     private Writer streamWriter;
     private boolean flattened;
 
@@ -56,6 +56,19 @@ public class Generator {
     }
 
     /**
+     * Release all resources, except of output stream.
+     */
+    public void clear() {
+        this.flattened = false;
+        this.block = null;
+        this.streamWriter = null;
+        this.blockName.clear();
+        this.blockStack.clear();
+        this.partNames.clear();
+        this.partStack.clear();
+    }
+
+    /**
      * Runs flattening process that converts Block to String.
      */
     public void flatten() {
@@ -64,7 +77,8 @@ public class Generator {
         while (!blockStack.isEmpty()) {
             if (!blockStack.peek().hasBlocks() || isPrepared(blockStack.peek())) {
                 flattenTop();
-            } else {
+            }
+            else {
                 for (Map.Entry<String, Block> blockEntry : blockStack.peek().getBlockIterator()) {
                     blockName.push(blockEntry.getKey());
                     blockStack.push(blockEntry.getValue());
@@ -73,17 +87,68 @@ public class Generator {
         }
     }
 
-    private boolean isPrepared(Block peek) {
-        if (!peek.hasBlocks()) {
-            return true;
+    /**
+     * Writes flattened Block to stream
+     *
+     * @throws IOException
+     */
+    public void flush() throws IOException {
+        if (!isFlattened()) {
+            flatten();
         }
-        final List<String> subParts;
-        if (peek.getBlockCount() == partNames.size()) {
-            subParts = partNames;
-        } else {
-            subParts = partNames.subList(0, peek.getBlockCount() - 1);
+        getStreamWriter().write(partStack.peek().toString());
+        getStreamWriter().flush();
+    }
+
+    public String getCode() {
+        if (isFlattened()) {
+            return partStack.peek().toString();
         }
-        return subParts.containsAll(peek.getBlockNames());
+        throw new RuntimeException("Not ready");
+    }
+
+    /**
+     * @return OutputStreamWriter object.
+     */
+    public Writer getStreamWriter() {
+        if (streamWriter == null) {
+            if (os == null) {
+                throw new RuntimeException("Can not create writer when output stream is not specified");
+            }
+            streamWriter = new OutputStreamWriter(this.os);
+        }
+        return streamWriter;
+    }
+
+    /**
+     * Returns if flattening process was run.
+     *
+     * @return true when flattening process was performed successfully.
+     */
+    public boolean isFlattened() {
+        return flattened && blockStack.isEmpty();
+    }
+
+    /**
+     * Sets Block that will be flattened.
+     *
+     * @param block code block
+     */
+    public void setBlock(Block block) {
+        this.flattened = false;
+        this.block = block;
+    }
+
+    /**
+     * Sets output stream
+     *
+     * @param os output stream object
+     */
+    public void setOutputStream(OutputStream os) {
+        if (os == null) {
+            return;
+        }
+        this.os = os;
     }
 
     private void flattenTop() {
@@ -116,7 +181,8 @@ public class Generator {
         final StringWriter codeBuffer = new StringWriter();
         try {
             tpl.merge(context, codeBuffer);
-        } catch (IOException e) {
+        }
+        catch (IOException e) {
             // TODO add logger
             e.printStackTrace();
         }
@@ -128,76 +194,17 @@ public class Generator {
         }
     }
 
-    /**
-     * Writes flattened Block to stream
-     * @throws IOException
-     */
-    public void flush() throws IOException {
-        if (!isFlattened()) {
-            flatten();
+    private boolean isPrepared(Block peek) {
+        if (!peek.hasBlocks()) {
+            return true;
         }
-        getStreamWriter().write(partStack.peek().toString());
-        getStreamWriter().flush();
-    }
-
-    public String getCode() {
-        if (isFlattened()) {
-            return partStack.peek().toString();
+        final List<String> subParts;
+        if (peek.getBlockCount() == partNames.size()) {
+            subParts = partNames;
         }
-        throw new RuntimeException("Not ready");
-    }
-
-    /**
-     * Sets output stream
-     * @param os output stream object
-     */
-    public void setOutputStream(OutputStream os) {
-        if (os == null) {
-            return;
+        else {
+            subParts = partNames.subList(0, peek.getBlockCount() - 1);
         }
-        this.os = os;
-    }
-
-    /**
-     * Sets Block that will be flattened.
-     * @param block code block
-     */
-    public void setBlock(Block block) {
-        this.flattened = false;
-        this.block = block;
-    }
-
-    /**
-     * Release all resources, except of output stream.
-     */
-    public void clear() {
-        this.flattened = false;
-        this.block = null;
-        this.streamWriter = null;
-        this.blockName.clear();
-        this.blockStack.clear();
-        this.partNames.clear();
-        this.partStack.clear();
-    }
-
-    /**
-     * @return OutputStreamWriter object.
-     */
-    public Writer getStreamWriter() {
-        if (streamWriter == null) {
-            if (os == null) {
-                throw new RuntimeException("Can not create writer when output stream is not specified");
-            }
-            streamWriter = new OutputStreamWriter(this.os);
-        }
-        return streamWriter;
-    }
-
-    /**
-     * Returns if flattening process was run.
-     * @return true when flattening process was performed successfully.
-     */
-    public boolean isFlattened() {
-        return flattened && blockStack.isEmpty();
+        return subParts.containsAll(peek.getBlockNames());
     }
 }

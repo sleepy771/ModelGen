@@ -2,8 +2,8 @@ package me.sleepyprojects.modelgen.language;
 
 import me.sleepyprojects.modelgen.Type;
 
-public interface HasType {
-    void setType(Type type);
+public interface HasType<Language> {
+    Type<Language> getType();
 
-    Type getType();
+    void setType(Type type);
 }

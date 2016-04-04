@@ -29,7 +29,7 @@ public class PartsIterable<T> implements Iterable<String>, Part {
     private final Iterable<T> parts;
     private Filter<T> filter;
 
-    public PartsIterable(final @NotNull  Iterable<T> parts) {
+    public PartsIterable(final @NotNull Iterable<T> parts) {
         this.parts = parts;
     }
 
@@ -64,20 +64,6 @@ public class PartsIterable<T> implements Iterable<String>, Part {
             this.filter = filter;
         }
 
-        private void findNext() {
-            if (current != null) {
-                return;
-            }
-            while (partIterator.hasNext()) {
-                final T part = partIterator.next();
-                if (filter.isAppropriate(part)) {
-                    this.current = part;
-                    return;
-                }
-            }
-            this.current = null;
-        }
-
         @Override
         public boolean hasNext() {
             if (filter != null) {
@@ -100,6 +86,20 @@ public class PartsIterable<T> implements Iterable<String>, Part {
             }
             final Object part = partIterator.next();
             return part.toString();
+        }
+
+        private void findNext() {
+            if (current != null) {
+                return;
+            }
+            while (partIterator.hasNext()) {
+                final T part = partIterator.next();
+                if (filter.isAppropriate(part)) {
+                    this.current = part;
+                    return;
+                }
+            }
+            this.current = null;
         }
     }
 }

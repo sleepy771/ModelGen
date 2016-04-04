@@ -6,8 +6,8 @@ import me.sleepyprojects.modelgen.language.Signature;
 
 public class JavaFieldSignature implements Signature {
 
-    private JavaFieldType fieldType;
     private final Type declaringType;
+    private JavaFieldType fieldType;
     private volatile int hashCode;
 
     JavaFieldSignature(JavaFieldType fieldType, Type declaringType) {
@@ -16,13 +16,21 @@ public class JavaFieldSignature implements Signature {
     }
 
     @Override
+    public boolean equals(Object obj) {
+        return obj != null && JavaFieldType.class == obj.getClass()
+               && this.declaringType.equals(((JavaFieldSignature) obj).declaringType) && this.getName()
+                                                                                             .equals(((JavaFieldSignature) obj)
+                                                                                                             .getName());
+    }
+
+    @Override
     public BlockType getBlockType() {
         return BlockType.FIELD;
     }
 
     @Override
-    public String getName() {
-        return fieldType.getName();
+    public Type getDeclaringType() {
+        return declaringType;
     }
 
     @Override
@@ -31,8 +39,8 @@ public class JavaFieldSignature implements Signature {
     }
 
     @Override
-    public Type getDeclaringType() {
-        return declaringType;
+    public String getName() {
+        return fieldType.getName();
     }
 
     @Override
@@ -45,10 +53,5 @@ public class JavaFieldSignature implements Signature {
             hashCode = hash;
         }
         return hashCode;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        return obj != null && JavaFieldType.class == obj.getClass() && this.declaringType.equals(((JavaFieldSignature)obj).declaringType) && this.getName().equals(((JavaFieldSignature) obj).getName());
     }
 }

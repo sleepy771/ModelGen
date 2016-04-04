@@ -1,7 +1,6 @@
 package me.sleepyprojects.modelgen.language;
 
 import me.sleepyprojects.modelgen.Block;
-import me.sleepyprojects.modelgen.Part;
 
 import java.util.Collection;
 import java.util.Iterator;
@@ -9,20 +8,10 @@ import java.util.Map;
 
 public class BuildMultiple<T extends CreateBlock> extends BuildableType implements Iterable<T> {
 
-    @Override
-    public Iterator<T> iterator() {
-        return elementCollection.iterator();
-    }
-
-    public Collection<T> getCollection() {
-        return elementCollection;
-    }
-
     private final Collection<T> elementCollection;
     private final String commonName;
     private final String templateId;
     private final CanAppend<T> type;
-
     public BuildMultiple(Collection<T> contexts, String commonName, String templateId, CanAppend<T> type) {
         this.commonName = commonName;
         this.elementCollection = contexts;
@@ -32,6 +21,19 @@ public class BuildMultiple<T extends CreateBlock> extends BuildableType implemen
 
     public boolean add(T element) {
         return this.type.canAppend(elementCollection, element) && elementCollection.add(element);
+    }
+
+    public Collection<T> getCollection() {
+        return elementCollection;
+    }
+
+    public boolean isEmpty() {
+        return elementCollection.isEmpty();
+    }
+
+    @Override
+    public Iterator<T> iterator() {
+        return elementCollection.iterator();
     }
 
     @Override
@@ -45,9 +47,5 @@ public class BuildMultiple<T extends CreateBlock> extends BuildableType implemen
     @Override
     protected String getId() {
         return templateId;
-    }
-
-    public boolean isEmpty() {
-        return elementCollection.isEmpty();
     }
 }

@@ -18,5 +18,17 @@
 package me.sleepyprojects.modelgen;
 
 public enum MetaDefaults {
-    BOOL, U_INT8, U_INT16, U_INT32, U_INT64, INT8, INT16, INT32, INT64, FLOAT32, FLOAT64, STRING, NONE;
+    BOOL,
+    U_INT8,
+    U_INT16,
+    U_INT32,
+    U_INT64,
+    INT8,
+    INT16,
+    INT32,
+    INT64,
+    FLOAT32,
+    FLOAT64,
+    STRING,
+    NONE;
 }

@@ -21,11 +21,11 @@ public interface Block extends Buildable {
 
     String useTemplate();
 
-    interface Definition {
-        Block create(Language language);
-    }
-
     interface Builder<T extends Definition> {
         T build();
+    }
+
+    interface Definition {
+        Block create(Language language);
     }
 }

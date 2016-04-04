@@ -15,12 +15,10 @@
  * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
  * DEALINGS IN THE SOFTWARE.
  */
-package me.sleepyprojects.modelgen;
+package me.sleepyprojects.modelgen.language;
 
-public enum BlockType {
-    TYPE,
-    METHOD,
-    FIELD,
-    BLOCK,
-    VARIABLE;
+import me.sleepyprojects.modelgen.Type;
+
+public interface TypeProvider<Language> {
+    Type<Language> get(Type general);
 }

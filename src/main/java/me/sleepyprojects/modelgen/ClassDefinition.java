@@ -38,24 +38,23 @@ public class ClassDefinition extends NamedDefinition {
 
     // TODO create setters
 
-
-    public List<Type> getSuperTypes() {
-        return superTypes;
-    }
-
-    public List<Meta> getMetas() {
-        return metas;
+    public List<MethodDefinition> getConstructors() {
+        return constructors;
     }
 
     public List<FieldDefinition> getFields() {
         return fields;
     }
 
+    public List<Meta> getMetas() {
+        return metas;
+    }
+
     public List<MethodDefinition> getMethods() {
         return methods;
     }
 
-    public List<MethodDefinition> getConstructors() {
-        return constructors;
+    public List<Type> getSuperTypes() {
+        return superTypes;
     }
 }

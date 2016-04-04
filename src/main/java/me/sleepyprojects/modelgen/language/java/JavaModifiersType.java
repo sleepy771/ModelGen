@@ -1,6 +1,8 @@
 package me.sleepyprojects.modelgen.language.java;
 
-import me.sleepyprojects.modelgen.*;
+import me.sleepyprojects.modelgen.Block;
+import me.sleepyprojects.modelgen.PartsIterable;
+import me.sleepyprojects.modelgen.TemplateId;
 import me.sleepyprojects.modelgen.language.BuildableType;
 import me.sleepyprojects.modelgen.language.HasModifiers;
 import me.sleepyprojects.modelgen.language.ModifierType;
@@ -24,6 +26,11 @@ public class JavaModifiersType extends BuildableType implements HasModifiers<Jav
         this(JavaModifierType.Comparator.INSTANCE);
     }
 
+    @Override
+    public boolean addModifier(ModifierType<JavaMarker> modifier) {
+        return addMod((JavaModifierType) modifier);
+    }
+
     public void setComparator(Comparator<JavaModifierType> comparator) {
         final Set<JavaModifierType> modifiers = this.modifiers;
         this.modifiers = new TreeSet<>(comparator);
@@ -37,10 +44,5 @@ public class JavaModifiersType extends BuildableType implements HasModifiers<Jav
 
     private boolean addMod(JavaModifierType modifierType) {
         return modifiers.add(modifierType);
-    }
-
-    @Override
-    public boolean addModifier(ModifierType<JavaMarker> modifier) {
-        return addMod((JavaModifierType) modifier);
     }
 }

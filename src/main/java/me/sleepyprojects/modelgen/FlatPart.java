@@ -41,13 +41,17 @@ public class FlatPart implements Part, Iterable<String> {
         }
     }
 
-
-    public void setPrefix(String prefix) {
-        this.prefix = prefix;
+    @Override
+    public Iterator<String> iterator() {
+        return new FlatPartIterator(this.lines, this.prefix, "\n" + this.postfix);
     }
 
     public void setPostfix(String postfix) {
         this.postfix = postfix;
+    }
+
+    public void setPrefix(String prefix) {
+        this.prefix = prefix;
     }
 
     public String toString() {
@@ -56,11 +60,6 @@ public class FlatPart implements Part, Iterable<String> {
             codeBuilder.append(this.prefix).append(line).append(this.postfix);
         }
         return codeBuilder.toString();
-    }
-
-    @Override
-    public Iterator<String> iterator() {
-        return new FlatPartIterator(this.lines, this.prefix, "\n" + this.postfix);
     }
 
     private class FlatPartIterator implements Iterator<String> {

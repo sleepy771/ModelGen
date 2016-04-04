@@ -21,7 +21,10 @@ public interface CanAppend<T> {
         }
     };
 
-    boolean canAppend(Collection<? extends T> collection, T element);
+    @SuppressWarnings("unchecked")
+    static <T> CanAppend<T> all() {
+        return ALL;
+    }
 
     @SuppressWarnings("unchecked")
     static <T> CanAppend<T> unique() {
@@ -29,12 +32,9 @@ public interface CanAppend<T> {
     }
 
     @SuppressWarnings("unchecked")
-    static <T> CanAppend<T> all() {
-        return ALL;
-    }
-
-    @SuppressWarnings("unchecked")
     static <T extends Significant> CanAppend<T> uniqueSignature() {
         return (CanAppend<T>) UNIQUE_SIGNATURE;
     }
+
+    boolean canAppend(Collection<? extends T> collection, T element);
 }

@@ -20,8 +20,8 @@ package me.sleepyprojects.modelgen;
 import java.util.Map;
 
 public interface Language {
-    Map<String, String> getPredefined();
-
     TemplateManager getManager();
+
+    Map<String, String> getPredefined();
 
 }

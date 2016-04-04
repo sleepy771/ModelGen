@@ -17,10 +17,24 @@
  */
 package me.sleepyprojects.modelgen;
 
-public enum BlockType {
-    TYPE,
-    METHOD,
-    FIELD,
-    BLOCK,
-    VARIABLE;
+public class ValuePart implements Part {
+
+    private boolean quote;
+    private Object value;
+
+
+    public ValuePart(Object value) {
+        if (value.getClass() == String.class) {
+            quote = true;
+        }
+        this.value = value;
+    }
+
+    @Override
+    public String toString() {
+        if (!quote) {
+            return value.toString();
+        }
+        return "\"" + value + "\"";
+    }
 }

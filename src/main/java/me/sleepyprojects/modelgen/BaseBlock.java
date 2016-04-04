@@ -32,16 +32,9 @@ public class BaseBlock implements Block {
         this.template = template;
     }
 
-
     @Override
-    public Set<String> getBlockNames() {
-        return subBlocks.keySet();
-    }
-
-
-    @Override
-    public Set<? extends Map.Entry<String, ?>> getPartIterator() {
-        return subParts.entrySet();
+    public int getBlockCount() {
+        return subBlocks.size();
     }
 
     @Override
@@ -50,8 +43,13 @@ public class BaseBlock implements Block {
     }
 
     @Override
-    public int getBlockCount() {
-        return subBlocks.size();
+    public Set<String> getBlockNames() {
+        return subBlocks.keySet();
+    }
+
+    @Override
+    public Set<? extends Map.Entry<String, ?>> getPartIterator() {
+        return subParts.entrySet();
     }
 
     @Override

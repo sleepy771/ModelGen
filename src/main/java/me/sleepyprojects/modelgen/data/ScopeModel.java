@@ -28,6 +28,11 @@ public class ScopeModel implements Scope {
     }
 
     @Override
+    public boolean equals(Object obj) {
+        return obj instanceof Scope && this.id.equals(((Scope) obj).getId());
+    }
+
+    @Override
     public String getId() {
         return id;
     }
@@ -35,10 +40,5 @@ public class ScopeModel implements Scope {
     @Override
     public int hashCode() {
         return 17 * 31 + id.hashCode();
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        return obj instanceof Scope && this.id.equals(((Scope) obj).getId());
     }
 }

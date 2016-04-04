@@ -31,6 +31,10 @@ public class BaseType implements Type {
         this.metaType = metaType;
     }
 
+    public MetaType getMetaType() {
+        return metaType;
+    }
+
     @Override
     public String getName() {
         return name;
@@ -39,10 +43,6 @@ public class BaseType implements Type {
     @Override
     public String getPackage() {
         return pkg;
-    }
-
-    public MetaType getMetaType() {
-        return metaType;
     }
 
     @Override

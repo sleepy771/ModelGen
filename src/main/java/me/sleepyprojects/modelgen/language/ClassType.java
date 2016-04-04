@@ -4,9 +4,9 @@ import me.sleepyprojects.modelgen.Type;
 
 public interface ClassType<Language> extends HasName, CreateBlock {
 
-    void addSuperType(Type superType);
+    void addField(FieldType<Language> field);
 
     void addMethod(MethodType<Language> method);
 
-    void addField(FieldType<Language> field);
+    void addSuperType(Type superType);
 }

@@ -21,13 +21,13 @@ import java.util.Map;
 import java.util.Set;
 
 public interface Buildable {
-    Set<String> getBlockNames();
-
-    Set<? extends Map.Entry<String, ?>> getPartIterator();
+    int getBlockCount();
 
     Iterable<Map.Entry<String, Block>> getBlockIterator();
 
-    int getBlockCount();
+    Set<String> getBlockNames();
+
+    Set<? extends Map.Entry<String, ?>> getPartIterator();
 
     boolean hasBlocks();
 }

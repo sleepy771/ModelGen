@@ -38,10 +38,6 @@ import java.util.Map;
 
 public class JavaConverter implements Converter {
     private static final Map<Meta, JavaModifierType> JAVA_MODIFIERS;
-    private MetaFactory<JavaAnnotationType> annotationFactory;
-    private MetaFactory<JavaModifierType> modifierFactory;
-    private MethodFactory<JavaMethodType> methodFactory;
-    private FieldFactory<JavaFieldType> fieldFactory;
 
     static {
         HashMap<Meta, JavaModifierType> modifiers = new HashMap<>();
@@ -52,22 +48,35 @@ public class JavaConverter implements Converter {
         modifiers.put(Modifiers.PROTECTED, new JavaModifierType(visibilitySet, 1, "protected"));
         modifiers.put(Modifiers.PUBLIC, new JavaModifierType(visibilitySet, 1, "private"));
 
-        modifiers.put(Modifiers.STATIC, new JavaModifierType(EnumSet.of(BlockType.TYPE, BlockType.METHOD, BlockType.FIELD, BlockType.BLOCK), 2, "static"));
+        modifiers.put(Modifiers.STATIC,
+                      new JavaModifierType(EnumSet.of(BlockType.TYPE, BlockType.METHOD, BlockType.FIELD, BlockType.BLOCK),
+                                           2,
+                                           "static"));
 
-        modifiers.put(Modifiers.ABSTRACT, new JavaModifierType(EnumSet.of(BlockType.TYPE, BlockType.METHOD), 3, "abstract"));
+        modifiers.put(Modifiers.ABSTRACT,
+                      new JavaModifierType(EnumSet.of(BlockType.TYPE, BlockType.METHOD), 3, "abstract"));
 
-        modifiers.put(JavaModifiers.SYNCHRONISED, new JavaModifierType(EnumSet.of(BlockType.BLOCK, BlockType.METHOD), 4, "synchronised"));
+        modifiers.put(JavaModifiers.SYNCHRONISED,
+                      new JavaModifierType(EnumSet.of(BlockType.BLOCK, BlockType.METHOD), 4, "synchronised"));
 
         modifiers.put(JavaModifiers.TRANSIENT, new JavaModifierType(EnumSet.of(BlockType.FIELD), 5, "transient"));
         modifiers.put(JavaModifiers.VOLATILE, new JavaModifierType(EnumSet.of(BlockType.FIELD), 5, "volatile"));
 
-        modifiers.put(Modifiers.FINAL, new JavaModifierType(EnumSet.of(BlockType.TYPE, BlockType.METHOD, BlockType.VARIABLE, BlockType.FIELD), 6, "final"));
+        modifiers.put(Modifiers.FINAL,
+                      new JavaModifierType(EnumSet.of(BlockType.TYPE,
+                                                      BlockType.METHOD,
+                                                      BlockType.VARIABLE,
+                                                      BlockType.FIELD), 6, "final"));
 
         modifiers.put(JavaModifiers.NATIVE, new JavaModifierType(EnumSet.of(BlockType.METHOD), 7, "native"));
 
         JAVA_MODIFIERS = Collections.unmodifiableMap(modifiers);
     }
 
+    private MetaFactory<JavaAnnotationType> annotationFactory;
+    private MetaFactory<JavaModifierType> modifierFactory;
+    private MethodFactory<JavaMethodType> methodFactory;
+    private FieldFactory<JavaFieldType> fieldFactory;
 
     @Override
     public JavaArgumentType convert(ArgumentDefinition argument) {

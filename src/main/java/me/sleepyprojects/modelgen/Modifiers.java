@@ -18,5 +18,10 @@
 package me.sleepyprojects.modelgen;
 
 public enum Modifiers implements Modifier {
-    PRIVATE, PROTECTED, PUBLIC, FINAL, STATIC, ABSTRACT;
+    PRIVATE,
+    PROTECTED,
+    PUBLIC,
+    FINAL,
+    STATIC,
+    ABSTRACT;
 }

@@ -17,14 +17,24 @@
  */
 package me.sleepyprojects.modelgen;
 
-public interface Type extends Part {
+import java.util.List;
+
+public interface Type<Language> extends Part {
+    MetaType getMetaType();
+
     String getName();
 
     String getPackage();
 
-    MetaType getMetaType();
+    List<String> getMethods();
+
+    List<String> getFields();
 
     enum MetaType {
-        INTERFACE, CLASS, TYPE, ANNOTATION, TRAIT;
+        INTERFACE,
+        CLASS,
+        TYPE,
+        ANNOTATION,
+        TRAIT;
     }
 }

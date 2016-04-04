@@ -22,11 +22,11 @@ import com.sun.istack.internal.NotNull;
 public abstract class InstanceDefinition extends NamedDefinition {
     private Type declaringType;
 
-    public final void setDeclaringType(final @NotNull Type declaringType) {
-        this.declaringType = declaringType;
-    }
-
     public final Type getDeclaringType() {
         return this.declaringType;
+    }
+
+    public final void setDeclaringType(final @NotNull Type declaringType) {
+        this.declaringType = declaringType;
     }
 }

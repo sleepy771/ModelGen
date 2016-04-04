@@ -15,12 +15,19 @@
  * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
  * DEALINGS IN THE SOFTWARE.
  */
-package me.sleepyprojects.modelgen;
+package me.sleepyprojects.modelgen.language.java;
 
-public enum BlockType {
-    TYPE,
-    METHOD,
-    FIELD,
-    BLOCK,
-    VARIABLE;
+import me.sleepyprojects.modelgen.language.HasAssignment;
+import me.sleepyprojects.modelgen.language.ValueType;
+
+class JavaVariableTypeImpl extends JavaVariableType implements HasAssignment {
+    @Override
+    public void setValue(Object value) {
+
+    }
+
+    @Override
+    public ValueType getValue() {
+        return null;
+    }
 }

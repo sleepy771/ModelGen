@@ -21,7 +21,6 @@ import com.sun.istack.internal.NotNull;
 import me.sleepyprojects.modelgen.BlockType;
 import me.sleepyprojects.modelgen.language.ModifierType;
 
-import java.util.Comparator;
 import java.util.EnumSet;
 
 public class JavaModifierType implements ModifierType {
@@ -36,19 +35,19 @@ public class JavaModifierType implements ModifierType {
         this.modifier = modifier;
     }
 
-    public final EnumSet<BlockType> getSupportedTypes() {
-        return this.supportedBlocks;
+    public final String getName() {
+        return this.modifier;
     }
 
     public final int getOrder() {
         return this.order;
     }
 
-    public final String toString() {
-        return this.modifier;
+    public final EnumSet<BlockType> getSupportedTypes() {
+        return this.supportedBlocks;
     }
 
-    public final String getName() {
+    public final String toString() {
         return this.modifier;
     }
 
@@ -61,7 +60,7 @@ public class JavaModifierType implements ModifierType {
 
         @Override
         public int compare(JavaModifierType o1, JavaModifierType o2) {
-            return o1.getOrder() -  o2.getOrder();
+            return o1.getOrder() - o2.getOrder();
         }
     }
 }

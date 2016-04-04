@@ -19,12 +19,18 @@ public class SimpleModifierFactory implements MetaFactory<JavaModifierType> {
         initModifiers();
     }
 
-    protected final boolean put(Meta meta, JavaModifierType modifier) {
-        if (javaModifiers.containsKey(meta)) {
-            return javaModifiers.get(meta).equals(modifier);
+    @Override
+    public JavaModifierType get(Meta meta) {
+        JavaModifierType modifier = javaModifiers.get(meta);
+        if (modifier == null) {
+            throw new RuntimeException("Undefined modifier");
         }
-        javaModifiers.put(meta, modifier);
-        return true;
+        return modifier;
+    }
+
+    @Override
+    public boolean is(Meta meta) {
+        return javaModifiers.containsKey(meta);
     }
 
     protected void initModifiers() {
@@ -33,31 +39,32 @@ public class SimpleModifierFactory implements MetaFactory<JavaModifierType> {
         put(Modifiers.PROTECTED, new JavaModifierType(visibilitySet, 1, "protected"));
         put(Modifiers.PUBLIC, new JavaModifierType(visibilitySet, 1, "private"));
 
-        put(Modifiers.STATIC, new JavaModifierType(EnumSet.of(BlockType.TYPE, BlockType.METHOD, BlockType.FIELD, BlockType.BLOCK), 2, "static"));
+        put(Modifiers.STATIC,
+            new JavaModifierType(EnumSet.of(BlockType.TYPE, BlockType.METHOD, BlockType.FIELD, BlockType.BLOCK),
+                                 2,
+                                 "static"));
 
         put(Modifiers.ABSTRACT, new JavaModifierType(EnumSet.of(BlockType.TYPE, BlockType.METHOD), 3, "abstract"));
 
-        put(JavaModifiers.SYNCHRONISED, new JavaModifierType(EnumSet.of(BlockType.BLOCK, BlockType.METHOD), 4, "synchronised"));
+        put(JavaModifiers.SYNCHRONISED,
+            new JavaModifierType(EnumSet.of(BlockType.BLOCK, BlockType.METHOD), 4, "synchronised"));
 
         put(JavaModifiers.TRANSIENT, new JavaModifierType(EnumSet.of(BlockType.FIELD), 5, "transient"));
         put(JavaModifiers.VOLATILE, new JavaModifierType(EnumSet.of(BlockType.FIELD), 5, "volatile"));
 
-        put(Modifiers.FINAL, new JavaModifierType(EnumSet.of(BlockType.TYPE, BlockType.METHOD, BlockType.VARIABLE, BlockType.FIELD), 6, "final"));
+        put(Modifiers.FINAL,
+            new JavaModifierType(EnumSet.of(BlockType.TYPE, BlockType.METHOD, BlockType.VARIABLE, BlockType.FIELD),
+                                 6,
+                                 "final"));
 
         put(JavaModifiers.NATIVE, new JavaModifierType(EnumSet.of(BlockType.METHOD), 7, "native"));
     }
 
-    @Override
-    public boolean is(Meta meta) {
-        return javaModifiers.containsKey(meta);
-    }
-
-    @Override
-    public JavaModifierType get(Meta meta) {
-        JavaModifierType modifier = javaModifiers.get(meta);
-        if (modifier == null) {
-            throw new RuntimeException("Undefined modifier");
+    protected final boolean put(Meta meta, JavaModifierType modifier) {
+        if (javaModifiers.containsKey(meta)) {
+            return javaModifiers.get(meta).equals(modifier);
         }
-        return modifier;
+        javaModifiers.put(meta, modifier);
+        return true;
     }
 }

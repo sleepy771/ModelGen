@@ -15,12 +15,33 @@
  * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
  * DEALINGS IN THE SOFTWARE.
  */
-package me.sleepyprojects.modelgen;
+package me.sleepyprojects.modelgen.language.java;
 
-public enum BlockType {
-    TYPE,
-    METHOD,
-    FIELD,
-    BLOCK,
-    VARIABLE;
+import me.sleepyprojects.modelgen.Block;
+import me.sleepyprojects.modelgen.TemplateId;
+import me.sleepyprojects.modelgen.language.HasAssignment;
+import me.sleepyprojects.modelgen.language.ValueType;
+
+import java.util.Map;
+
+@TemplateId("variable-with-assign")
+public class JavaAssignVariable extends JavaVariableType implements HasAssignment{
+
+    JavaValueType valueType;
+
+    @Override
+    public void setValue(Object value) {
+
+    }
+
+    @Override
+    public ValueType getValue() {
+        return null;
+    }
+
+    @Override
+    protected void assign(Map<String, Block> blockMap, Map<String, Object> partMap) {
+        super.assign(blockMap, partMap);
+        partMap.put("assign", getValue());
+    }
 }
