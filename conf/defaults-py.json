@@ -121,7 +121,7 @@
       "@add": "${SELF_OBJ}.add($value)",
       "@remove": "${SELF_OBJ}.remove($value)",
       "@addAll": "${SELF_OBJ}.update($values)",
-      "@removeAll": "${SELF_OBJ}.difference_update($values)",
+      "@removeAll": "${SELF_OBJ}.difference_update($values)"
     }
   }
 }
