@@ -1,0 +1,222 @@
+{
+  "@Comparable": {
+    "name": "Comparable",
+    "type": "A",
+    "methods": {
+      "@gt": {
+        "call": "${SELF_OBJ}.compareTo($value) > 0;"
+      },
+      "@ge": {
+        "call": "${SELF_OBJ}.compareTo($value) >= 0;"
+      },
+      "@eq": {
+        "call": "${SELF_OBJ}.compareTo($value) == 0;"
+      },
+      "@le": {
+        "call": "${SELF_OBJ}.compareTo($value) <= 0;"
+      },
+      "@lt": {
+        "call": "${SELF_OBJ}.compareTo($value) < 0;"
+      },
+      "ne": {
+        "call": "${SELF_OBJ}.compareTo($value) != 0;"
+      }
+    }
+  },
+  "@Integer": {
+    "name": ["int", "java.lang.Integer"],
+    "extends": [
+      "@py_cmp"
+    ],
+    "methods": {
+      "@toString": {
+        "call": {
+          "call-type": "static-method",
+          "class": "java.lang.String",
+          "method": "valueOf",
+          "args": ["$SELF_OBJ"]
+        }
+      },
+      "@toFloat": {
+        "call": {
+          "call": "(double) ${SELF_OBJ}"
+        }
+      },
+      "@toInteger": {
+        "call-type": "return-self",
+        "call": "${SELF_OBJ};"
+      },
+      "@parse": {
+        "call-type": "static-method",
+        "class": "java.lang.Integer",
+        "method": "parseString",
+        "args": ["$value"]
+      }
+    }
+  },
+  "@Float": {
+    "name": ["double", "java.lang.Double"],
+    "extends": [
+      "@py-cmp"
+    ],
+    "methods": {
+      "@toString": {
+        "call-type": "static-method",
+        "class": "java.lang.String",
+        "method": "valueOf",
+        "args": ["$SELF_OBJ"]
+      },
+      "@toFloat": {
+        "call-type": "leave",
+        "call": "${SELF_OBJ}"
+      },
+      "@toInteger": {
+        "call": "(int) ${SELF_OBJ}"
+      },
+      "@parse": {
+        "call-type": "static-method",
+        "class": "java.lang.Double",
+        "method": "parseValue",
+        "args": ["$value"]
+      }
+    }
+  },
+  "@String": {
+    "name": "java.lang.String",
+    "extends": [
+      "@Comparable"
+    ],
+    "methods": {
+      "@length": {
+        "call-type": "instance-method",
+        "class": "java.lang.String",
+        "method": "length",
+        "args": []
+      },
+      "@charAt": {
+        "call-type": "instance-method",
+        "class": "java.lang.String",
+        "method": "charAt",
+        "args": ["$value"]
+      }
+    }
+  },
+  "@DataStruct": {
+    "name": "java.utils.Collection",
+    "type": "A",
+    "methods": {
+      "@size": {
+        "call-type": "instance-method",
+        "method": "size",
+        "args": []
+      },
+      "@contains": {
+        "call-type": "instance-method",
+        "method": "contains",
+        "args": ["$value"]
+      }
+    }
+  },
+  "@Map": {
+    "name": "java.utils.Map",
+    "default-instance": "java.utils.HashMap",
+    "extends": [
+      "@java.lang.Collection"
+    ],
+    "methods": {
+      "@put": {
+        "call-type": "instance-method",
+        "method": "put",
+        "args": ["$key", "$value"]
+      },
+      "@get": {
+        "call-type": "instance-method",
+        "method": "get",
+        "args": ["$key"]
+      },
+      "@remove": {
+        "call-type": "instance-method",
+        "method": "remove",
+        "args": ["$key"]
+      }
+    }
+  },
+  "@List": {
+    "name": "java.utils.List",
+    "default-instance": "java.utils.ArrayList",
+    "extends": [
+      "@java.lang.Collection"
+    ],
+    "methods": {
+      "@add": {
+        "call-type": "instance-method",
+        "method": "add",
+        "args": ["$value"]
+      },
+      "@remove": {
+        "call-type": "instance-method",
+        "method": "remove",
+        "args": ["$value"]
+      },
+      "@removeIndex": {
+        "call-type": "instance-method",
+        "method": "remove",
+        "args": ["$index"]
+      },
+      "@removeAll": {
+        "call-type": "instance-method",
+        "method": "removeAll",
+        "args": ["$values"]
+      },
+      "@addAll": {
+        "call-type": "instance-method",
+        "method": "addAll",
+        "args": ["$values"]
+      },
+      "@insert": {
+        "call-type": "instance-method",
+        "method": "add",
+        "args": ["$index", "$value"]
+      },
+      "@set": {
+        "call-type": "instance-method",
+        "method": "set",
+        "args": ["$index", "$value"]
+      },
+      "@get": {
+        "call-type": "instance-method",
+        "method": "get",
+        "args": ["$index"]
+      }
+    }
+  },
+  "@Set": {
+    "name": "java.utils.Set",
+    "default-instance": "java.utils.HashSet",
+    "extends": [
+      "@java.utils.Collection"
+    ],
+    "methods": {
+      "@add": {
+        "call-type": "instance-method",
+        "method": "add",
+        "args": ["$value"]
+      },
+      "@remove": {
+        "call-type": "instance-method",
+        "method": "remove",
+        "args": ["$value"]
+      },
+      "@addAll": {
+        "call-type": "instance-method",
+        "method": "addAll",
+        "args": ["$values"]
+      },
+      "@removeAll": {
+        "call-type": "instance-method",
+        "method": "removeAll",
+        "args": ["$values"]
+      }
+    }
+  }
+}

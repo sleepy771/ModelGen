@@ -1,6 +1,6 @@
 {
   "@Comparable": {
-    "name": "py_cmp",
+    "name": "__mock__",
     "type": "A",
     "methods": {
       "@gt": {
