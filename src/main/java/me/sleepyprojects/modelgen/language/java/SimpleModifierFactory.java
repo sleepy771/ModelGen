@@ -14,7 +14,7 @@ public class SimpleModifierFactory implements MetaFactory<JavaModifierType> {
     private final Map<Meta, JavaModifierType> javaModifiers;
     private final EnumSet<BlockType> visibilitySet = EnumSet.of(BlockType.TYPE, BlockType.METHOD, BlockType.FIELD);
 
-    SimpleModifierFactory() {
+    protected SimpleModifierFactory() {
         javaModifiers = new HashMap<>();
         initModifiers();
     }

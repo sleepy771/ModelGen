@@ -24,4 +24,7 @@ public interface Language {
 
     Map<String, String> getPredefined();
 
+    String asStringLiteral(String value);
+
+    String asVariableCall(String value);
 }
