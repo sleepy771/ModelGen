@@ -17,5 +17,5 @@
  */
 package me.sleepyprojects.modelgen.language.flowcode;
 
-public interface Condition {
+public interface Condition<Language> {
 }

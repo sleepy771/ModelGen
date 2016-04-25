@@ -15,21 +15,23 @@
  * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
  * DEALINGS IN THE SOFTWARE.
  */
-package me.sleepyprojects.modelgen.language.flowcode;
+package me.sleepyprojects.modelgen;
 
-import me.sleepyprojects.modelgen.ValuePart;
-import me.sleepyprojects.modelgen.language.FlowCode;
+public interface StringDefinition<Language> extends ComparableDefinition<Language> {
 
-public interface ForLoop<Language> {
-    void setVariable();
+    StringDefinition<Language> valueOf(IntegerDefinition<Language> definition);  // String.valueOf(number)  str(num)
 
-    void createVariable(String name);
+    StringDefinition<Language> valueOf(LongDefinition<Language> definition);  // String.valueOf(number)  str(num)
 
-    void setStart(ValuePart value);
+    StringDefinition<Language> valueOf(FloatDefinition<Language> definition); // String.valueOf(number)  str(num)
 
-    void setCondition(Condition condition);
+    StringDefinition<Language> charAt(IntegerDefinition<Language> definition); // "abc".charAr(3)  str[3]
 
-    void setStep(ValuePart valuePart);
+    IntegerDefinition<Language> indexOf(StringDefinition<Language> subString);  // "abcd".indexOf("bc")  "abcd".index("bc")
 
-    void setCode(FlowCode<Language> code);
+    BooleanDefinition<Language> contains(StringDefinition<Language> subString); // "abcd".contains("cd")  "cd" in "abcd"
+
+    BooleanDefinition<Language> startsWith(StringDefinition<Language> subString); // "abcdef".startsWith("ab")
+
+    BooleanDefinition<Language> endsWith(StringDefinition<Language> subString); // "fgh".endsWith("ghi")
 }

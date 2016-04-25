@@ -27,6 +27,11 @@ public class TypeMethodModel implements MethodProxy<DefaultType> {
     private List<String> args;
     private Type<DefaultType> returnType;
 
+    @Override
+    public Type<DefaultType> getDeclaringType() {
+        return null;
+    }
+
 
     @Override
     public String getName() {

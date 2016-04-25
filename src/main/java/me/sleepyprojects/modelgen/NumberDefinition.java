@@ -15,21 +15,18 @@
  * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
  * DEALINGS IN THE SOFTWARE.
  */
-package me.sleepyprojects.modelgen.language.flowcode;
+package me.sleepyprojects.modelgen;
 
-import me.sleepyprojects.modelgen.ValuePart;
-import me.sleepyprojects.modelgen.language.FlowCode;
+public interface NumberDefinition<Language> extends ComparableDefinition<Language> {
+    NumberDefinition<Language> add(NumberDefinition<Language> definition);
 
-public interface ForLoop<Language> {
-    void setVariable();
+    NumberDefinition<Language> sub(NumberDefinition<Language> definition);
 
-    void createVariable(String name);
+    NumberDefinition<Language> mul(NumberDefinition<Language> definition);
 
-    void setStart(ValuePart value);
+    NumberDefinition<Language> div(NumberDefinition<Language> definition);
 
-    void setCondition(Condition condition);
+    NumberDefinition<Language> mod(NumberDefinition<Language> definition);
 
-    void setStep(ValuePart valuePart);
-
-    void setCode(FlowCode<Language> code);
+    NumberDefinition<Language> valueOf(StringDefinition<Language> definition);
 }

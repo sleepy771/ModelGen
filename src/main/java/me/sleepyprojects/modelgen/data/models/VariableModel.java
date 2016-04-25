@@ -15,21 +15,34 @@
  * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
  * DEALINGS IN THE SOFTWARE.
  */
-package me.sleepyprojects.modelgen.language.flowcode;
+package me.sleepyprojects.modelgen.data.models;
 
-import me.sleepyprojects.modelgen.ValuePart;
-import me.sleepyprojects.modelgen.language.FlowCode;
+public class VariableModel {
+    private String id;
+    private String name;
+    private String type;
 
-public interface ForLoop<Language> {
-    void setVariable();
+    public String getId() {
+        return id;
+    }
 
-    void createVariable(String name);
+    public String getName() {
+        return name;
+    }
 
-    void setStart(ValuePart value);
+    public String getType() {
+        return type;
+    }
 
-    void setCondition(Condition condition);
+    public void setId(String id) {
+        this.id = id;
+    }
 
-    void setStep(ValuePart valuePart);
+    public void setName(String name) {
+        this.name = name;
+    }
 
-    void setCode(FlowCode<Language> code);
+    public void setType(String type) {
+        this.type = type;
+    }
 }

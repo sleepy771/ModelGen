@@ -15,21 +15,36 @@
  * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
  * DEALINGS IN THE SOFTWARE.
  */
-package me.sleepyprojects.modelgen.language.flowcode;
+package me.sleepyprojects.modelgen.data.models;
 
-import me.sleepyprojects.modelgen.ValuePart;
-import me.sleepyprojects.modelgen.language.FlowCode;
+import java.util.List;
 
-public interface ForLoop<Language> {
-    void setVariable();
+public class TemplateModel {
+    private String id;
+    private String velocityTemplate;
+    private List<VariableModel> variables;
 
-    void createVariable(String name);
+    public String getId() {
+        return id;
+    }
 
-    void setStart(ValuePart value);
+    public List<VariableModel> getVariables() {
+        return variables;
+    }
 
-    void setCondition(Condition condition);
+    public String getVelocityTemplate() {
+        return velocityTemplate;
+    }
 
-    void setStep(ValuePart valuePart);
+    public void setId(String id) {
+        this.id = id;
+    }
 
-    void setCode(FlowCode<Language> code);
+    public void setVariables(List<VariableModel> variables) {
+        this.variables = variables;
+    }
+
+    public void setVelocityTemplate(String velocityTemplate) {
+        this.velocityTemplate = velocityTemplate;
+    }
 }

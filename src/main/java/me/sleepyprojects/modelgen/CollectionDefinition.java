@@ -15,21 +15,18 @@
  * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
  * DEALINGS IN THE SOFTWARE.
  */
-package me.sleepyprojects.modelgen.language.flowcode;
+package me.sleepyprojects.modelgen;
 
-import me.sleepyprojects.modelgen.ValuePart;
-import me.sleepyprojects.modelgen.language.FlowCode;
+public interface CollectionDefinition<Language> {
 
-public interface ForLoop<Language> {
-    void setVariable();
+    LineCode<Language> add(ValuePart valuePart);
 
-    void createVariable(String name);
+    LineCode<Language> remove(ValuePart valuePart);
 
-    void setStart(ValuePart value);
+    LineCode<Language> removeAll(CollectionDefinition<Language> values);
 
-    void setCondition(Condition condition);
+    LineCode<Language> addAll(CollectionDefinition<Language> values);
 
-    void setStep(ValuePart valuePart);
+    BooleanDefinition<Language> contains(ValuePart part);
 
-    void setCode(FlowCode<Language> code);
 }
