@@ -1,17 +1,15 @@
 {
-  "version": "3. > version > 2.",
   "@Object": {
     "methods": [
       {
         "name": "newInstance",
         "variables": ["${L:args}"],
-        "code": "${CLASS}(${args})",
+        "code": "new ${CLASS}(${args})",
         "m_type": "class"
       },
       {
         "name": "getClassDefinition",
-        "code": "type(${THIS})",
-        "m_type": "instance"
+        "m_type": "__undefined__"
       },
       {
         "name": "equals",
@@ -21,8 +19,7 @@
       },
       {
         "name": "hashCode",
-        "code": "hash(${THIS})",
-        "m_type": "instance"
+        "m_type": "__undefined__"
       }
     ]
   },
@@ -44,7 +41,6 @@
         "name": "eq",
         "variables": ["$2"],
         "code": "${THIS} == $2",
-        "autoboxed": "${THIS}.equals($2)",
         "m_type": "instance"
       },
       {
@@ -63,7 +59,6 @@
         "name": "ne",
         "variables": ["$2"],
         "code": "${THIS} != $2",
-        "autoboxed": "!${THIS}.equals($2)",
         "m_type": "instance"
       }
     ]
@@ -74,7 +69,7 @@
         "name": "valueOf",
         "args_t": ["@me.sleepyprojects.modelgen.NumberDefinition"],
         "variables": ["$N"],
-        "code": "str($N)",
+        "code": "((string) $N)",
         "m_type": "static"
       },
       {
@@ -86,13 +81,13 @@
       {
         "name": "indexOf",
         "variables": ["$S"],
-        "code": "${THIS}.index($S)",
+        "code": "strpos(${THIS}, $S)",  // check order of haystack and needle
         "m_type": "instance"
       },
       {
         "name": "contains",
         "variables": ["$S"],
-        "code": "$S in ${THIS}",
+        "code": "strpos(${THIS}, $S) !== false",
         "m_type": "instance"
       },
       {
@@ -114,7 +109,7 @@
       {
         "name": "valueOf",
         "variables": ["$S"],
-        "code": "${CLASS}($S)",
+        "code": "((${CLASS}) $S)",
         "m_type": "class"
       },
       {
@@ -150,7 +145,7 @@
       {
         "name": "fdiv",
         "variables": ["$2"],
-        "code": "float(${THIS}) / $2",
+        "code": "((float) ${THIS}) / $2",
         "m_type": "instance"
       }
     ]
@@ -159,13 +154,13 @@
     "methods": [
       {
         "name": "size",
-        "code": "len(${THIS})",
+        "code": "count(${THIS})",
         "m_type": "instance"
       },
       {
         "name": "contains",
         "variables": ["$1"],
-        "code": "$1 in ${THIS}",
+        "code": "in_array($1, ${THIS})", // order
         "m_type": "instance"
       }
     ]
@@ -175,28 +170,39 @@
       {
         "name": "add",
         "variables": ["$1"],
-        "code": "${THIS}.add($1)",
+        "code": "${THIS}[] = $1",
         "m_type": "instance"
       },
       {
         "name": "remove",
         "variables": ["$1"],
-        "code": "${THIS}.remove($1)",
+        "code": [
+          "if (($key = array_search($1, ${THIS}) !== false) {",
+          "${TAB}unset(${THIS}[$key]);",
+          "}"
+        ],
         "m_type": "instance"
       },
       {
         "name": "removeAll",
         "variables": ["$1"],
         "code": [
-          "for item in $1:",
-          "${TAB}${THIS}.remove(item)"
+          "foreach($1 as $item) {",
+          "${TAB}if (($key = array_search($1, ${THIS}) !== false) {",
+          "${TAB}${TAB}unset(${THIS[$key]);",
+          "${TAB}}",
+          "}"
         ],
         "m_type": "instance"
       },
       {
         "name": "addAll",
         "variables": ["$1"],
-        "code": "${THIS}.extend($1)",
+        "code": [
+          "foreach ($1 as $item) {",
+          "${TAB}${THIS}[] = $item;",
+          "}"
+        ],
         "m_type": "instance"
       }
     ]
@@ -205,12 +211,7 @@
     "methods": [
       {
         "name": "newInstance",
-        "code": "[]"
-      },
-      {
-        "name": "add",
-        "variables": ["$1"],
-        "code": "${THIS}.append($1)"
+        "code": "array()"
       },
       {
         "name": "get",
@@ -220,19 +221,12 @@
       }
     ]
   },
-  "@Set": {
-    "methods": [
-      {
-        "name": "newInstance",
-        "code": "set()"
-      }
-    ]
-  },
+  "@Set": "__undefined__",
   "@Map": {
     "methods": [
       {
         "name": "newInstance",
-        "code": "{}"
+        "code": "array()"
       },
       {
         "name": "get",
@@ -243,7 +237,7 @@
       {
         "name": "remove",
         "variables": ["$1"],
-        "code": "del ${THIS}[$1]",
+        "code": "unset(${THIS}[$1])",
         "m_type": "instance"
       },
       {

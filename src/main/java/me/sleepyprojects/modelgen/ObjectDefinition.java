@@ -15,16 +15,10 @@
  * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
  * DEALINGS IN THE SOFTWARE.
  */
-package me.sleepyprojects.modelgen.language.flowcode;
+package me.sleepyprojects.modelgen;
 
-import me.sleepyprojects.modelgen.BooleanDefinition;
-import me.sleepyprojects.modelgen.language.FlowCode;
+public interface ObjectDefinition<Language> extends LineCode<Language> {
+    ObjectDefinition newInstance(ValuePart... args);
 
-public interface IfStatement<Language> extends FlowCode<Language> {
-
-    void setThenBlock(FlowCode<Language> flowCode);
-
-    void addIfCondition(BooleanDefinition<Language> condition, FlowCode<Language> flowCode);
-
-    void setElseBlock(FlowCode<Language> flowCode);
+    ClassDefinition getClassDefinition();
 }

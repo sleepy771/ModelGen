@@ -17,19 +17,17 @@
  */
 package me.sleepyprojects.modelgen.language.flowcode;
 
+import me.sleepyprojects.modelgen.BooleanDefinition;
+import me.sleepyprojects.modelgen.LineCode;
 import me.sleepyprojects.modelgen.ValuePart;
 import me.sleepyprojects.modelgen.language.FlowCode;
 
-public interface ForLoop<Language> {
-    void setVariable();
+public interface ForLoop<Language> extends FlowCode<Language> {
+    void setStart(LineCode<Language> init);
 
-    void createVariable(String name);
+    void setCondition(BooleanDefinition<Language> condition);
 
-    void setStart(ValuePart value);
-
-    void setCondition(Condition condition);
-
-    void setStep(ValuePart valuePart);
+    void setStep(LineCode<Language> step);
 
     void setCode(FlowCode<Language> code);
 }

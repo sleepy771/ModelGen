@@ -17,7 +17,7 @@
  */
 package me.sleepyprojects.modelgen;
 
-public interface CollectionDefinition<Language> {
+public interface CollectionDefinition<Language> extends DataStruct<Language> {
 
     LineCode<Language> add(ValuePart valuePart);
 
@@ -26,7 +26,5 @@ public interface CollectionDefinition<Language> {
     LineCode<Language> removeAll(CollectionDefinition<Language> values);
 
     LineCode<Language> addAll(CollectionDefinition<Language> values);
-
-    BooleanDefinition<Language> contains(ValuePart part);
 
 }

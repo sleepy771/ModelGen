@@ -26,6 +26,8 @@ public interface NumberDefinition<Language> extends ComparableDefinition<Languag
 
     NumberDefinition<Language> div(NumberDefinition<Language> definition);
 
+    NumberDefinition<Language> fdiv (NumberDefinition<Language> definition);
+
     NumberDefinition<Language> mod(NumberDefinition<Language> definition);
 
     NumberDefinition<Language> valueOf(StringDefinition<Language> definition);

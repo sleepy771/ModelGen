@@ -17,5 +17,13 @@
  */
 package me.sleepyprojects.modelgen.language.flowcode;
 
-public class WhileLoop {
+import me.sleepyprojects.modelgen.BooleanDefinition;
+import me.sleepyprojects.modelgen.Language;
+import me.sleepyprojects.modelgen.LineCode;
+import me.sleepyprojects.modelgen.language.FlowCode;
+
+public interface WhileLoop extends LineCode<Language> {
+    void setCondition(BooleanDefinition<Language> condition);
+
+    void setCode(FlowCode<Language> innerCode);
 }

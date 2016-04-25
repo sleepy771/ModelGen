@@ -18,13 +18,14 @@
 package me.sleepyprojects.modelgen.language.flowcode;
 
 
+import me.sleepyprojects.modelgen.LineCode;
+import me.sleepyprojects.modelgen.ValuePart;
 import me.sleepyprojects.modelgen.language.FlowCode;
-import me.sleepyprojects.modelgen.language.ValueType;
 
 public interface SwitchStatement<Language> {
-    void setAttribute(Assigner<Language> attribute);
+    void setAttribute(LineCode<Language> arg);
 
-    void addCase(ValueType valueType, FlowCode<Language> block);
+    void addCase(ValuePart valueType, FlowCode<Language> block);
 
     void setDefault(FlowCode<Language> block);
 }

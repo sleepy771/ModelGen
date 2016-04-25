@@ -17,15 +17,11 @@
  */
 package me.sleepyprojects.modelgen;
 
-import me.sleepyprojects.modelgen.language.flowcode.Condition;
-
-public interface MapDefinition<Language> {
+public interface MapDefinition<Language> extends DataStruct<Language> {
 
     LineCode<Language> get(ValuePart key);
 
     LineCode<Language> remove(ValuePart key);
 
     LineCode<Language> put(ValuePart key, ValuePart value);
-
-    BooleanDefinition<Language> containsKey(ValuePart key);
 }

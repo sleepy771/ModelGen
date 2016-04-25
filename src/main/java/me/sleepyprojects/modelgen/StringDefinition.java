@@ -18,12 +18,7 @@
 package me.sleepyprojects.modelgen;
 
 public interface StringDefinition<Language> extends ComparableDefinition<Language> {
-
-    StringDefinition<Language> valueOf(IntegerDefinition<Language> definition);  // String.valueOf(number)  str(num)
-
-    StringDefinition<Language> valueOf(LongDefinition<Language> definition);  // String.valueOf(number)  str(num)
-
-    StringDefinition<Language> valueOf(FloatDefinition<Language> definition); // String.valueOf(number)  str(num)
+    StringDefinition<Language> valueOf(NumberDefinition<Language> definition); // String.valueOf(number)  str(num)
 
     StringDefinition<Language> charAt(IntegerDefinition<Language> definition); // "abc".charAr(3)  str[3]
 

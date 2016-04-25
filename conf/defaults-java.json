@@ -1,222 +1,268 @@
 {
+  "@Object": {
+    "methods": [
+      {
+        "name": "newInstance",
+        "variables": ["${L:args}"],
+        "code": "new ${CLASS}(${args})",
+        "m_type": "class"
+      },
+      {
+        "name": "getClassDefinition",
+        "code": "${THIS}.getClass()",
+        "m_type": "instance"
+      },
+      {
+        "name": "equals",
+        "variables": ["$1"],
+        "code": "${THIS}.equals($1)",
+        "m_type": "instance"
+      },
+      {
+        "name": "hashCode",
+        "code": "${THIS}.hashCode()",
+        "m_type": "instance"
+      }
+    ]
+  },
   "@Comparable": {
-    "name": "Comparable",
-    "type": "A",
-    "methods": {
-      "@gt": {
-        "call": "${SELF_OBJ}.compareTo($value) > 0;"
+    "methods": [
+      {
+        "name": "gt",
+        "variables": ["$2"],
+        "code": "${THIS}.compareTo($2) > 0",
+        "m_type": "instance"
       },
-      "@ge": {
-        "call": "${SELF_OBJ}.compareTo($value) >= 0;"
+      {
+        "name": "ge",
+        "variables": ["$2"],
+        "code": "${THIS}.compareTo($2) >= 0",
+        "m_type": "instance"
       },
-      "@eq": {
-        "call": "${SELF_OBJ}.compareTo($value) == 0;"
+      {
+        "name": "eq",
+        "variables": ["$2"],
+        "code": "${THIS}.compareTo($2) == 0",
+        "m_type": "instance"
       },
-      "@le": {
-        "call": "${SELF_OBJ}.compareTo($value) <= 0;"
+      {
+        "name": "le",
+        "variables": ["$2"],
+        "code": "${THIS}.compareTo($2) <= 0",
+        "m_type": "instance"
       },
-      "@lt": {
-        "call": "${SELF_OBJ}.compareTo($value) < 0;"
+      {
+        "name": "lt",
+        "variables": ["$2"],
+        "code": "${THIS}.compareTo($2) < 0",
+        "m_type": "instance"
       },
-      "ne": {
-        "call": "${SELF_OBJ}.compareTo($value) != 0;"
+      {
+        "name": "ne",
+        "variables": ["$2"],
+        "code": "${THIS}.compareTo($2) != 0",
+        "m_type": "instance"
       }
-    }
-  },
-  "@Integer": {
-    "name": ["int", "java.lang.Integer"],
-    "extends": [
-      "@py_cmp"
-    ],
-    "methods": {
-      "@toString": {
-        "call": {
-          "call-type": "static-method",
-          "class": "java.lang.String",
-          "method": "valueOf",
-          "args": ["$SELF_OBJ"]
-        }
-      },
-      "@toFloat": {
-        "call": {
-          "call": "(double) ${SELF_OBJ}"
-        }
-      },
-      "@toInteger": {
-        "call-type": "return-self",
-        "call": "${SELF_OBJ};"
-      },
-      "@parse": {
-        "call-type": "static-method",
-        "class": "java.lang.Integer",
-        "method": "parseString",
-        "args": ["$value"]
-      }
-    }
-  },
-  "@Float": {
-    "name": ["double", "java.lang.Double"],
-    "extends": [
-      "@py-cmp"
-    ],
-    "methods": {
-      "@toString": {
-        "call-type": "static-method",
-        "class": "java.lang.String",
-        "method": "valueOf",
-        "args": ["$SELF_OBJ"]
-      },
-      "@toFloat": {
-        "call-type": "leave",
-        "call": "${SELF_OBJ}"
-      },
-      "@toInteger": {
-        "call": "(int) ${SELF_OBJ}"
-      },
-      "@parse": {
-        "call-type": "static-method",
-        "class": "java.lang.Double",
-        "method": "parseValue",
-        "args": ["$value"]
-      }
-    }
+    ]
   },
   "@String": {
-    "name": "java.lang.String",
-    "extends": [
-      "@Comparable"
-    ],
-    "methods": {
-      "@length": {
-        "call-type": "instance-method",
-        "class": "java.lang.String",
-        "method": "length",
-        "args": []
+    "methods": [
+      {
+        "name": "valueOf",
+        "args_t": ["@me.sleepyprojects.modelgen.NumberDefinition"],
+        "variables": ["$N"],
+        "code": "String.valueOf($N)",
+        "m_type": "static"
       },
-      "@charAt": {
-        "call-type": "instance-method",
-        "class": "java.lang.String",
-        "method": "charAt",
-        "args": ["$value"]
+      {
+        "name": "charAt",
+        "variables": ["$N"],
+        "code": "${THIS}.charAt($N)",
+        "m_type": "instance"
+      },
+      {
+        "name": "indexOf",
+        "variables": ["$S"],
+        "code": "${THIS}.indexOf($S)",
+        "m_type": "instance"
+      },
+      {
+        "name": "contains",
+        "variables": ["$S"],
+        "code": "${THIS}.contains($S)",
+        "m_type": "instance"
+      },
+      {
+        "name": "startsWith",
+        "variables": ["$S"],
+        "code": "${THIS}.startsWith($S)",
+        "m_type": "instance"
+      },
+      {
+        "name": "endsWith",
+        "variables": ["$S"],
+        "code": "${THIS}.endsWith($S)",
+        "m_type": "instance"
       }
-    }
+    ]
+  },
+  "@Number": {
+    "methods": [
+      {
+        "name": "valueOf",
+        "variables": ["$S"],
+        "code": "${CLASS}.valueOf($S)",
+        "m_type": "class"
+      },
+      {
+        "name": "add",
+        "variables": ["$2"],
+        "code": "${THIS} + $2",
+        "m_type": "instance"
+      },
+      {
+        "name": "sub",
+        "variables": ["$2"],
+        "code": "${THIS} - $2",
+        "m_type": "instance"
+      },
+      {
+        "name": "mul",
+        "variables": ["$2"],
+        "code": "${THIS} * $2",
+        "m_type": "instance"
+      },
+      {
+        "name": "div",
+        "variables": ["$2"],
+        "code": "${THIS} / $2",
+        "m_type": "instance"
+      },
+      {
+        "name": "mod",
+        "variables": ["$2"],
+        "code": "${THIS} % $2",
+        "m_type": "instance"
+      },
+      {
+        "name": "fdiv",
+        "variables": ["$2"],
+        "code": "((double) ${THIS}) / $2",
+        "m_type": "instance"
+      },
+      {
+        "name": "gt",
+        "variables": ["$2"],
+        "code": "${THIS} > $2",
+        "m_type": "instance"
+      },
+      {
+        "name": "ge",
+        "variables": ["$2"],
+        "code": "${THIS} >= $2",
+        "m_type": "instance"
+      },
+      {
+        "name": "eq",
+        "variables": ["$2"],
+        "code": "${THIS} == $2",
+        "autoboxed": "${THIS}.equals($2)",
+        "m_type": "instance"
+      },
+      {
+        "name": "le",
+        "variables": ["$2"],
+        "code": "${THIS} <= $2",
+        "m_type": "instance"
+      },
+      {
+        "name": "lt",
+        "variables": ["$2"],
+        "code": "${THIS} < $2",
+        "m_type": "instance"
+      },
+      {
+        "name": "ne",
+        "variables": ["$2"],
+        "code": "${THIS} != $2",
+        "autoboxed": "!${THIS}.equals($2)",
+        "m_type": "instance"
+      }
+    ]
   },
   "@DataStruct": {
-    "name": "java.utils.Collection",
-    "type": "A",
-    "methods": {
-      "@size": {
-        "call-type": "instance-method",
-        "method": "size",
-        "args": []
+    "methods": [
+      {
+        "name": "size",
+        "code": "${THIS}.size()",
+        "m_type": "instance"
       },
-      "@contains": {
-        "call-type": "instance-method",
-        "method": "contains",
-        "args": ["$value"]
+      {
+        "name": "contains",
+        "variables": ["$1"],
+        "code": "${THIS}.contains($1)",
+        "m_type": "instance"
       }
-    }
+    ]
   },
-  "@Map": {
-    "name": "java.utils.Map",
-    "default-instance": "java.utils.HashMap",
-    "extends": [
-      "@java.lang.Collection"
-    ],
-    "methods": {
-      "@put": {
-        "call-type": "instance-method",
-        "method": "put",
-        "args": ["$key", "$value"]
+  "@Collection": {
+    "methods": [
+      {
+        "name": "add",
+        "variables": ["$1"],
+        "code": "${THIS}.add($1)",
+        "m_type": "instance"
       },
-      "@get": {
-        "call-type": "instance-method",
-        "method": "get",
-        "args": ["$key"]
+      {
+        "name": "remove",
+        "variables": ["$1"],
+        "code": "${THIS}.remove($1)",
+        "m_type": "instance"
       },
-      "@remove": {
-        "call-type": "instance-method",
-        "method": "remove",
-        "args": ["$key"]
+      {
+        "name": "removeAll",
+        "variables": ["$1"],
+        "code": "${THIS}.removeAll($1)",
+        "m_type": "instance"
+      },
+      {
+        "name": "addAll",
+        "variables": ["$1"],
+        "code": "${THIS}.addAll($1)",
+        "m_type": "instance"
       }
-    }
+    ]
   },
   "@List": {
-    "name": "java.utils.List",
-    "default-instance": "java.utils.ArrayList",
-    "extends": [
-      "@java.lang.Collection"
-    ],
-    "methods": {
-      "@add": {
-        "call-type": "instance-method",
-        "method": "add",
-        "args": ["$value"]
-      },
-      "@remove": {
-        "call-type": "instance-method",
-        "method": "remove",
-        "args": ["$value"]
-      },
-      "@removeIndex": {
-        "call-type": "instance-method",
-        "method": "remove",
-        "args": ["$index"]
-      },
-      "@removeAll": {
-        "call-type": "instance-method",
-        "method": "removeAll",
-        "args": ["$values"]
-      },
-      "@addAll": {
-        "call-type": "instance-method",
-        "method": "addAll",
-        "args": ["$values"]
-      },
-      "@insert": {
-        "call-type": "instance-method",
-        "method": "add",
-        "args": ["$index", "$value"]
-      },
-      "@set": {
-        "call-type": "instance-method",
-        "method": "set",
-        "args": ["$index", "$value"]
-      },
-      "@get": {
-        "call-type": "instance-method",
-        "method": "get",
-        "args": ["$index"]
+    "methods": [
+      {
+        "name": "get",
+        "variables": ["$1"],
+        "code": "${THIS}.get($1)",
+        "m_type": "instance"
       }
-    }
+    ]
   },
-  "@Set": {
-    "name": "java.utils.Set",
-    "default-instance": "java.utils.HashSet",
-    "extends": [
-      "@java.utils.Collection"
-    ],
-    "methods": {
-      "@add": {
-        "call-type": "instance-method",
-        "method": "add",
-        "args": ["$value"]
+  "@Map": {
+    "methods": [
+      {
+        "name": "get",
+        "variables": ["$1"],
+        "code": "${THIS}.get($1)",
+        "m_type": "instance"
       },
-      "@remove": {
-        "call-type": "instance-method",
-        "method": "remove",
-        "args": ["$value"]
+      {
+        "name": "remove",
+        "variables": ["$1"],
+        "code": "${THIS}.remove($1)",
+        "m_type": "instance"
       },
-      "@addAll": {
-        "call-type": "instance-method",
-        "method": "addAll",
-        "args": ["$values"]
-      },
-      "@removeAll": {
-        "call-type": "instance-method",
-        "method": "removeAll",
-        "args": ["$values"]
+      {
+        "name": "put",
+        "variables": ["$1", "$2"],
+        "$code": "${THIS}.put($1, $2)",
+        "m_type": "instance"
       }
-    }
+    ]
   }
 }
