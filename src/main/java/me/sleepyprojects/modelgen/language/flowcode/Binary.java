@@ -17,16 +17,12 @@
  */
 package me.sleepyprojects.modelgen.language.flowcode;
 
-import me.sleepyprojects.modelgen.BooleanDefinition;
-import me.sleepyprojects.modelgen.LineCode;
-import me.sleepyprojects.modelgen.language.general.GDataRef;
+import me.sleepyprojects.modelgen.Type;
 
-public interface ForLoop<Language> extends CodeElement {
-    FlowCode getLoopCondition();
+public interface Binary extends Condition {
+    enum Type {
+        AND, OR, NOT, X_OR, X_AND, N_AND, N_OR
+    }
 
-    GDataRef getLoopVariable();
-
-    FlowCode getLoopStep();
-
-    FlowCode getLoopCode();
+    Type getBinaryType();
 }

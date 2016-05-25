@@ -17,8 +17,10 @@
  */
 package me.sleepyprojects.modelgen.language.flowcode;
 
-import me.sleepyprojects.modelgen.VariableProxy;
+import me.sleepyprojects.modelgen.language.general.GDataRef;
 
-public interface Assignee<Language> {
-    VariableProxy<Language> getVariable();
+public interface Assignment extends CodeElement {
+    GDataRef getAssignee();
+
+    Assignable getAssigner();
 }

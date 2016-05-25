@@ -17,5 +17,8 @@
  */
 package me.sleepyprojects.modelgen.language.flowcode;
 
-public interface Condition<Language> {
+public interface Condition extends FlowCode, Assignable {
+    Assignable getFirst();
+
+    Assignable getSecond();
 }

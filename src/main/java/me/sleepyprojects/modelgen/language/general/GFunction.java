@@ -15,42 +15,17 @@
  * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
  * DEALINGS IN THE SOFTWARE.
  */
-package me.sleepyprojects.modelgen.language.flowcode;
+package me.sleepyprojects.modelgen.language.general;
 
-import me.sleepyprojects.modelgen.data.types.DefaultType;
-import me.sleepyprojects.modelgen.language.FlowCode;
+import me.sleepyprojects.modelgen.language.flowcode.FlowCode;
 
-public class FlowCodeBuilder {
+import java.util.List;
+import java.util.Set;
 
-    public FlowCode<DefaultType> build() {
-        return null;
-    }
+public interface GFunction extends Named, WithMetas, Callable {
+    List<GVariable> getVariables();
 
-    public AssignmentFactory addAssignment() {
-        return null;
-    }
+    Set<GType> getReturnType();
 
-    public IfStatement addIfStatement() {
-        return null;
-    }
-
-    public SwitchStatement addSwitch() {
-        return null;
-    }
-
-    public ForeachLoop addForeach() {
-        return null;
-    }
-
-    public ForLoop addForLoop() {
-        return null;
-    }
-
-    public WhileLoop addWhile() {
-        return null;
-    }
-
-    public ReturnStatement addReturn() {
-        return null;
-    }
+    FlowCode<General> getCode();
 }

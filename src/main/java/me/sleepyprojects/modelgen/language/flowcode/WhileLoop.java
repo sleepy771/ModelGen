@@ -20,10 +20,9 @@ package me.sleepyprojects.modelgen.language.flowcode;
 import me.sleepyprojects.modelgen.BooleanDefinition;
 import me.sleepyprojects.modelgen.Language;
 import me.sleepyprojects.modelgen.LineCode;
-import me.sleepyprojects.modelgen.language.FlowCode;
 
 public interface WhileLoop extends LineCode<Language> {
-    void setCondition(BooleanDefinition<Language> condition);
+    FlowCode getLoopCondition();
 
-    void setCode(FlowCode<Language> innerCode);
+    FlowCode getCode();
 }

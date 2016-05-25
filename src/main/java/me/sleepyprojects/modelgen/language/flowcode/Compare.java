@@ -17,16 +17,12 @@
  */
 package me.sleepyprojects.modelgen.language.flowcode;
 
-import me.sleepyprojects.modelgen.BooleanDefinition;
-import me.sleepyprojects.modelgen.LineCode;
-import me.sleepyprojects.modelgen.language.general.GDataRef;
+public interface Compare extends Condition {
+    enum Type {
+        GT, LT, GE, LE, EQ, NE;
+    }
 
-public interface ForLoop<Language> extends CodeElement {
-    FlowCode getLoopCondition();
+    Type getComparisonType();
 
-    GDataRef getLoopVariable();
-
-    FlowCode getLoopStep();
-
-    FlowCode getLoopCode();
+    boolean useMethods();
 }

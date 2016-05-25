@@ -17,5 +17,12 @@
  */
 package me.sleepyprojects.modelgen.language.flowcode;
 
-public class ForeachLoop {
+import me.sleepyprojects.modelgen.language.general.GDataRef;
+
+public interface ForeachLoop extends CodeElement {
+    GDataRef getIteratorVar();
+
+    GDataRef getIterable();
+
+    FlowCode getCode();
 }

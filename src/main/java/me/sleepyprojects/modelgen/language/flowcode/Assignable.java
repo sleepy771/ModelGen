@@ -17,16 +17,7 @@
  */
 package me.sleepyprojects.modelgen.language.flowcode;
 
-import me.sleepyprojects.modelgen.BooleanDefinition;
-import me.sleepyprojects.modelgen.LineCode;
-import me.sleepyprojects.modelgen.language.general.GDataRef;
+import me.sleepyprojects.modelgen.language.general.HasType;
 
-public interface ForLoop<Language> extends CodeElement {
-    FlowCode getLoopCondition();
-
-    GDataRef getLoopVariable();
-
-    FlowCode getLoopStep();
-
-    FlowCode getLoopCode();
+public interface Assignable<Language> extends HasType {
 }

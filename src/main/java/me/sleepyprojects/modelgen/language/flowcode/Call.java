@@ -17,6 +17,14 @@
  */
 package me.sleepyprojects.modelgen.language.flowcode;
 
-public interface ReturnStatement<Language> {
-    Assigner<Language> getReturnAssigner();
+import me.sleepyprojects.modelgen.language.general.Callable;
+
+import java.util.List;
+
+public interface Call extends Assignable {
+    Callable getCallable();
+
+    List<Assignable> getVariables();
+
+//    Assignable getResult();
 }

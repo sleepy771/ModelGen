@@ -7,7 +7,7 @@ import me.sleepyprojects.modelgen.language.AnnotationType;
 import me.sleepyprojects.modelgen.language.ArgumentType;
 import me.sleepyprojects.modelgen.language.BuildMultiple;
 import me.sleepyprojects.modelgen.language.CanAppend;
-import me.sleepyprojects.modelgen.language.FlowCode;
+import me.sleepyprojects.modelgen.language.flowcode.FlowCode;
 import me.sleepyprojects.modelgen.language.HasAnnotations;
 import me.sleepyprojects.modelgen.language.HasModifiers;
 import me.sleepyprojects.modelgen.language.InstanceType;

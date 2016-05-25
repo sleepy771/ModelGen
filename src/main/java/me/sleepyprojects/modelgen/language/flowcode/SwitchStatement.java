@@ -20,12 +20,17 @@ package me.sleepyprojects.modelgen.language.flowcode;
 
 import me.sleepyprojects.modelgen.LineCode;
 import me.sleepyprojects.modelgen.ValuePart;
-import me.sleepyprojects.modelgen.language.FlowCode;
+
+import java.util.List;
 
 public interface SwitchStatement<Language> {
-    void setAttribute(LineCode<Language> arg);
+    FlowCode getAttribute();
 
-    void addCase(ValuePart valueType, FlowCode<Language> block);
+    List<GLiteral> getCases();
 
-    void setDefault(FlowCode<Language> block);
+    boolean hasDefault();
+
+    List<FlowCode> getBlocks();
+
+    boolean isAutoBrake();
 }

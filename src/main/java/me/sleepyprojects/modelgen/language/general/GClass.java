@@ -15,18 +15,27 @@
  * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
  * DEALINGS IN THE SOFTWARE.
  */
-package me.sleepyprojects.modelgen.language.flowcode;
+package me.sleepyprojects.modelgen.language.general;
 
-import me.sleepyprojects.modelgen.BooleanDefinition;
-import me.sleepyprojects.modelgen.LineCode;
-import me.sleepyprojects.modelgen.language.general.GDataRef;
+import me.sleepyprojects.modelgen.language.Signature;
 
-public interface ForLoop<Language> extends CodeElement {
-    FlowCode getLoopCondition();
+import java.util.Set;
 
-    GDataRef getLoopVariable();
+public interface GClass extends Named, WithMetas {
 
-    FlowCode getLoopStep();
+    GMethod getMethod(Signature signature);
 
-    FlowCode getLoopCode();
+    GField getField(Signature signature);
+
+    GClass getClass(Signature signature);
+
+    Set<GMethod> getMethods();
+
+    Set<GField> getFields();
+
+    Set<GClass> getClasses();
+
+    Set<GConstructor> getConstructors();
+
+
 }

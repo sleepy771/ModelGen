@@ -1,6 +1,6 @@
 package me.sleepyprojects.modelgen.language;
 
-import me.sleepyprojects.modelgen.Type;
+import me.sleepyprojects.modelgen.language.flowcode.FlowCode;
 
 public interface MethodType<Language> extends HasName,
                                               CreateBlock,

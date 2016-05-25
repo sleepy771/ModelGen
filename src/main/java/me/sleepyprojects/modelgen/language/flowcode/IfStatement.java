@@ -17,14 +17,21 @@
  */
 package me.sleepyprojects.modelgen.language.flowcode;
 
-import me.sleepyprojects.modelgen.BooleanDefinition;
-import me.sleepyprojects.modelgen.language.FlowCode;
+import java.util.List;
 
-public interface IfStatement<Language> extends FlowCode<Language> {
+public interface IfStatement extends CodeElement {
 
-    void setThenBlock(FlowCode<Language> flowCode);
+    Condition getIfCondition();
 
-    void addIfCondition(BooleanDefinition<Language> condition, FlowCode<Language> flowCode);
+    FlowCode getThenStatement();
 
-    void setElseBlock(FlowCode<Language> flowCode);
+    FlowCode getElseStatement();
+
+    boolean isMultiConditional();
+
+    boolean hasElseBlock();
+
+    List<Condition> getAllConditions();
+
+    List<FlowCode> getAllBlocks();
 }
