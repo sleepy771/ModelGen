@@ -8,7 +8,8 @@ package me.sleepyprojects.modelgen.ast;
  * @since 24.11.16
  */
 
+@BlockMultiplicityRestriction(multiplicity = BlockMultiplicityRestriction.Size.ONE)
 public abstract class WhileLoop extends Loop {
 
-    public abstract Line getCondition();
+    public abstract Condition getCondition();
 }

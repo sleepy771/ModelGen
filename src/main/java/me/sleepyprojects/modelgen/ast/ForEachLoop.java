@@ -8,6 +8,7 @@ package me.sleepyprojects.modelgen.ast;
  * @since 24.11.16
  */
 
+@BlockMultiplicityRestriction(multiplicity = BlockMultiplicityRestriction.Size.ONE)
 public abstract class ForEachLoop extends Loop {
     public abstract Variable getVariable();
 

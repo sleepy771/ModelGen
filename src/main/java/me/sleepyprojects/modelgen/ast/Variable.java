@@ -1,5 +1,7 @@
 package me.sleepyprojects.modelgen.ast;
 
+import java.util.Set;
+
 /**
  * modelgen
  *
@@ -8,5 +10,24 @@ package me.sleepyprojects.modelgen.ast;
  * @since 24.11.16
  */
 
-public interface Variable extends Named, Modified {
+public class Variable implements Named, Modified, ValueProducer {
+
+    private final String name;
+
+    private final Set<Modifier> modifiers;
+
+    Variable(final String name, final Set<Modifier> modifiers) {
+        this.name = name;
+        this.modifiers = modifiers;
+    }
+
+    @Override
+    public String getName() {
+        return this.name;
+    }
+
+    @Override
+    public Set<Modifier> getModifiers() {
+        return this.modifiers;
+    }
 }

@@ -1,7 +1,5 @@
 package me.sleepyprojects.modelgen.ast;
 
-import java.util.Set;
-
 /**
  * modelgen
  *
@@ -10,8 +8,6 @@ import java.util.Set;
  * @since 24.11.16
  */
 
-public interface Callable {
-    Set<Argument> getArguments();
-
-    int getArgumentSize();
+public enum Reserved implements NamedConstant {
+    TRUE, FALSE, BREAK, CONTINUE;
 }

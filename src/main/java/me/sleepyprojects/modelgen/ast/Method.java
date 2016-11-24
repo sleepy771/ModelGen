@@ -11,6 +11,6 @@ package me.sleepyprojects.modelgen.ast;
 public abstract class Method extends Function implements Owned {
 
     public Method(String name) {
-        super(name);
+        super(name, codeBlock, modifiers, arguments);
     }
 }

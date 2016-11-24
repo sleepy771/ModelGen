@@ -10,8 +10,7 @@ import java.util.List;
  * @since 24.11.16
  */
 
+@BlockMultiplicityRestriction
 public interface HasBlocks {
     List<CodeBlock> getBlocks();
-
-    int getMaxBlockCount();
 }

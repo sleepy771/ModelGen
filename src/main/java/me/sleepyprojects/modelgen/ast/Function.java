@@ -12,19 +12,31 @@ import java.util.Set;
  * @since 24.11.16
  */
 
+/**
+ * This class provides all important information for creating function.
+ * By default Function has only one body.
+ */
 // TODO this might be actual type
-public abstract class Function implements Named, HasBlocks, ValueProducer, Callable, Modified {
+@BlockMultiplicityRestriction(multiplicity = BlockMultiplicityRestriction.Size.ONE)
+@Level(level = Level.Part.BOTH)
+public class Function implements Named, HasBlocks, ValueProducer, Callable, Modified {
 
     private final String name;
+    private final CodeBlock codeBlock;
+    private final Set<Modifier> modifiers;
+    private final Set<Argument> arguments;
 
-    public Function(final String name) {
+    Function(final String name, CodeBlock codeBlock, Set<Modifier> modifiers, Set<Argument> arguments) {
         this.name = name;
+        this.codeBlock = codeBlock;
+        this.modifiers = Collections.unmodifiableSet(modifiers);
+        this.arguments = Collections.unmodifiableSet(arguments);
     }
 
     @Override
-    public abstract Set<Modifier> getModifiers();
-
-    protected abstract CodeBlock getCodeBlock();
+    public Set<Modifier> getModifiers() {
+        return modifiers;
+    }
 
     @Override
     public String getName() {
@@ -33,11 +45,16 @@ public abstract class Function implements Named, HasBlocks, ValueProducer, Calla
 
     @Override
     public List<CodeBlock> getBlocks() {
-        return Collections.singletonList(getCodeBlock());
+        return Collections.singletonList(codeBlock);
     }
 
     @Override
-    public int getMaxBlockCount() {
-        return 1;
+    public Set<Argument> getArguments() {
+        return this.arguments;
+    }
+
+    @Override
+    public int getArgumentSize() {
+        return arguments.size();
     }
 }

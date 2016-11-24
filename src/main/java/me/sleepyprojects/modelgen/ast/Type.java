@@ -8,9 +8,22 @@ package me.sleepyprojects.modelgen.ast;
  * @since 24.11.16
  */
 
-public interface Type extends Modifier {
+/**
+ * Type meta class node. This is kept separately from Prototype class
+ * because several languages does not have concept of Type meta class object.
+ * This interface is only intended to use for static typing in languages that supports it.
+ */
+public interface Type extends Modifier, Named, ValueProducer {
 
+    /**
+     * Returns whether the type is build-in type and does not require imports or not.
+     * @return true iff this Type is build-in and doesn't require imports.
+     */
     boolean isBuildIn();
 
+    /**
+     * Returns import object that contains all important information for language transformer and Path optimizer.
+     * @return import object.
+     */
     Import getImport();
 }
