@@ -18,10 +18,9 @@
 package me.sleepyprojects.modelgen;
 
 import com.sun.istack.internal.NotNull;
+import me.sleepyprojects.modelgen.ast.Modifier;
 
 import java.util.Map;
-import java.util.Set;
-import java.util.TreeSet;
 
 @TemplateId("method")
 public class MethodDefinition extends BaseDefinition {

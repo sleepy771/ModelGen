@@ -17,6 +17,7 @@
  */
 package me.sleepyprojects.modelgen;
 
+import me.sleepyprojects.modelgen.ast.Modifier;
 import me.sleepyprojects.modelgen.language.BaseMeta;
 import me.sleepyprojects.modelgen.language.SuperTypeAssigner;
 

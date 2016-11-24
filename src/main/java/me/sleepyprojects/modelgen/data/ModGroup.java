@@ -18,7 +18,7 @@
 package me.sleepyprojects.modelgen.data;
 
 import me.sleepyprojects.modelgen.BlockType;
-import me.sleepyprojects.modelgen.Modifier;
+import me.sleepyprojects.modelgen.ast.Modifier;
 
 import java.util.Set;
 

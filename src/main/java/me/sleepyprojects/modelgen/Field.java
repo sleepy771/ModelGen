@@ -17,9 +17,9 @@
  */
 package me.sleepyprojects.modelgen;
 
-import me.sleepyprojects.modelgen.language.HasName;
+import me.sleepyprojects.modelgen.language.Named;
 
-public interface Field extends HasName {
+public interface Field extends Named {
 
     void setType(Meta type);
 

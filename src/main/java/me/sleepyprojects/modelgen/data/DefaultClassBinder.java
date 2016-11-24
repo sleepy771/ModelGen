@@ -7,7 +7,7 @@ import me.sleepyprojects.modelgen.FieldDefinition;
 import me.sleepyprojects.modelgen.FlowCode;
 import me.sleepyprojects.modelgen.Meta;
 import me.sleepyprojects.modelgen.MethodDefinition;
-import me.sleepyprojects.modelgen.Modifier;
+import me.sleepyprojects.modelgen.ast.Modifier;
 import me.sleepyprojects.modelgen.ModifiersDefinition;
 
 public class DefaultClassBinder extends ClassBinder {

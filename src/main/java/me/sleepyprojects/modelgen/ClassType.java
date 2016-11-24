@@ -17,9 +17,9 @@
  */
 package me.sleepyprojects.modelgen;
 
-import me.sleepyprojects.modelgen.language.HasName;
+import me.sleepyprojects.modelgen.language.Named;
 
-public interface ClassType extends HasName {
+public interface ClassType extends Named {
 
     void addMethod(Method method);
 

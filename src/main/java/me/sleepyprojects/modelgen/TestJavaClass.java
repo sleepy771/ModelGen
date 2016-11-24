@@ -17,24 +17,19 @@
  */
 package me.sleepyprojects.modelgen;
 
-import com.sun.org.apache.xpath.internal.operations.Mod;
+import me.sleepyprojects.modelgen.ast.Modifier;
 import me.sleepyprojects.modelgen.data.DefaultClassBinder;
-import me.sleepyprojects.modelgen.data.ITemplateModel;
 import me.sleepyprojects.modelgen.data.TemplateManagerImpl;
 import me.sleepyprojects.modelgen.data.XMLLangParser;
 import me.sleepyprojects.modelgen.language.BaseMeta;
 import me.sleepyprojects.modelgen.language.SuperTypeAssigner;
 
 import java.io.File;
-import java.util.Collection;
-import java.util.Comparator;
 import java.util.EnumSet;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
-import java.util.function.Function;
 
 public class TestJavaClass {
 

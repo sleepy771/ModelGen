@@ -18,7 +18,7 @@
 package me.sleepyprojects.modelgen.language.python;
 
 import me.sleepyprojects.modelgen.Block;
-import me.sleepyprojects.modelgen.language.HasName;
+import me.sleepyprojects.modelgen.language.Named;
 import me.sleepyprojects.modelgen.language.modifiers.Modifier;
 
 public class PythonInvisibleModifier implements Modifier {
@@ -29,8 +29,8 @@ public class PythonInvisibleModifier implements Modifier {
 
     @Override
     public boolean apply(Block.Definition builder) {
-        if (builder instanceof HasName) {
-            HasName named = (HasName) builder;
+        if (builder instanceof Named) {
+            Named named = (Named) builder;
             if (!named.getName().startsWith("_")) {
                 named.setName("_" + named.getName());
             }

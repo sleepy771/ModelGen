@@ -17,6 +17,8 @@
  */
 package me.sleepyprojects.modelgen;
 
+import me.sleepyprojects.modelgen.ast.Modifier;
+
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;

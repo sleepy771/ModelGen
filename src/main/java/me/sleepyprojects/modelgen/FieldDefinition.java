@@ -18,6 +18,7 @@
 package me.sleepyprojects.modelgen;
 
 import com.sun.istack.internal.NotNull;
+import me.sleepyprojects.modelgen.ast.Modifier;
 
 import java.util.Map;
 

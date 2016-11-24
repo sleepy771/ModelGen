@@ -19,7 +19,7 @@ package me.sleepyprojects.modelgen.language.python;
 
 import me.sleepyprojects.modelgen.Block;
 import me.sleepyprojects.modelgen.BlockType;
-import me.sleepyprojects.modelgen.language.HasName;
+import me.sleepyprojects.modelgen.language.Named;
 import me.sleepyprojects.modelgen.language.modifiers.Modifier;
 
 public class StaticModifier implements Modifier {
@@ -27,8 +27,8 @@ public class StaticModifier implements Modifier {
     public boolean apply(Block.Definition builder) {
         if (builder.getType() == BlockType.METHOD && builder instanceof HasDecorators) {
             return ((HasDecorators) builder).addDecorator(PythonImporter.getInstance().getMethod("", "staticmethod"));
-        } else if (builder.getType() == BlockType.FIELD && builder instanceof HasName) {
-            ((HasName) builder).setName(((HasName) builder).getName().toUpperCase());
+        } else if (builder.getType() == BlockType.FIELD && builder instanceof Named) {
+            ((Named) builder).setName(((Named) builder).getName().toUpperCase());
         }
         return false;
     }

@@ -17,25 +17,6 @@
  */
 package me.sleepyprojects.modelgen;
 
-import me.sleepyprojects.modelgen.language.HasName;
-
-import java.util.List;
-
-public interface Method extends HasName {
-
-    void setName(String name);
-
-    void addArgument(Argument argument);
-
-    void addArguments(Iterable<Argument> arguments);
-
-    void setReturnType(Meta returnType);
-
-    void setBody(FlowCode code);
-
-    FlowCode getBody();
-
-    List<Argument> getArguments();
-
-    Meta getReturnType();
+public interface Method extends Function {
+    ClassType getContainingClass();
 }
