@@ -9,8 +9,35 @@ package me.sleepyprojects.modelgen.ast;
  */
 
 @BlockMultiplicityRestriction(multiplicity = BlockMultiplicity.ONE)
-public abstract class ForEachLoop extends Loop {
-    public abstract Variable getVariable();
+public class ForEachLoop extends Loop {
+    private final Assignable iterable;
+    private final Variable variable;
+    private final Scoped owner;
+    private final CodeBlock codeBlock;
 
-    public abstract Assignable getIterable();
+    public ForEachLoop(Scoped owner, Assignable iterable, Variable variable, CodeBlock block) {
+        this.iterable = iterable;
+        this.variable = variable;
+        this.owner = owner;
+        this.codeBlock = block;
+    }
+
+
+    public Variable getVariable() {
+        return variable;
+    }
+
+    public Assignable getIterable() {
+        return iterable;
+    }
+
+    @Override
+    CodeBlock getCodeBlock() {
+        return codeBlock;
+    }
+
+    @Override
+    public Scoped getOwner() {
+        return owner;
+    }
 }

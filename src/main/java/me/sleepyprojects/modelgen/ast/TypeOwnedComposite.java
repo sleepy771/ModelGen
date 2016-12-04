@@ -1,21 +1,24 @@
 package me.sleepyprojects.modelgen.ast;
 
-import java.util.Set;
-
 /**
  * modelgen
  *
  * @author filip
  * @version 0.0.1
- * @since 24.11.16
+ * @since 4.12.16
  */
 
-public class Field extends Variable implements TypeOwned {
-    private final Prototype prototype;
+public class TypeOwnedComposite implements TypeOwned {
 
-    Field(String name, Set<Modifier> modifiers, Prototype prototype) {
-        super(name, modifiers, prototype);
+    private Prototype prototype;
+
+    TypeOwnedComposite(Prototype prototype) {
         this.prototype = prototype;
+    }
+
+    @Override
+    public Scoped getOwner() {
+        return this.prototype;
     }
 
     @Override

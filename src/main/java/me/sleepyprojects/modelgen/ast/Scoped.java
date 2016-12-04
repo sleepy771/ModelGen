@@ -8,5 +8,6 @@ package me.sleepyprojects.modelgen.ast;
  * @since 4.12.16
  */
 
+// TODO Scoped is bad name for HasScope
 public interface Scoped {
 }

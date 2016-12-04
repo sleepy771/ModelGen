@@ -10,6 +10,7 @@ import java.util.Set;
  * @since 24.11.16
  */
 
+// TODO make this as composite
 public class Method extends Function implements TypeOwned {
 
     private final Prototype prototype;

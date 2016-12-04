@@ -35,7 +35,7 @@ public class Variable implements Named, Modified, Assignable, Owned {
     }
 
     @Override
-    public Scoped getScope() {
+    public Scoped getOwner() {
         return this.inScope;
     }
 }

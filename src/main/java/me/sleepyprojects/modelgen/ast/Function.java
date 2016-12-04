@@ -56,7 +56,7 @@ public class Function implements Named, HasBlocks, Assignable, Callable, Modifie
     }
 
     @Override
-    public Scoped getScope() {
+    public Scoped getOwner() {
         return scope;
     }
 

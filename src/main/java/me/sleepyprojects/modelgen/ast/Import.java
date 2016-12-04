@@ -8,7 +8,7 @@ package me.sleepyprojects.modelgen.ast;
  * @since 24.11.16
  */
 
-public interface Import {
+public interface Import extends Owned {
 
     String getLocation();
 }

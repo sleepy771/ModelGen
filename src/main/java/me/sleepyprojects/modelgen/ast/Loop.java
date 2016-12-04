@@ -11,9 +11,9 @@ import java.util.List;
  * @since 24.11.16
  */
 
-public abstract class Loop implements HasBlocks, Scoped {
+public abstract class Loop implements HasBlocks, Scoped, Owned {
 
-    protected abstract CodeBlock getCodeBlock();
+    abstract CodeBlock getCodeBlock();
 
     @Override
     public List<CodeBlock> getBlocks() {
