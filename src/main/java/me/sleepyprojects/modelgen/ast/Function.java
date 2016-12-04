@@ -19,15 +19,15 @@ import java.util.Set;
 // TODO this might be actual type
 @BlockMultiplicityRestriction(multiplicity = BlockMultiplicity.ONE)
 @BlockLocation(level = Location.BOTH)
-public class Function implements Named, HasBlocks, Assignable, Callable, Modified, HasScope, Owned {
+public class Function implements Named, HasBlocks, Assignable, Callable, Modified, Scoped, Owned {
 
     private final String name;
     private final CodeBlock codeBlock;
     private final Set<Modifier> modifiers;
     private final Set<Argument> arguments;
-    private final HasScope scope;
+    private final Scoped scope;
 
-    Function(final String name, CodeBlock codeBlock, Set<Modifier> modifiers, Set<Argument> arguments, HasScope scope) {
+    Function(final String name, CodeBlock codeBlock, Set<Modifier> modifiers, Set<Argument> arguments, Scoped scope) {
         this.name = name;
         this.codeBlock = codeBlock;
         this.modifiers = Collections.unmodifiableSet(modifiers);
@@ -56,7 +56,7 @@ public class Function implements Named, HasBlocks, Assignable, Callable, Modifie
     }
 
     @Override
-    public HasScope getScope() {
+    public Scoped getScope() {
         return scope;
     }
 

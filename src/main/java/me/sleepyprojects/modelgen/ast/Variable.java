@@ -16,9 +16,9 @@ public class Variable implements Named, Modified, Assignable, Owned {
 
     private final Set<Modifier> modifiers;
 
-    private final HasScope inScope;
+    private final Scoped inScope;
 
-    Variable(final String name, final Set<Modifier> modifiers, HasScope inScope) {
+    Variable(final String name, final Set<Modifier> modifiers, Scoped inScope) {
         this.name = name;
         this.modifiers = modifiers;
         this.inScope = inScope;
@@ -35,7 +35,7 @@ public class Variable implements Named, Modified, Assignable, Owned {
     }
 
     @Override
-    public HasScope getScope() {
+    public Scoped getScope() {
         return this.inScope;
     }
 }

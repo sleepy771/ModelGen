@@ -9,5 +9,5 @@ package me.sleepyprojects.modelgen.ast;
  */
 
 public interface Owned {
-    HasScope getScope();
+    Scoped getScope();
 }

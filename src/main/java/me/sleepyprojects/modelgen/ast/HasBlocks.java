@@ -11,6 +11,6 @@ import java.util.List;
  */
 
 @BlockMultiplicityRestriction
-public interface HasBlocks extends HasScope {
+public interface HasBlocks extends Scoped {
     List<CodeBlock> getBlocks();
 }

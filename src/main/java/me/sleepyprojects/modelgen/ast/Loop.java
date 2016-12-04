@@ -11,7 +11,7 @@ import java.util.List;
  * @since 24.11.16
  */
 
-public abstract class Loop implements HasBlocks, HasScope {
+public abstract class Loop implements HasBlocks, Scoped {
 
     protected abstract CodeBlock getCodeBlock();
 
