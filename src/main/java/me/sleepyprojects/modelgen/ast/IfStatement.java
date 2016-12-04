@@ -10,7 +10,7 @@ import java.util.List;
  * @since 24.11.16
  */
 
-@BlockMultiplicityRestriction(multiplicity = BlockMultiplticity.MULTIPLE)
+@BlockMultiplicityRestriction(multiplicity = BlockMultiplicity.MULTIPLE)
 public interface IfStatement extends HasBlocks, Statement {
     List<Condition> getConditions();
 }

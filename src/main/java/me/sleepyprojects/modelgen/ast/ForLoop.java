@@ -9,7 +9,7 @@ package me.sleepyprojects.modelgen.ast;
  */
 
 // TODO this might be actual implementation
-@BlockMultiplicityRestriction(multiplicity = BlockMultiplticity.ONE)
+@BlockMultiplicityRestriction(multiplicity = BlockMultiplicity.ONE)
 public abstract class ForLoop extends Loop {
 
     public abstract Variable getVariable();

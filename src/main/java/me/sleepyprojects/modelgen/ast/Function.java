@@ -17,7 +17,7 @@ import java.util.Set;
  * By default Function has only one body.
  */
 // TODO this might be actual type
-@BlockMultiplicityRestriction(multiplicity = BlockMultiplticity.ONE)
+@BlockMultiplicityRestriction(multiplicity = BlockMultiplicity.ONE)
 @BlockLocation(level = Location.BOTH)
 public class Function implements Named, HasBlocks, Assignable, Callable, Modified, HasScope, Owned {
 

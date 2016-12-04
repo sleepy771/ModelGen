@@ -7,6 +7,6 @@ package me.sleepyprojects.modelgen.ast;
  * @version 0.0.1
  * @since 24.11.16
  */
-public enum BlockMultiplticity {
+public enum BlockMultiplicity {
     ONE, TWO, MULTIPLE, NONE
 }
