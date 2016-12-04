@@ -1,5 +1,7 @@
 package me.sleepyprojects.modelgen.ast;
 
+import java.util.Set;
+
 /**
  * modelgen
  *
@@ -8,27 +10,21 @@ package me.sleepyprojects.modelgen.ast;
  * @since 24.11.16
  */
 
-public abstract class Field implements Variable, Owned {
-    private final String name;
+public abstract class Field extends Variable implements TypeOwned {
     private final Prototype prototype;
 
-    public Field(final String name, Prototype prototype) {
-        this.name = name;
+    Field(String name, Set<Modifier> modifiers, Prototype prototype) {
+        super(name, modifiers, prototype);
         this.prototype = prototype;
     }
 
     @Override
-    public String getName() {
-        return this.name;
-    }
-
-    @Override
-    public Type getDeclaringType() {
+    public Type getType() {
         return this.prototype.getType();
     }
 
     @Override
-    public Prototype getDeclaringPrototype() {
+    public Prototype getPrototype() {
         return this.prototype;
     }
 }

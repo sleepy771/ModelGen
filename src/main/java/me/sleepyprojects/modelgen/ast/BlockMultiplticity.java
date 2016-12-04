@@ -1,7 +1,5 @@
 package me.sleepyprojects.modelgen.ast;
 
-import java.util.Set;
-
 /**
  * modelgen
  *
@@ -9,7 +7,6 @@ import java.util.Set;
  * @version 0.0.1
  * @since 24.11.16
  */
-
-public interface Callable {
-    Set<Argument> getArguments();
+public enum BlockMultiplticity {
+    ONE, TWO, MULTIPLE, NONE
 }

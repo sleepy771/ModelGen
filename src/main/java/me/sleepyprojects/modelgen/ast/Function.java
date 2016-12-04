@@ -17,20 +17,22 @@ import java.util.Set;
  * By default Function has only one body.
  */
 // TODO this might be actual type
-@BlockMultiplicityRestriction(multiplicity = BlockMultiplicityRestriction.Size.ONE)
-@Level(level = Level.Part.BOTH)
-public class Function implements Named, HasBlocks, ValueProducer, Callable, Modified {
+@BlockMultiplicityRestriction(multiplicity = BlockMultiplticity.ONE)
+@BlockLocation(level = Location.BOTH)
+public class Function implements Named, HasBlocks, Assignable, Callable, Modified, HasScope, Owned {
 
     private final String name;
     private final CodeBlock codeBlock;
     private final Set<Modifier> modifiers;
     private final Set<Argument> arguments;
+    private final HasScope scope;
 
-    Function(final String name, CodeBlock codeBlock, Set<Modifier> modifiers, Set<Argument> arguments) {
+    Function(final String name, CodeBlock codeBlock, Set<Modifier> modifiers, Set<Argument> arguments, HasScope scope) {
         this.name = name;
         this.codeBlock = codeBlock;
         this.modifiers = Collections.unmodifiableSet(modifiers);
         this.arguments = Collections.unmodifiableSet(arguments);
+        this.scope = scope;
     }
 
     @Override
@@ -54,7 +56,11 @@ public class Function implements Named, HasBlocks, ValueProducer, Callable, Modi
     }
 
     @Override
-    public int getArgumentSize() {
-        return arguments.size();
+    public HasScope getScope() {
+        return scope;
+    }
+
+    public boolean hasReturn() {
+        return false;
     }
 }

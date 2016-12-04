@@ -1,5 +1,7 @@
 package me.sleepyprojects.modelgen.ast;
 
+import java.util.Set;
+
 /**
  * modelgen
  *
@@ -8,9 +10,22 @@ package me.sleepyprojects.modelgen.ast;
  * @since 24.11.16
  */
 
-public abstract class Method extends Function implements Owned {
+public class Method extends Function implements TypeOwned {
 
-    public Method(String name) {
-        super(name, codeBlock, modifiers, arguments);
+    private final Prototype prototype;
+
+    Method(String name, CodeBlock codeBlock, Set<Modifier> modifiers, Set<Argument> arguments, Prototype prototype) {
+        super(name, codeBlock, modifiers, arguments, prototype);
+        this.prototype = prototype;
+    }
+
+    @Override
+    public Type getType() {
+        return prototype.getType();
+    }
+
+    @Override
+    public Prototype getPrototype() {
+        return prototype;
     }
 }

@@ -5,8 +5,8 @@ package me.sleepyprojects.modelgen.ast;
  *
  * @author filip
  * @version 0.0.1
- * @since 24.11.16
+ * @since 4.12.16
  */
 
-public interface ValueProducer {
+public interface HasScope {
 }

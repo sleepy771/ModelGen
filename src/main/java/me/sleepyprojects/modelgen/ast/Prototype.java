@@ -10,7 +10,7 @@ import java.util.List;
  * @since 24.11.16
  */
 
-public interface Prototype extends Named, Modified {
+public interface Prototype extends Named, Modified, HasScope {
 
     Type getType();
 

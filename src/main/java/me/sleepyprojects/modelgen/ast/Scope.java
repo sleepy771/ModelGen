@@ -10,14 +10,11 @@ import java.lang.annotation.Target;
  *
  * @author filip
  * @version 0.0.1
- * @since 24.11.16
+ * @since 4.12.16
  */
 
-@Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
-public @interface Level {
-    enum Part {
-        EXECUTION, DECLARATION, BOTH;
-    }
-    Part level() default Part.EXECUTION;
+@Retention(RetentionPolicy.RUNTIME)
+public @interface Scope {
+    ScopeType getType();
 }

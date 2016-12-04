@@ -11,17 +11,12 @@ import java.util.List;
  * @since 24.11.16
  */
 
-public abstract class Loop implements HasBlocks {
+public abstract class Loop implements HasBlocks, HasScope {
 
     protected abstract CodeBlock getCodeBlock();
 
     @Override
     public List<CodeBlock> getBlocks() {
         return Collections.singletonList(getCodeBlock());
-    }
-
-    @Override
-    public int getMaxBlockCount() {
-        return 1;
     }
 }

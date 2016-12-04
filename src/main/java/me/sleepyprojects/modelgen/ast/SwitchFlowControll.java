@@ -12,24 +12,19 @@ import java.util.List;
 
 public class SwitchFlowControll implements HasBlocks {
 
-    private final ValueProducer valueProducer;
+    private final Assignable valueProducer;
     private List<CodeBlock> blocks;
 
-    SwitchFlowControll(final ValueProducer producer) {
+    SwitchFlowControll(final Assignable producer) {
         this.valueProducer = producer;
     }
 
-    public ValueProducer getValueProducer() {
+    public Assignable getValueProducer() {
         return this.valueProducer;
     }
 
     @Override
     public List<CodeBlock> getBlocks() {
         return null;
-    }
-
-    @Override
-    public int getMaxBlockCount() {
-        return -1;
     }
 }

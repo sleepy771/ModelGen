@@ -10,6 +10,6 @@ import java.util.List;
  * @since 24.11.16
  */
 
-public interface CodeBlock {
-    List<Line> getLines();
+public interface CodeBlock extends HasScope {
+    List<Statement> getLines();
 }

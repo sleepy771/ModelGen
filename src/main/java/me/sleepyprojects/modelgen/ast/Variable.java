@@ -10,15 +10,18 @@ import java.util.Set;
  * @since 24.11.16
  */
 
-public class Variable implements Named, Modified, ValueProducer {
+public class Variable implements Named, Modified, Assignable, Owned {
 
     private final String name;
 
     private final Set<Modifier> modifiers;
 
-    Variable(final String name, final Set<Modifier> modifiers) {
+    private final HasScope inScope;
+
+    Variable(final String name, final Set<Modifier> modifiers, HasScope inScope) {
         this.name = name;
         this.modifiers = modifiers;
+        this.inScope = inScope;
     }
 
     @Override
@@ -29,5 +32,10 @@ public class Variable implements Named, Modified, ValueProducer {
     @Override
     public Set<Modifier> getModifiers() {
         return this.modifiers;
+    }
+
+    @Override
+    public HasScope getScope() {
+        return this.inScope;
     }
 }

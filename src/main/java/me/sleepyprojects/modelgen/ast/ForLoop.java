@@ -9,14 +9,14 @@ package me.sleepyprojects.modelgen.ast;
  */
 
 // TODO this might be actual implementation
-@BlockMultiplicityRestriction(multiplicity = BlockMultiplicityRestriction.Size.ONE)
+@BlockMultiplicityRestriction(multiplicity = BlockMultiplticity.ONE)
 public abstract class ForLoop extends Loop {
 
     public abstract Variable getVariable();
 
     public abstract Assignment getAssigment();
 
-    public abstract Line getIncrementer();
+    public abstract Statement getIncrementer();
 
     public abstract Condition getCondition();
 }

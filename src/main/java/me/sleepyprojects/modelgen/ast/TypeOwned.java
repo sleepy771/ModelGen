@@ -1,7 +1,5 @@
 package me.sleepyprojects.modelgen.ast;
 
-import java.util.Set;
-
 /**
  * modelgen
  *
@@ -10,6 +8,8 @@ import java.util.Set;
  * @since 24.11.16
  */
 
-public interface Callable {
-    Set<Argument> getArguments();
+public interface TypeOwned {
+    Type getType();
+
+    Prototype getPrototype();
 }

@@ -8,5 +8,5 @@ package me.sleepyprojects.modelgen.ast;
  * @since 24.11.16
  */
 
-public interface Line {
+public interface Statement {
 }

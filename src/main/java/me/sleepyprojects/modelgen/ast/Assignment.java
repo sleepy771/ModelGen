@@ -10,13 +10,13 @@ import java.util.List;
  * @since 24.11.16
  */
 
-public class Assignment {
+public class Assignment implements Statement {
 
     private final List<Variable> targets;
 
-    private final ValueProducer producer;
+    private final Assignable producer;
 
-    public Assignment(List<Variable> targets, ValueProducer producer) {
+    public Assignment(List<Variable> targets, Assignable producer) {
         this.targets = targets;
         this.producer = producer;
     }
@@ -25,7 +25,7 @@ public class Assignment {
         return targets;
     }
 
-    public ValueProducer getProducer() {
+    public Assignable getProducer() {
         return producer;
     }
 }

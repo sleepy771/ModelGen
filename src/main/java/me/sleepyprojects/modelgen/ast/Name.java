@@ -8,7 +8,7 @@ package me.sleepyprojects.modelgen.ast;
  * @since 24.11.16
  */
 
-public class Name implements ValueProducer {
+public class Name implements Assignable {
     public final String id;
     private final NameProducer producedBy;
 

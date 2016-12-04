@@ -1,5 +1,7 @@
 package me.sleepyprojects.modelgen.ast;
 
+import java.util.Set;
+
 /**
  * modelgen
  *
@@ -8,5 +10,17 @@ package me.sleepyprojects.modelgen.ast;
  * @since 24.11.16
  */
 
-public interface Argument extends Variable, Positional {
+public class Argument extends Variable implements Positional {
+
+    private final int order;
+
+    Argument(String name, Set<Modifier> modifiers, int order, Function function) {
+        super(name, modifiers, function);
+        this.order = order;
+    }
+
+    @Override
+    public int getOrder() {
+        return order;
+    }
 }
