@@ -9,5 +9,4 @@ package me.sleepyprojects.modelgen.ast;
  */
 
 public interface Argument extends Variable {
-    int getOrder();
 }
