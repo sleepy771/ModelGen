@@ -8,6 +8,7 @@ package me.sleepyprojects.modelgen.ast;
  * @since 4.12.16
  */
 
-public interface Owned {
-    Scoped getOwner();
+// TODO remove because every statement is possesion of some owner
+public interface Possession {
+    Owner getOwner();
 }

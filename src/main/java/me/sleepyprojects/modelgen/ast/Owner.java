@@ -1,5 +1,7 @@
 package me.sleepyprojects.modelgen.ast;
 
+import java.util.List;
+
 /**
  * modelgen
  *
@@ -8,6 +10,6 @@ package me.sleepyprojects.modelgen.ast;
  * @since 4.12.16
  */
 
-// TODO Scoped is bad name for HasScope
-public interface Scoped {
+public interface Owner {
+    List<Possession> getPossessions();
 }

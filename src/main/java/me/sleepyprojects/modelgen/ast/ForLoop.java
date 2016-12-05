@@ -1,5 +1,9 @@
 package me.sleepyprojects.modelgen.ast;
 
+import me.sleepyprojects.modelgen.ast.build.AssignmentImpl;
+
+import java.util.Optional;
+
 /**
  * modelgen
  *
@@ -8,15 +12,13 @@ package me.sleepyprojects.modelgen.ast;
  * @since 24.11.16
  */
 
-// TODO this might be actual implementation
-@BlockMultiplicityRestriction(multiplicity = BlockMultiplicity.ONE)
-public abstract class ForLoop extends Loop {
+public interface ForLoop extends Loop {
 
-    public abstract Variable getVariable();
+    Optional<Declaration> getDeclaration();
 
-    public abstract Assignment getAssigment();
+    AssignmentImpl getAssigment();
 
-    public abstract Statement getIncrementer();
+    Statement getIncrementer();
 
-    public abstract Condition getCondition();
+    Condition getCondition();
 }

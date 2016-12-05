@@ -1,5 +1,8 @@
 package me.sleepyprojects.modelgen.ast;
 
+import me.sleepyprojects.modelgen.ast.build.Argument;
+
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -12,4 +15,6 @@ import java.util.Set;
 
 public interface Callable {
     Set<Argument> getArguments();
+
+    Callable asCallable(List<Assignable> assignment);
 }

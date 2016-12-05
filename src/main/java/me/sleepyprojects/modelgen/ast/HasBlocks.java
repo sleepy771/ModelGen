@@ -10,7 +10,6 @@ import java.util.List;
  * @since 24.11.16
  */
 
-@BlockMultiplicityRestriction
-public interface HasBlocks extends Scoped {
+public interface HasBlocks extends Owner {
     List<CodeBlock> getBlocks();
 }

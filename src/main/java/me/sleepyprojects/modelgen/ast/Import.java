@@ -8,7 +8,7 @@ package me.sleepyprojects.modelgen.ast;
  * @since 24.11.16
  */
 
-public interface Import extends Owned {
+public interface Import extends Possession {
 
     String getLocation();
 }

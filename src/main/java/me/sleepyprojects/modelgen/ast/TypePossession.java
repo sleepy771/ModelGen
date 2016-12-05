@@ -8,7 +8,7 @@ package me.sleepyprojects.modelgen.ast;
  * @since 24.11.16
  */
 
-public interface TypeOwned extends Owned {
+public interface TypePossession extends Possession {
     Type getType();
 
     Prototype getPrototype();

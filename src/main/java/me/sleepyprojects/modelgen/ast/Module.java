@@ -1,5 +1,8 @@
 package me.sleepyprojects.modelgen.ast;
 
+import me.sleepyprojects.modelgen.ast.build.FunctionImpl;
+import me.sleepyprojects.modelgen.ast.build.VariableImpl;
+
 import java.util.List;
 
 /**
@@ -10,7 +13,7 @@ import java.util.List;
  * @since 4.12.16
  */
 
-public interface Module extends Named, Scoped {
+public interface Module extends Named, Owner {
 
     List<Prototype> getPrototypes();
 
@@ -19,8 +22,6 @@ public interface Module extends Named, Scoped {
     List<Variable> getVariables();
 
     List<Import> getImports();
-
-    List<Owned> getOwned();
 
     Path getPath();
 }

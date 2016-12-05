@@ -1,5 +1,8 @@
 package me.sleepyprojects.modelgen.ast;
 
+import me.sleepyprojects.modelgen.ast.build.FieldImpl;
+import me.sleepyprojects.modelgen.ast.build.MethodImpl;
+
 import java.util.List;
 
 /**
@@ -10,7 +13,7 @@ import java.util.List;
  * @since 24.11.16
  */
 
-public interface Prototype extends Named, Modified, Scoped, Owned {
+public interface Prototype extends Named, Modified, Owner, Possession {
 
     Type getType();
 
