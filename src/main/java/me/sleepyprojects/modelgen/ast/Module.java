@@ -13,7 +13,7 @@ import java.util.List;
  * @since 4.12.16
  */
 
-public interface Module extends Named, Owner {
+public interface Module extends Named, CodeBlock {
 
     List<Prototype> getPrototypes();
 

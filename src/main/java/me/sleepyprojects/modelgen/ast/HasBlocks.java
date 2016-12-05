@@ -10,6 +10,6 @@ import java.util.List;
  * @since 24.11.16
  */
 
-public interface HasBlocks extends Owner {
+public interface HasBlocks extends CodeBlock {
     List<CodeBlock> getBlocks();
 }

@@ -8,5 +8,5 @@ package me.sleepyprojects.modelgen.ast;
  * @since 4.12.16
  */
 
-public interface Loop extends HasBlocks, Owner, Code {
+public interface Loop extends HasBlocks, CodeBlock, Code {
 }

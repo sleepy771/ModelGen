@@ -10,6 +10,6 @@ import java.util.List;
  * @since 24.11.16
  */
 
-public interface CodeBlock extends Owner {
-    List<Code> getLines();
+public interface CodeBlock {
+    List<Code> getCodeLines();
 }

@@ -15,6 +15,4 @@ public interface ForEachLoop extends Loop {
     Assignable getIterable();
 
     CodeBlock getCodeBlock();
-
-    Owner getOwner();
 }
