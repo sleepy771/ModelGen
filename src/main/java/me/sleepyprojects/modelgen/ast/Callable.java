@@ -13,5 +13,5 @@ import java.util.List;
 public interface Callable {
     List<Argument> getArguments();
 
-    Callable asCallable(List<Assignable> assignment);
+    Call createCall(List<Assignable> assignment);
 }
