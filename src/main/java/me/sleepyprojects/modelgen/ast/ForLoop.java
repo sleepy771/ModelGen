@@ -1,6 +1,6 @@
 package me.sleepyprojects.modelgen.ast;
 
-import me.sleepyprojects.modelgen.ast.build.AssignmentImpl;
+import me.sleepyprojects.modelgen.ast.builder.AssignmentImpl;
 
 import java.util.Optional;
 

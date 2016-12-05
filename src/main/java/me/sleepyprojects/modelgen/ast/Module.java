@@ -1,8 +1,5 @@
 package me.sleepyprojects.modelgen.ast;
 
-import me.sleepyprojects.modelgen.ast.build.FunctionImpl;
-import me.sleepyprojects.modelgen.ast.build.VariableImpl;
-
 import java.util.List;
 
 /**

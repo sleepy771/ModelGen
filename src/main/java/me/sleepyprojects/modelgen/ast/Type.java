@@ -16,8 +16,8 @@ package me.sleepyprojects.modelgen.ast;
 public interface Type extends Modifier, Named, Assignable {
 
     /**
-     * Returns whether the type is build-in type and does not require imports or not.
-     * @return true iff this Type is build-in and doesn't require imports.
+     * Returns whether the type is builder-in type and does not require imports or not.
+     * @return true iff this Type is builder-in and doesn't require imports.
      */
     boolean isBuildIn();
 
