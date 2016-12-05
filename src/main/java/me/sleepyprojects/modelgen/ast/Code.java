@@ -9,6 +9,5 @@ package me.sleepyprojects.modelgen.ast;
  */
 
 // TODO remove because every statement is possesion of some owner
-public interface Possession {
-    Owner getOwner();
+public interface Code {
 }

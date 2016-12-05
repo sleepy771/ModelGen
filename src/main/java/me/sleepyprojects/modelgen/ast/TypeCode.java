@@ -8,7 +8,7 @@ package me.sleepyprojects.modelgen.ast;
  * @since 24.11.16
  */
 
-public interface TypePossession extends Possession {
+public interface TypeCode extends Code {
     Type getType();
 
     Prototype getPrototype();

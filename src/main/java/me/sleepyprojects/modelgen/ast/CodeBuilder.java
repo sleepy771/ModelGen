@@ -5,8 +5,9 @@ package me.sleepyprojects.modelgen.ast;
  *
  * @author filip
  * @version 0.0.1
- * @since 24.11.16
+ * @since 5.12.16
  */
 
-public interface Statement extends Possession {
+public interface CodeBuilder<T extends Code> {
+    T build();
 }

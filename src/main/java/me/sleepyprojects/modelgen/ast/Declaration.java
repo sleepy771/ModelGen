@@ -8,5 +8,5 @@ package me.sleepyprojects.modelgen.ast;
  * @since 4.12.16
  */
 
-public interface Declaration extends Statement, Named, Modified {
+public interface Declaration extends Code, Named, Modified {
 }

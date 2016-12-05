@@ -11,5 +11,5 @@ import java.util.List;
  */
 
 public interface Owner {
-    List<Possession> getPossessions();
+    List<Code> getCodes();
 }

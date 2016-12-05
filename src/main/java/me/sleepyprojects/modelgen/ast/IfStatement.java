@@ -11,6 +11,6 @@ import java.util.List;
  */
 
 @BlockMultiplicityRestriction(multiplicity = BlockMultiplicity.MULTIPLE)
-public interface IfStatement extends HasBlocks, Statement {
+public interface IfStatement extends HasBlocks, Code {
     List<Condition> getConditions();
 }

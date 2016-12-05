@@ -18,7 +18,7 @@ public interface ForLoop extends Loop {
 
     AssignmentImpl getAssigment();
 
-    Statement getIncrementer();
+    Code getIncrementer();
 
     Condition getCondition();
 }

@@ -11,5 +11,5 @@ import java.util.List;
  */
 
 public interface CodeBlock extends Owner {
-    List<Statement> getLines();
+    List<Code> getLines();
 }

@@ -8,5 +8,5 @@ package me.sleepyprojects.modelgen.ast;
  * @since 5.12.16
  */
 
-public interface Method extends Function, TypePossession {
+public interface Method extends Function, TypeCode {
 }
