@@ -1,6 +1,8 @@
 package me.sleepyprojects.modelgen.ast.builder;
 
 import me.sleepyprojects.modelgen.ast.Import;
+import me.sleepyprojects.modelgen.ast.Scope;
+import me.sleepyprojects.modelgen.ast.ScopeType;
 import me.sleepyprojects.modelgen.ast.Type;
 
 /**
@@ -11,6 +13,7 @@ import me.sleepyprojects.modelgen.ast.Type;
  * @since 5.12.16
  */
 
+@Scope(ScopeType.DECLARATION)
 public class TypeImpl implements Type {
     @Override
     public String getName() {

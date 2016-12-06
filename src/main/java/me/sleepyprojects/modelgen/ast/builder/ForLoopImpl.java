@@ -16,6 +16,7 @@ import java.util.Optional;
  * @since 6.12.16
  */
 
+@Scope(ScopeType.EXECUTION)
 public class ForLoopImpl implements ForLoop {
 
     private final CodeBlock body;

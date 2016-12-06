@@ -1,8 +1,6 @@
 package me.sleepyprojects.modelgen.ast.builder;
 
-import me.sleepyprojects.modelgen.ast.Assignable;
-import me.sleepyprojects.modelgen.ast.Assignment;
-import me.sleepyprojects.modelgen.ast.Variable;
+import me.sleepyprojects.modelgen.ast.*;
 
 import java.util.List;
 
@@ -14,6 +12,7 @@ import java.util.List;
  * @since 24.11.16
  */
 
+@Scope({ScopeType.EXECUTION, ScopeType.LANGUAGE_SPECIFIC})
 public class AssignmentImpl implements Assignment {
     private final List<Variable> targets;
 

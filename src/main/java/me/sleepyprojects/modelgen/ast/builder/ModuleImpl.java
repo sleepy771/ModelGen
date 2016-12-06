@@ -13,6 +13,7 @@ import java.util.stream.Collectors;
  * @since 4.12.16
  */
 
+@Scope(ScopeType.DECLARATION)
 public class ModuleImpl implements Module {
 
     private final Path path;

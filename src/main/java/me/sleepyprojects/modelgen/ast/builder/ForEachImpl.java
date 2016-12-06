@@ -13,6 +13,7 @@ import java.util.List;
  * @since 5.12.16
  */
 
+@Scope(ScopeType.EXECUTION)
 public class ForEachImpl implements ForEachLoop {
 
     private final Variable variable;

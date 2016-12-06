@@ -13,7 +13,7 @@ import java.util.Set;
  * @since 24.11.16
  */
 
-// TODO make this as composite
+@Scope({ScopeType.PROTOTYPE, ScopeType.EXECUTION})
 public class MethodImpl extends FunctionImpl implements Method {
 
     private final Prototype prototype;

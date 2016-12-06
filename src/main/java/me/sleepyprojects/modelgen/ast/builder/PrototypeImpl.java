@@ -14,6 +14,7 @@ import java.util.stream.Collectors;
  * @since 5.12.16
  */
 
+@Scope(ScopeType.DECLARATION)
 public class PrototypeImpl implements Prototype {
 
     private final List<Code> codes;

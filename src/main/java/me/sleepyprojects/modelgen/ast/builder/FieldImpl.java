@@ -12,6 +12,7 @@ import java.util.Set;
  * @since 24.11.16
  */
 
+@Scope({ScopeType.PROTOTYPE, ScopeType.EXECUTION})
 public class FieldImpl extends VariableImpl implements Field {
     private final Provider<Prototype> prototype;
 

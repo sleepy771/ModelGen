@@ -1,13 +1,9 @@
 package me.sleepyprojects.modelgen.ast.builder;
 
 import com.sun.istack.internal.NotNull;
-import me.sleepyprojects.modelgen.ast.Code;
-import me.sleepyprojects.modelgen.ast.CodeBlock;
-import me.sleepyprojects.modelgen.ast.Condition;
-import me.sleepyprojects.modelgen.ast.WhileLoop;
+import me.sleepyprojects.modelgen.ast.*;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -19,6 +15,7 @@ import java.util.List;
  * @since 6.12.16
  */
 
+@Scope(ScopeType.EXECUTION)
 public class WhileImpl implements WhileLoop {
 
     private final Condition condition;

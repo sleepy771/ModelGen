@@ -1,9 +1,6 @@
 package me.sleepyprojects.modelgen.ast.builder;
 
-import me.sleepyprojects.modelgen.ast.Code;
-import me.sleepyprojects.modelgen.ast.CodeBlock;
-import me.sleepyprojects.modelgen.ast.Condition;
-import me.sleepyprojects.modelgen.ast.IfStatement;
+import me.sleepyprojects.modelgen.ast.*;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -18,6 +15,7 @@ import java.util.List;
  * @since 6.12.16
  */
 
+@Scope(ScopeType.EXECUTION)
 public class IfImpl implements IfStatement {
 
     private final List<Condition> conditions;

@@ -20,6 +20,7 @@ import java.util.Set;
  * By default FunctionImpl has only one body.
  */
 
+@Scope({ScopeType.LANGUAGE_SPECIFIC, ScopeType.DECLARATION})
 public class FunctionImpl implements Function {
 
     private final String name;

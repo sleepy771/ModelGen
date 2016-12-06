@@ -9,5 +9,5 @@ package me.sleepyprojects.modelgen.ast;
  */
 
 public enum ScopeType {
-    MODULE, PROTOTYPE, BLOCK;
+    MODULE, PROTOTYPE, BLOCK, FUNCTION, METHOD, LANGUAGE_SPECIFIC, DECLARATION, EXECUTION;
 }

@@ -1,9 +1,7 @@
 package me.sleepyprojects.modelgen.ast.builder;
 
 import com.sun.istack.internal.NotNull;
-import me.sleepyprojects.modelgen.ast.Assignable;
-import me.sleepyprojects.modelgen.ast.Call;
-import me.sleepyprojects.modelgen.ast.Function;
+import me.sleepyprojects.modelgen.ast.*;
 
 import java.util.List;
 import java.util.Optional;
@@ -16,6 +14,7 @@ import java.util.Optional;
  * @since 6.12.16
  */
 
+@Scope(ScopeType.EXECUTION)
 public class AssignableCallImpl extends CallImpl implements Assignable, Call {
     AssignableCallImpl(@NotNull Function function, List<Assignable> args) {
         super(function, args);

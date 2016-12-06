@@ -1,8 +1,6 @@
 package me.sleepyprojects.modelgen.ast.builder;
 
-import me.sleepyprojects.modelgen.ast.Declaration;
-import me.sleepyprojects.modelgen.ast.Modifier;
-import me.sleepyprojects.modelgen.ast.Variable;
+import me.sleepyprojects.modelgen.ast.*;
 
 import java.util.Set;
 
@@ -14,6 +12,7 @@ import java.util.Set;
  * @since 24.11.16
  */
 
+@Scope({ScopeType.DECLARATION, ScopeType.LANGUAGE_SPECIFIC, ScopeType.EXECUTION})
 public class VariableImpl implements Variable {
 
     private final String name;
