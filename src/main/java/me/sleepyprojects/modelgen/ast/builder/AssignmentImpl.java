@@ -1,6 +1,7 @@
 package me.sleepyprojects.modelgen.ast.builder;
 
 import me.sleepyprojects.modelgen.ast.Assignable;
+import me.sleepyprojects.modelgen.ast.Assignment;
 import me.sleepyprojects.modelgen.ast.Variable;
 
 import java.util.List;
@@ -13,7 +14,7 @@ import java.util.List;
  * @since 24.11.16
  */
 
-public class AssignmentImpl {
+public class AssignmentImpl implements Assignment {
     private final List<Variable> targets;
 
     private final Assignable producer;
@@ -23,10 +24,12 @@ public class AssignmentImpl {
         this.producer = producer;
     }
 
+    @Override
     public List<Variable> getTargets() {
         return targets;
     }
 
+    @Override
     public Assignable getProducer() {
         return producer;
     }

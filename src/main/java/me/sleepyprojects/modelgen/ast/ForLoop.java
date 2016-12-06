@@ -1,7 +1,5 @@
 package me.sleepyprojects.modelgen.ast;
 
-import me.sleepyprojects.modelgen.ast.builder.AssignmentImpl;
-
 import java.util.Optional;
 
 /**
@@ -16,9 +14,11 @@ public interface ForLoop extends Loop {
 
     Optional<Declaration> getDeclaration();
 
-    AssignmentImpl getAssigment();
+    Assignment getAssignment();
 
     Code getIncrementer();
 
     Condition getCondition();
+
+    boolean isDeclaredInside();
 }

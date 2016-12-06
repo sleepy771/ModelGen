@@ -20,7 +20,7 @@ public interface Call {
 
     boolean isAssignable();
 
-    Optional<Assignable> asAssignable();
+    Optional<? extends Assignable> asAssignable();
 
     Optional<Method> getMethod();
 }

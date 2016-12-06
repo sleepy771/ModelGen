@@ -55,7 +55,7 @@ public class FunctionImpl implements Function {
     }
 
     @Override
-    public Callable asCallable(List<Assignable> assignment) {
+    public Call createCall(List<Assignable> assignment) {
         return null;
     }
 
@@ -70,5 +70,10 @@ public class FunctionImpl implements Function {
 
     public List<Code> getCodeLines() {
         return null;
+    }
+
+    @Override
+    public Declaration asDeclaration() {
+        return this;
     }
 }

@@ -10,7 +10,7 @@ import java.util.Optional;
  * @since 4.12.16
  */
 
-public interface Function extends Named, HasBlocks, Callable, Modified, CodeBlock, Code {
+public interface Function extends Named, HasBlocks, Callable, Modified, CodeBlock, Code, Declarable, Declaration {
     boolean hasReturn();
 
     Optional<Assignable> asAssignable();

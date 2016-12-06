@@ -2,6 +2,7 @@ package me.sleepyprojects.modelgen.ast.builder;
 
 import me.sleepyprojects.modelgen.ast.*;
 
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -14,28 +15,38 @@ import java.util.List;
 
 public class ForEachImpl implements ForEachLoop {
 
+    private final Variable variable;
+    private final Assignable assignable;
+    private final CodeBlock block;
+
+    public ForEachImpl(Variable variable, Assignable assignable, CodeBlock block) {
+        this.variable = variable;
+        this.assignable = assignable;
+        this.block = block;
+    }
+
     @Override
     public Variable getVariable() {
-        return null;
+        return variable;
     }
 
     @Override
     public Assignable getIterable() {
-        return null;
+        return assignable;
     }
 
     @Override
     public CodeBlock getCodeBlock() {
-        return null;
+        return block;
     }
 
     @Override
     public List<Code> getCodeLines() {
-        return null;
+        return block.getCodeLines();
     }
 
     @Override
     public List<CodeBlock> getBlocks() {
-        return null;
+        return Collections.singletonList(block);
     }
 }

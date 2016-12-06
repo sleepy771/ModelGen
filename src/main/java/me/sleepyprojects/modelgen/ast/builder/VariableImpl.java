@@ -1,5 +1,6 @@
 package me.sleepyprojects.modelgen.ast.builder;
 
+import me.sleepyprojects.modelgen.ast.Declaration;
 import me.sleepyprojects.modelgen.ast.Modifier;
 import me.sleepyprojects.modelgen.ast.Variable;
 
@@ -32,5 +33,10 @@ public class VariableImpl implements Variable {
     @Override
     public Set<Modifier> getModifiers() {
         return this.modifiers;
+    }
+
+    @Override
+    public Declaration asDeclaration() {
+        return this;
     }
 }
